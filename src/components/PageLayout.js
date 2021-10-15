@@ -21,6 +21,9 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
+import Home from "../screens/Home";
+import { Link } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -72,19 +75,21 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/indicators">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Indicators" />
-    </ListItem>
-    <ListItem button>
+     </ListItem>
+     
+    <ListItem button component={Link} to="/data">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Data" />
     </ListItem>
-    <ListItem button>
+
+    <ListItem button component={Link} to="/graph">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -130,7 +135,7 @@ function PageLayout({children}) {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" component={Link} to="/notification">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
