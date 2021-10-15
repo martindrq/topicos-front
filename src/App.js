@@ -14,7 +14,6 @@ function App() {
       <BrowserRouter>
       <PageLayout>
         <Grid item xs={12} md={12} lg={12}>
-          <p>Hello material</p>
            
           <Route path="/home" component={Home} exact/>
 
