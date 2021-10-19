@@ -10,25 +10,24 @@ import NotFound from './screens/NotFound';
 
 import Box from '@mui/material/Box';
 //
-//          <Route component={NotFound} />
-//<Route path="/" render={() => <Redirect to="/home"/>} />
+//  <Route component={NotFound} />
+//  <Route path="/" render={() => <Redirect to="/home"/>} />
+//  <Route path="/home" component={Home} exact/>
 
 function App() {
   return (
 
       <BrowserRouter>
-      <PageLayout>
-      <Box sx={{ flexGrow:1 }}>
-        <Grid item xs={12} md={12} lg={12}>
-          <Route path="/home" component={Home} exact/>
-        </Grid>
-      </Box>
-      </PageLayout>
-
-        
-       
-      </BrowserRouter>
+        <PageLayout>
+          <Box sx={{ flexGrow:1 }}>
+            <Grid item xs={12} md={12} lg={12}>
+              <Route path="/" render={() => <Redirect to="/home"/>} />
+              <Route path="/home" component={Home} exact/>
+            </Grid>
+          </Box>
+        </PageLayout>
       
+      </BrowserRouter>
   );
 }
 

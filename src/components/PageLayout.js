@@ -77,13 +77,12 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
-      <ListItem button component={Link} to="/home">
-        <ListItemIcon>
-          <HomeOutlinedIcon/>
-        </ListItemIcon>
-        <ListItemText primary="Inicio" />
-      </ListItem>
-  
+    <ListItem button component={Link} to="/home">
+      <ListItemIcon>
+        <HomeOutlinedIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Inicio" />
+    </ListItem>
 
     <ListItem button component={Link} to="/indicators">
       <ListItemIcon>
@@ -168,7 +167,7 @@ function PageLayout({children}) {
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
-              ? theme.palette.grey[100]
+              ? theme.palette.grey[200]
               : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
