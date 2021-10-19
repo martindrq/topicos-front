@@ -18,9 +18,11 @@ import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
+
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
+
 import Home from "../screens/Home";
 import { Link } from "react-router-dom";
 
@@ -75,25 +77,26 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
+      <ListItem button component={Link} to="/home">
+        <ListItemIcon>
+          <HomeOutlinedIcon/>
+        </ListItemIcon>
+        <ListItemText primary="Inicio" />
+      </ListItem>
+  
+
     <ListItem button component={Link} to="/indicators">
       <ListItemIcon>
-        <DashboardIcon />
+        <AssignmentIcon/>
       </ListItemIcon>
-      <ListItemText primary="Indicators" />
-     </ListItem>
-     
-    <ListItem button component={Link} to="/data">
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Data" />
+      <ListItemText primary="Indicadores" />
     </ListItem>
-
-    <ListItem button component={Link} to="/graph">
+     
+    <ListItem button component={Link} to="/report">
       <ListItemIcon>
-        <PeopleIcon />
+        <AssessmentOutlinedIcon />
       </ListItemIcon>
-      <ListItemText primary="Graph" />
+      <ListItemText primary="Reportes"/>
     </ListItem>
   </div>
 );
