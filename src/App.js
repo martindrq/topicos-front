@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 //to-do add react router, and import components from /screens
 import Home from './screens/Home';
 import NotFound from './screens/NotFound';
+import AddIndicator from './screens/AddIndicator';
 
 import Box from '@mui/material/Box';
 //
@@ -23,6 +24,7 @@ function App() {
             <Grid item xs={12} md={12} lg={12}>
               <Route path="/" render={() => <Redirect to="/home"/>} />
               <Route path="/home" component={Home} exact/>
+              <Route path="/add-indicator" component={AddIndicator} exact/>
             </Grid>
           </Box>
         </PageLayout>

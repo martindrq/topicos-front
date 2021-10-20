@@ -19,6 +19,8 @@ import Box from "@mui/material/Box";
 
 import ButtonUnstyled from '@mui/core/ButtonUnstyled';
 
+
+
 const Home = () =>  
   <div>
     <List>
@@ -116,8 +118,8 @@ const Home = () =>
 
     <Stack direction="column" alignItems="center" spacing={2} >
       <Stack direction="row"  spacing={12} >
-        <Button variant="outlined" startIcon={<AddIcon />} component={Link} to="/add-indicadtor">
-          Agregar
+        <Button variant="outlined" startIcon={<AddIcon />} component={Link} to="/add-indicator">
+           Agregar
         </Button>
       </Stack>  
     </Stack>  
