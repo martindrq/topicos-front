@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
@@ -11,22 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { blue, green, red, yellow } from '@mui/material/colors';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import DeleteIcon from '@mui/icons-material/Delete';
-
-
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
-import Box from "@mui/material/Box";
-
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -36,28 +21,25 @@ import Chip from '@mui/material/Chip';
 
 
 function SelectVariants() {
-    const [element, setElement] = React.useState('');
+    const [element, setElement] = useState('');
   
-    const handleChange = (event) => {
+    const handleChange = event => {
         setElement(event.target.value);
     };
 }
 
 
-function mostrar(dato) {
-    if (dato == "D") {
-        document.getElementById("id_form_1");
-        console.log("Entra");
-        document.getElementById("id_form_2");
-        document.getElementById("id_form_3");
-        console.log(dato);
+function GetRadioSelect() {
+   
+    console.log("a")
+
+    const [radioSelect, setradioSelect] = useState('D')
+
+    const handleChange = event => {
+        console.log(event.target.value);
     }
-    if (dato == "I") {
-        document.getElementById("id_form_1");
-        document.getElementById("id_form_2");
-        document.getElementById("id_form_3");
-    }
-  }
+}
+
 
 const AddIndicator = () =>  
 
@@ -84,13 +66,13 @@ const AddIndicator = () =>
             </FormControl>
             
             <FormControl component="fieldset">
-                <RadioGroup row aria-label="gender" name="row-radio-buttons-group" defaultValue="D">
-                    <FormControlLabel value="D" control={<Radio color="success"/>} labelPlacement="start" label="Directa" onClick={mostrar("D")}/>
-                    <FormControlLabel value="I" control={<Radio color="secondary"/>} labelPlacement="start" label="Indirecta" onChange={mostrar("I")}/>
+                <RadioGroup row aria-label="gender" name="row-radio-buttons-group" value={GetRadioSelect.radioSelect}>
+                    <FormControlLabel value="D" control={<Radio color="success" />} label="Directa" />
+                    <FormControlLabel value="I" control={<Radio color="secondary" />} label="Indirecta" />
                 </RadioGroup>
             </FormControl>  
 
-            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1" disabled="false">
+            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1" disabled>
                 <InputLabel>1er Indicador</InputLabel>
                 <Select
                     id="id_indicador_1"
@@ -106,7 +88,7 @@ const AddIndicator = () =>
                 <FormHelperText>Seleccione el primer indicador</FormHelperText>
             </FormControl>
 
-            <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2" disabled>
+            <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2"  disabled>
                 <InputLabel>Operador</InputLabel>
                 <Select
                     id="id_operador_1"
@@ -123,7 +105,7 @@ const AddIndicator = () =>
                 <FormHelperText>Seleccione el operador</FormHelperText>
             </FormControl>
 
-            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3">
+            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3"  disabled>
                 <InputLabel>2do Indicador</InputLabel>
                 <Select
                     id="id_indicador_2"
