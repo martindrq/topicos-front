@@ -77,21 +77,21 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/home">
+    <ListItem button component={Link} to="/inicio">
       <ListItemIcon>
         <HomeOutlinedIcon/>
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItem>
 
-    <ListItem button component={Link} to="/indicators">
+    <ListItem button component={Link} to="/indicador">
       <ListItemIcon>
         <AssignmentIcon/>
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
     </ListItem>
      
-    <ListItem button component={Link} to="/report">
+    <ListItem button component={Link} to="/reporte">
       <ListItemIcon>
         <AssessmentOutlinedIcon />
       </ListItemIcon>
@@ -137,7 +137,7 @@ function PageLayout({children}) {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit" component={Link} to="/notification">
+          <IconButton color="inherit" component={Link} to="/notificacion">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
