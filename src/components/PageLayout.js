@@ -26,6 +26,8 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import Home from "../screens/Home";
 import { Link } from "react-router-dom";
 
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+
 
 const drawerWidth = 240;
 
@@ -137,11 +139,23 @@ function PageLayout({children}) {
           >
             Dashboard
           </Typography>
+          
+          <IconButton color="inherit" component={Link} to="/login">
+              <LoginOutlinedIcon />
+          </IconButton>
+
+          <IconButton color="inherit" component={Link} to="/signup">
+            <Badge badgeContent={10} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+
           <IconButton color="inherit" component={Link} to="/notification">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

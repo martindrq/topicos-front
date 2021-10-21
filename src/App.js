@@ -10,7 +10,10 @@ import NotFound from './screens/NotFound';
 import AddIndicator from './screens/AddIndicator';
 
 import Box from '@mui/material/Box';
-//
+
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+
 //  <Route component={NotFound} />
 //  <Route path="/" render={() => <Redirect to="/home"/>} />
 //  <Route path="/home" component={Home} exact/>
@@ -25,6 +28,8 @@ function App() {
               <Route path="/" render={() => <Redirect to="/home"/>} />
               <Route path="/home" component={Home} exact/>
               <Route path="/add-indicator" component={AddIndicator} exact/>
+              <Route path="/login" component={Login} exact/>
+              <Route path="/signup" component={Signup} exact/>
             </Grid>
           </Box>
         </PageLayout>
