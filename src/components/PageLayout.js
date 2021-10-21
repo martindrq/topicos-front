@@ -1,32 +1,19 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
-import MuiDrawer from "@mui/material/Drawer";
+import {CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import Divider from '@mui/material/Divider';
+import { Link } from "react-router-dom";
+
+import MuiAppBar from "@mui/material/AppBar";
+import MuiDrawer from "@mui/material/Drawer";
+
+import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import List from '@mui/material/List';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-
-import Home from "../screens/Home";
-import { Link } from "react-router-dom";
-
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
 
 const drawerWidth = 240;
@@ -137,25 +124,22 @@ function PageLayout({children}) {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
           </Typography>
           
-          <IconButton color="inherit" component={Link} to="/login">
-              <LoginOutlinedIcon />
+          <IconButton size="large" color="inherit" component={Link} to="/login">
+              <LoginOutlinedIcon fontSize="inherit"/>
           </IconButton>
 
-          <IconButton color="inherit" component={Link} to="/signup">
-            <Badge badgeContent={10} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+          <IconButton size="large" color="inherit" component={Link} to="/signup">
+              <PersonAddAltOutlinedIcon fontSize="inherit" />
           </IconButton>
 
-          <IconButton color="inherit" component={Link} to="/notification">
+          <IconButton size="large" color="inherit" component={Link} to="/notification">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon fontSize="inherit"/>
             </Badge>
           </IconButton>
-          
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

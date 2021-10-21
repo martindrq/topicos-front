@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link,Checkbox,FormControlLabel, Stack} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
+
 const Login=()=>{
 
     const paperStyle={padding :20,height:'70vh',width:500, margin:"40px auto"}
@@ -26,14 +27,14 @@ const Login=()=>{
                         }
                         label="Recordarme"
                     />
-                    <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                    <Button type='submit' color='primary' variant="contained" fullWidth>Iniciar Sesin</Button>
                     <Typography >
                         <Link href="#" underline="none">
                             Se te olvidó tu contraseña?
                         </Link>
                     </Typography>
-                    <Typography > Tiene usted una cuenta? 
-                        <Link  href="./signup"  underline="none">
+                    <Typography> Tiene usted una cuenta? 
+                        <Link  href="/signup" underline="none">
                             Registrarse
                         </Link>
                     </Typography>
