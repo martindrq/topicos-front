@@ -6,6 +6,8 @@ import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
 
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+
 
 const drawerWidth = 240;
 
@@ -130,7 +132,7 @@ function PageLayout({children}) {
               <Notifications fontSize="inherit"/>
             </Badge>
           </IconButton>
-
+          
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

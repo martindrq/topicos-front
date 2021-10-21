@@ -2,7 +2,6 @@ import React from 'react'
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link,Checkbox,FormControlLabel, Stack} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-
 const Login=()=>{
 
     const paperStyle={padding :20,height:'70vh',width:500, margin:"40px auto"}
