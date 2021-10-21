@@ -28,7 +28,7 @@ const AddIndicator = () => {
     
     const handleChange = event => {
         console.log('Esto es un log ' + event.target.value)
-        setRadioSelect = event.target.value
+        setRadioSelect(event.target.value)
         hide(event.target.value)
         console.log(radioSelect)
     }
