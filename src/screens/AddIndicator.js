@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
+import AddIcon from '@mui/icons-material/Add';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -20,24 +21,23 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
 
+
 function SelectVariants() {
-    const [element, setElement] = useState('');
-  
-    const handleChange = event => {
-        setElement(event.target.value);
-    };
+   
+    return element
 }
 
 
+const [element, setElement] = useState('');
+  
 function GetRadioSelect() {
    
-    console.log("a")
+    const [radioSelect, setRadioSelect] = useState('D')
 
-    const [radioSelect, setradioSelect] = useState('D')
+}
 
-    const handleChange = event => {
-        console.log(event.target.value);
-    }
+const handleChange = event => {
+    console.log('Esto es un log' + event.target.value);
 }
 
 
@@ -65,8 +65,9 @@ const AddIndicator = () =>
                 <FormHelperText>Métrica de medida</FormHelperText>
             </FormControl>
             
-            <FormControl component="fieldset">
-                <RadioGroup row aria-label="gender" name="row-radio-buttons-group" value={GetRadioSelect.radioSelect}>
+            <FormControl>
+                <FormLabel>Formula</FormLabel>
+                <RadioGroup row value={GetRadioSelect.radioSelect} onClick={ handleChange }>
                     <FormControlLabel value="D" control={<Radio color="success" />} label="Directa" />
                     <FormControlLabel value="I" control={<Radio color="secondary" />} label="Indirecta" />
                 </RadioGroup>
@@ -125,7 +126,13 @@ const AddIndicator = () =>
 
         <Stack direction="column" alignItems="center" spacing={2} >
             <Stack direction="row"  spacing={12} >
-                <Button type="submit">Submit</Button>
+                <Button
+                    type="submit" 
+                    color="primary" 
+                    variant="contained"
+                    endIcon={<AddIcon />}>
+                    Submit
+                </Button>
             </Stack>  
         </Stack>  
         
