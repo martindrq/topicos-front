@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {List, ListItem, ListItemText, Avatar, Divider, Grid, Typography, Button, Stack, Box} from '@mui/material';
-import { blue, green, red, yellow } from '@mui/material/colors';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
+import {green, red, yellow} from '@mui/material/colors';
+import {Link } from 'react-router-dom';
+import {Assignment, Add, Delete} from '@mui/icons-material';
 
 
 const Home = () =>  
@@ -16,7 +14,7 @@ const Home = () =>
           <Grid container  spacing={2} alignItems="center">
             <Grid item xs={0}>
               <Avatar sx={{bgcolor: red[500]}}>
-                <AssignmentIcon />
+                <Assignment />
               </Avatar>
             </Grid>
             <Grid item xs={3}>
@@ -33,7 +31,7 @@ const Home = () =>
               </Typography>
             </Grid>
             <Grid item xs={1} >
-              <Button variant="outlined" startIcon={<DeleteIcon/>} 
+              <Button variant="outlined" startIcon={<Delete/>} 
               onClick={() => console.log('Click Deleted!')}
               ></Button>
             </Grid>
@@ -48,7 +46,7 @@ const Home = () =>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={0}>
               <Avatar sx={{bgcolor: yellow[500]}}>
-                <AssignmentIcon />
+                <Assignment />
               </Avatar>
             </Grid>
             <Grid item xs={3}>
@@ -65,7 +63,7 @@ const Home = () =>
               </Typography>
             </Grid>
             <Grid item xs={1} >
-              <Button variant="outlined" startIcon={<DeleteIcon/>}></Button>
+              <Button variant="outlined" startIcon={<Delete/>}></Button>
             </Grid>
           </Grid>
         </Box>
@@ -78,7 +76,7 @@ const Home = () =>
           <Grid container spacing={2} alignItems="center" >
             <Grid item xs={0}>
               <Avatar sx={{bgcolor: green[500]}}>
-                <AssignmentIcon />
+                <Assignment />
               </Avatar>
             </Grid>
             <Grid item xs={3}>
@@ -95,7 +93,7 @@ const Home = () =>
               </Typography>
             </Grid>
             <Grid item xs={1} >
-              <Button variant="outlined" startIcon={<DeleteIcon/>}></Button>
+              <Button variant="outlined" startIcon={<Delete/>}></Button>
             </Grid>
           </Grid>
         </Box>
@@ -104,7 +102,7 @@ const Home = () =>
 
     <Stack direction="column" alignItems="center" spacing={2} >
       <Stack direction="row"  spacing={12} >
-        <Button variant="outlined" startIcon={<AddIcon />} component={Link} to="/add-indicator">
+        <Button variant="outlined" startIcon={<Add />} component={Link} to="/add-indicator">
            Agregar
         </Button>
       </Stack>  
