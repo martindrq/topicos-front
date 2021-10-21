@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
@@ -21,25 +20,32 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
 
-
-function SelectVariants() {
-   
-    return element
+const SelectVariants = props => { 
+    const [element, setElement] = useState('');
 }
 
-
-const [element, setElement] = useState('');
-  
-function GetRadioSelect() {
-   
-    const [radioSelect, setRadioSelect] = useState('D')
-
+const GetRadioSelect = (props) => {
+    var [radioSelect, setRadioSelect] = useState('D')
 }
+
+var radioSelect = 'D'
 
 const handleChange = event => {
-    console.log('Esto es un log' + event.target.value);
+    console.log('Esto es un log ' + event.target.value)
+    radioSelect = event.target.value
+    hide(event.target.value)
+    console.log(radioSelect)
 }
 
+var hidden = true
+function hide(state){
+    if (state == 'I') {
+        hidden = false
+    }
+    else {
+        hidden = true
+    }
+}
 
 const AddIndicator = () =>  
 
@@ -67,13 +73,13 @@ const AddIndicator = () =>
             
             <FormControl>
                 <FormLabel>Formula</FormLabel>
-                <RadioGroup row value={GetRadioSelect.radioSelect} onClick={ handleChange }>
-                    <FormControlLabel value="D" control={<Radio color="success" />} label="Directa" />
-                    <FormControlLabel value="I" control={<Radio color="secondary" />} label="Indirecta" />
-                </RadioGroup>
+                    <RadioGroup row onClick={ handleChange }>
+                        <FormControlLabel value='D' control={<Radio color="success" />} label="Directa" />
+                        <FormControlLabel value='I' control={<Radio color="secondary" />} label="Indirecta" />
+                    </RadioGroup>
             </FormControl>  
 
-            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1" disabled>
+            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1" disabled={hidden}>
                 <InputLabel>1er Indicador</InputLabel>
                 <Select
                     id="id_indicador_1"
@@ -89,7 +95,7 @@ const AddIndicator = () =>
                 <FormHelperText>Seleccione el primer indicador</FormHelperText>
             </FormControl>
 
-            <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2"  disabled>
+            <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2" disabled={hidden}>
                 <InputLabel>Operador</InputLabel>
                 <Select
                     id="id_operador_1"
@@ -106,7 +112,7 @@ const AddIndicator = () =>
                 <FormHelperText>Seleccione el operador</FormHelperText>
             </FormControl>
 
-            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3"  disabled>
+            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3" disabled={hidden}>
                 <InputLabel>2do Indicador</InputLabel>
                 <Select
                     id="id_indicador_2"
