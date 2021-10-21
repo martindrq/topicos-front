@@ -5,8 +5,6 @@ import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete} from '@mui/icons-material';
 
 
-
-
 const Home = () =>  
   <div>
     <List>
