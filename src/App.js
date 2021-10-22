@@ -18,8 +18,8 @@ function App() {
           <Box sx={{ flexGrow:1 }}>
             <Grid item xs={12} md={12} lg={12}>
               <Route path="/" render={() => <Redirect to="/home"/>} />
-              <Route path="/home" component={Home} exact/>
-              <Route path="/indicador/create" component={CreateIndicator} exact/>
+              <Route path="/inicio" component={Home} exact/>
+              <Route path="/indicador/crear" component={CreateIndicator} exact/>
             </Grid>
           </Box>
         </PageLayout>
