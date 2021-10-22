@@ -102,7 +102,7 @@ const Home = () =>
 
     <Stack direction="column" alignItems="center" spacing={2} >
       <Stack direction="row"  spacing={12} >
-        <Button variant="outlined" startIcon={<Add />} component={Link} to="/add-indicator">
+        <Button variant="outlined" startIcon={<Add />} component={Link} to="/indicador/crear"> 
            Agregar
         </Button>
       </Stack>  
