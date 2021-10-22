@@ -117,15 +117,15 @@ function PageLayout({children}) {
           >
           </Typography>
           
-          <IconButton size="large" color="inherit" component={Link} to="/login">
+          <IconButton size="large" color="inherit" component={Link} to="/registro">
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
-          <IconButton size="large" color="inherit" component={Link} to="/signup">
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
               <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
 
-          <IconButton size="large" color="inherit" component={Link} to="/notification">
+          <IconButton size="large" color="inherit" component={Link} to="/notificacion">
             <Badge badgeContent={4} color="secondary">
               <Notifications fontSize="inherit"/>
             </Badge>
