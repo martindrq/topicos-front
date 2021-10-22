@@ -16,8 +16,8 @@ function App() {
             <Grid item xs={12} md={12} lg={12}>
               <Route path="/" render={() => <Redirect to="/inicio"/>} />
               <Route path="/inicio" component={Home} exact/>
-              <Route path="/iniciar-sesion" component={Login} exact/>
-              <Route path="/registrarse" component={Signup} exact/>
+              <Route path="/inicio-sesion" component={Login} exact/>
+              <Route path="/registro" component={Signup} exact/>
               <Route path="/indicador/crear" component={CreateIndicator} exact/>
             </Grid>
           </Box>
