@@ -28,15 +28,48 @@ const AddIndicator = () => {
         }
     }
 
+
+
+
+
+
+
+
+    const [value, setValue] = useState('');
+    const [error, setError] = useState(false);
+    const [helperText, setHelperText] = useState('');
+  
+    const handleRadioChange = (event) => {
+      setValue(event.target.value);
+      setHelperText(' ');
+      setError(false);
+    };
+  
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (value === '') {
+            setHelperText('Ingrese un valor valido');
+            setError(true);
+        }
+        else {
+            setHelperText('You got it!');
+            setError(false);
+        }
+    };
+  
+    
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <Stack direction="column" alignItems="center" spacing={2} >
                 <FormLabel component="legend">Indicador</FormLabel>
-                <TextField id="id_name" label="Nombre" variant="outlined" fullWidth autocomplete="none"/>
-                <TextField id="id_description" label="Descripción" variant="outlined" fullWidth multiline rows={5} autocomplete="none"/>
+                <TextField id="id_name" label="Nombre" variant="outlined" fullWidth autocomplete="none" error={error}/>
+                <FormHelperText>{helperText}</FormHelperText>
 
+                <TextField id="id_description" label="Descripción" variant="outlined" fullWidth multiline rows={5} autocomplete="none" error={error}/>
+                <FormHelperText>{helperText}</FormHelperText>
+                
                 <Stack direction="row" alignItems="center" spacing={0}>
-                    <FormControl sx={{ m: 1, minWidth: 2 }}>
+                    <FormControl sx={{ m: 1, minWidth: 2 }} error={error}>
                         <InputLabel id="u">Unidad</InputLabel>
                         <Select
                             labelId="u"
