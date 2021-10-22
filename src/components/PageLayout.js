@@ -4,7 +4,7 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import {Menu, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
+import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
 
 
 const drawerWidth = 240;
@@ -134,7 +134,7 @@ function PageLayout({children}) {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <MenuChevronLeft />
+            <ChevronLeft />
           </IconButton>
         </Toolbar>
         <Divider />
