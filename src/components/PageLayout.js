@@ -1,30 +1,10 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
-import MuiDrawer from "@mui/material/Drawer";
+import {CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import Divider from '@mui/material/Divider';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import List from '@mui/material/List';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-
-import Home from "../screens/Home";
 import { Link } from "react-router-dom";
+import MuiAppBar from "@mui/material/AppBar";
+import MuiDrawer from "@mui/material/Drawer";
+import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
 
 
 const drawerWidth = 240;
@@ -77,23 +57,23 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/home">
+    <ListItem button component={Link} to="/inicio">
       <ListItemIcon>
-        <HomeOutlinedIcon/>
+        <HomeOutlined/>
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItem>
 
-    <ListItem button component={Link} to="/indicators">
+    <ListItem button component={Link} to="/indicador">
       <ListItemIcon>
-        <AssignmentIcon/>
+        <Assignment/>
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
     </ListItem>
      
-    <ListItem button component={Link} to="/report">
+    <ListItem button component={Link} to="/reporte">
       <ListItemIcon>
-        <AssessmentOutlinedIcon />
+        <AssessmentOutlined />
       </ListItemIcon>
       <ListItemText primary="Reportes"/>
     </ListItem>
@@ -126,7 +106,7 @@ function PageLayout({children}) {
               ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography
             component="h1"
@@ -137,9 +117,9 @@ function PageLayout({children}) {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit" component={Link} to="/notification">
+          <IconButton color="inherit" component={Link} to="/notificacion">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <Notifications />
             </Badge>
           </IconButton>
         </Toolbar>
@@ -154,7 +134,7 @@ function PageLayout({children}) {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeft />
           </IconButton>
         </Toolbar>
         <Divider />

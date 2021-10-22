@@ -6,13 +6,9 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 //to-do add react router, and import components from /screens
 import Home from './screens/Home';
-import NotFound from './screens/NotFound';
+import CreateIndicator from './screens/CreateIndicator';
 
 import Box from '@mui/material/Box';
-//
-//  <Route component={NotFound} />
-//  <Route path="/" render={() => <Redirect to="/home"/>} />
-//  <Route path="/home" component={Home} exact/>
 
 function App() {
   return (
@@ -21,8 +17,9 @@ function App() {
         <PageLayout>
           <Box sx={{ flexGrow:1 }}>
             <Grid item xs={12} md={12} lg={12}>
-              <Route path="/" render={() => <Redirect to="/home"/>} />
-              <Route path="/home" component={Home} exact/>
+              <Route path="/" render={() => <Redirect to="/inicio"/>} />
+              <Route path="/inicio" component={Home} exact/>
+              <Route path="/indicador/crear" component={CreateIndicator} exact/>
             </Grid>
           </Box>
         </PageLayout>
