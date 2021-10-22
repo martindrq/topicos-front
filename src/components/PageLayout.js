@@ -2,18 +2,9 @@ import * as React from "react";
 import {CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
 
 
 const drawerWidth = 240;
@@ -66,23 +57,23 @@ const mdTheme = createTheme();
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/home">
+    <ListItem button component={Link} to="/inicio">
       <ListItemIcon>
-        <HomeOutlinedIcon/>
+        <HomeOutlined/>
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItem>
 
-    <ListItem button component={Link} to="/indicators">
+    <ListItem button component={Link} to="/indicador">
       <ListItemIcon>
-        <AssignmentIcon/>
+        <Assignment/>
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
     </ListItem>
      
-    <ListItem button component={Link} to="/report">
+    <ListItem button component={Link} to="/reporte">
       <ListItemIcon>
-        <AssessmentOutlinedIcon />
+        <AssessmentOutlined />
       </ListItemIcon>
       <ListItemText primary="Reportes"/>
     </ListItem>
@@ -115,7 +106,7 @@ function PageLayout({children}) {
               ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography
             component="h1"
@@ -127,16 +118,16 @@ function PageLayout({children}) {
           </Typography>
           
           <IconButton size="large" color="inherit" component={Link} to="/login">
-              <LoginOutlinedIcon fontSize="inherit"/>
+              <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
           <IconButton size="large" color="inherit" component={Link} to="/signup">
-              <PersonAddAltOutlinedIcon fontSize="inherit" />
+              <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
 
           <IconButton size="large" color="inherit" component={Link} to="/notification">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon fontSize="inherit"/>
+              <Notifications fontSize="inherit"/>
             </Badge>
           </IconButton>
 
@@ -152,7 +143,7 @@ function PageLayout({children}) {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeft />
           </IconButton>
         </Toolbar>
         <Divider />
