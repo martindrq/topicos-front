@@ -1,15 +1,27 @@
 import * as React from "react";
+import {Grid, Box} from '@mui/material';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import Home from './screens/Home';
+import CreateIndicator from './screens/CreateIndicator';
 import PageLayout from "./components/PageLayout";
-import Grid from '@mui/material/Grid';
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
-//to-do add react router, and import components from /screens
 function App() {
   return (
-      <PageLayout>
-        <Grid item xs={12} md={12} lg={12}>
-           <p>Hello material</p>
-        </Grid>
-      </PageLayout>
+
+      <BrowserRouter>
+        <PageLayout>
+          <Box sx={{ flexGrow:1 }}>
+            <Grid item xs={12} md={12} lg={12}>
+              <Route path="/" render={() => <Redirect to="/inicio"/>} />
+              <Route path="/inicio" component={Home} exact/>
+              <Route path="/indicador/crear" component={CreateIndicator} exact/>
+            </Grid>
+          </Box>
+        </PageLayout>
+      
+      </BrowserRouter>
   );
 }
 
