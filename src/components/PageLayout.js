@@ -120,11 +120,11 @@ function PageLayout({children}) {
           >
           </Typography>
           
-          <IconButton size="large" color="inherit" component={Link} to="/registro">
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
-          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
+          <IconButton size="large" color="inherit" component={Link} to="/registro">
               <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
 
