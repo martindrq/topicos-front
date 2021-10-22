@@ -115,13 +115,22 @@ function PageLayout({children}) {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
           </Typography>
-          <IconButton color="inherit" component={Link} to="/notificacion">
+          
+          <IconButton size="large" color="inherit" component={Link} to="/registro">
+              <LoginOutlined fontSize="inherit"/>
+          </IconButton>
+
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
+              <PersonAddAltOutlined fontSize="inherit" />
+          </IconButton>
+
+          <IconButton size="large" color="inherit" component={Link} to="/notificacion">
             <Badge badgeContent={4} color="secondary">
-              <Notifications />
+              <Notifications fontSize="inherit"/>
             </Badge>
           </IconButton>
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

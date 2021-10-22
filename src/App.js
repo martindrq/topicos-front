@@ -10,6 +10,9 @@ import CreateIndicator from './screens/CreateIndicator';
 
 import Box from '@mui/material/Box';
 
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+
 function App() {
   return (
 
