@@ -116,12 +116,13 @@ function PageLayout({children}) {
             sx={{ flexGrow: 1 }}
           >
           </Typography>
-          
+
           <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
           <IconButton size="large" color="inherit" component={Link} to="/registro">
+
               <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
 

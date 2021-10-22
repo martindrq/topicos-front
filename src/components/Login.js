@@ -35,6 +35,7 @@ const Login=()=>{
                     </Typography>
                     <Typography> Tiene usted una cuenta? 
                         <Link  href="/inicio-sesion" underline="none">
+
                             Registrarse
                         </Link>
                     </Typography>

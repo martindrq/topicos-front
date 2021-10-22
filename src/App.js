@@ -1,15 +1,10 @@
 import * as React from "react";
-import PageLayout from "./components/PageLayout";
-import Grid from '@mui/material/Grid';
-
+import {Grid, Box} from '@mui/material';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-
-//to-do add react router, and import components from /screens
 import Home from './screens/Home';
 import CreateIndicator from './screens/CreateIndicator';
-
 import Box from '@mui/material/Box';
-
+import PageLayout from "./components/PageLayout";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 
