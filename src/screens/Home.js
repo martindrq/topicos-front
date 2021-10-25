@@ -79,7 +79,7 @@ const Home = () =>
       <Stack direction="column" alignItems="center" spacing={2} >
         <Stack direction="row"  spacing={12} >
           <Tooltip title="Agregar" placement="right">  
-            <Fab position="fixed" color="primary" aria-label="add" component={Link} to="/indicador/crear">
+            <Fab position="fixed" color="primary" aria-label="add" component={Link} to="/indicador/agregar">
               <Add/>
             </Fab>
           </Tooltip>
