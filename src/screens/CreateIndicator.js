@@ -28,13 +28,6 @@ const AddIndicator = () => {
         }
     }
 
-
-
-
-
-
-
-
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
