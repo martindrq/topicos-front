@@ -1,8 +1,11 @@
 import * as React from "react";
 import {Grid, Box} from '@mui/material';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+
+// screens
 import Home from './screens/Home';
 import CreateIndicator from './screens/CreateIndicator';
+// components
 import PageLayout from "./components/PageLayout";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
