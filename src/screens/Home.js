@@ -1,12 +1,23 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, Stack, Box, IconButton, Paper, Tooltip, Fab} from '@mui/material';
 import {green, yellow, red, grey} from '@mui/material/colors';
 import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete} from '@mui/icons-material';
 
 import data from '../data.js'
+       
 
-const element = data.map( (indicador) => 
+  
+const Home = () => {
+
+  const [list, setList] = useState(data);
+ 
+  const handleRemove = (id) => {
+    const newList = list.filter((indicador) => indicador.id !== id);
+    setList(newList);
+  }
+
+  const element = list.map( (indicador) => 
   <ListItem  key={indicador.id} sx={{mt: 2 , mb: 2}}>
     <Box sx={{ flexGrow: 1 }}>
     
@@ -31,7 +42,7 @@ const element = data.map( (indicador) =>
         </Grid>
         <Grid item xs={1} >
           <Tooltip title="Eliminar" placement="right">
-            <IconButton color="primary" aria-label="Eliminar" >
+            <IconButton color="primary" aria-label="Eliminar" onClick={() => handleRemove(indicador.id)}>
               <Delete/>
             </IconButton>
           </Tooltip>
@@ -41,8 +52,8 @@ const element = data.map( (indicador) =>
     </Box>
   </ListItem>
 );
-  
-const Home = () =>  
+
+return (
   <div>
     <ListItem sx={{mt: 2 , mb: 2}}>
         <Box sx={{ flexGrow: 1 }}>
@@ -85,6 +96,6 @@ const Home = () =>
     </Paper>
 
     
-  </div>
-
+  </div>);
+}
 export default Home
