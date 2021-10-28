@@ -45,33 +45,16 @@ const AddIndicator = () => {
         }
     }
 
-
-
-
-
-
-
-
-    const [value, setValue] = useState('');
-    const [error, setError] = useState(false);
-    const [helperText, setHelperText] = useState('');
-  
-    const handleRadioChange = (event) => {
-      setValue(event.target.value);
-      setHelperText(' ');
-      setError(false);
-    };
-  
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (value === '') {
-            setHelperText('Ingrese un valor valido');
-            setError(true);
+    const enviarDatosForm = (event) => {
+        event.preventDefault()
+        
+        if ( datosForm.unidad  === '') {
+            setError(true)
         }
         else {
             setError(false)
         }
-        console.log('Enviando datos...  ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
+        console.log('Enviando datos...  ' + datosForm.name + ' '  + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
     }
 
     return(
