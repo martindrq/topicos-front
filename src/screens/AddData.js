@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import {useIndicators} from "../hooks";
+import { useIndicators } from "../hooks";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -9,18 +9,18 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import {Assignment} from "@mui/icons-material";
+import { Assignment } from "@mui/icons-material";
 
 function AddData() {
   const [formState, setFormState] = useState({});
   const [indicators] = useIndicators();
 
   const handleSubmit = () => {
-    console.log("About to sumit", formState)
+    console.log("About to sumit", formState);
   };
 
   const handleChange = (event) => {
-    console.log(event)
+    console.log(event);
     setFormState({
       ...formState,
       [event.target.name]: event.target.value,
@@ -30,45 +30,45 @@ function AddData() {
   const handleDate = (date) => {
     setFormState({
       ...formState,
-      date: date.toISOString()
+      date: date.toISOString(),
     });
   };
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <h2><Assignment/>Agregar datos </h2>
-        <h5>Agregar datos referenciados a un indicador</h5>
+        <h2>
+          <Assignment />
+          Agregar datos{" "}
+        </h2>
+        <p>Agregar datos referenciados a un indicador</p>
       </Grid>
 
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <Grid container>
-          <Grid item xs={12}>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 220 }}>
+          <Grid item xs={12} >
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 220, marginBottom: "30px" }}>
               <InputLabel id="indicator">Indicador</InputLabel>
               <Select
                 labelId="indicator"
                 id="indicator"
                 name="indicator"
                 value={formState.indicator || ""}
-                autoWidth
+                fullWidth
                 onChange={handleChange}
                 label="Indicador"
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                {
-                  indicators.map(indicator => (
-                      <MenuItem value={indicator.id}>{indicator.name}</MenuItem>
-                  ))
-                }
+                {indicators.map((indicator) => (
+                  <MenuItem value={indicator.id}>{indicator.name}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
-
           <Grid item xs={6}>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 220 }}>
+            <FormControl variant="standard" fullWidth>
               <DesktopDatePicker
                 label="Fecha del dato"
                 inputFormat="MM/dd/yyyy"
@@ -79,7 +79,7 @@ function AddData() {
           </Grid>
 
           <Grid item xs={6}>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 220 }}>
+            <FormControl variant="standard" fullWidth sx={{ paddingLeft: "30px" }}>
               <TextField
                 required
                 fullWidth
@@ -94,7 +94,6 @@ function AddData() {
           </Grid>
           <Button
             type="submit"
-            fullWidth
             onClick={handleSubmit}
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
