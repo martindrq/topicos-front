@@ -6,6 +6,7 @@ import CreateIndicator from './screens/CreateIndicator';
 import PageLayout from "./components/PageLayout";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import AddData from "./screens/AddData";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/" render={() => <Redirect to="/inicio"/>} />
               <Route path="/inicio" component={Home} exact/>
               <Route path="/indicador/crear" component={CreateIndicator} exact/>
+              <Route path="/datos" component={AddData} exact/>
             </Grid>
           </Box>
         </PageLayout>

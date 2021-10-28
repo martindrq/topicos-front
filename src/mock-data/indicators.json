@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "Consumo de agua superficial directa",
+        "unit": "m3",
+        "description": "Toma directa realizada por la empresa de un curso de agua",
+        "frecuency": "monthly"
+    },
+    {
+        "id": 2,
+        "name": "Consumo de agua superficial / Unidad de producto",
+        "unit": "m3",
+        "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
+        "frecuency": "monthly"
+        
+    },
+    {
+        "id": 3,
+        "name": "Indicador 3",
+        "unit": "m3",
+        "frecuency": "monthly",
+        "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles."
+    }
+]
