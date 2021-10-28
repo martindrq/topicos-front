@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, Stack, Box, IconButton, Paper, Tooltip, Fab} from '@mui/material';
+import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, Stack, Box, IconButton, Paper, Tooltip, Fab, List} from '@mui/material';
 import {green, yellow, red, grey} from '@mui/material/colors';
 import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete} from '@mui/icons-material';
 
 import data from '../data.js'
-       
-
   
 const Home = () => {
 
@@ -54,7 +52,8 @@ const Home = () => {
 );
 
 return (
-  <div>
+ 
+  <List>
     <ListItem sx={{mt: 2 , mb: 2}}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container alignItems="center">
@@ -83,19 +82,13 @@ return (
     
     {element}
 
-    <Paper sx={{ position: "fixed", bottom: 15, left: 1000, right: 1000 }} elevation={0} >
-      <Stack direction="column" alignItems="center" spacing={2} >
-        <Stack direction="row"  spacing={12} >
-          <Tooltip title="Agregar" placement="right">  
-            <Fab position="fixed" color="primary" aria-label="add" component={Link} to="/indicador/agregar">
-              <Add/>
-            </Fab>
-          </Tooltip>
-        </Stack>  
-      </Stack>  
+    <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
+      <Tooltip title="Agregar" placement="right">  
+        <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/indicador/agregar">
+          <Add/>
+        </Fab>
+      </Tooltip>
     </Paper>
-
-    
-  </div>);
+  </List>);
 }
 export default Home
