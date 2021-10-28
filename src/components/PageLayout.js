@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
-
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const drawerWidth = 240;
 
@@ -70,6 +71,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
     </ListItem>
+
+    <ListItem button component={Link} to="/datos">
+      <ListItemIcon>
+        <Assignment/>
+      </ListItemIcon>
+      <ListItemText primary="Datos" />
+    </ListItem>
      
     <ListItem button component={Link} to="/reporte">
       <ListItemIcon>
@@ -87,6 +95,7 @@ function PageLayout({children}) {
   };
 
   return (
+    <LocalizationProvider dateAdapter={DateAdapter}>
     <ThemeProvider theme={mdTheme}>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -117,11 +126,11 @@ function PageLayout({children}) {
           >
           </Typography>
           
-          <IconButton size="large" color="inherit" component={Link} to="/registro">
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
-          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
+          <IconButton size="large" color="inherit" component={Link} to="/registro">
               <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
 
@@ -173,6 +182,7 @@ function PageLayout({children}) {
       </Box>
     </Box>
   </ThemeProvider>
+  </LocalizationProvider>
   );
 }
 
