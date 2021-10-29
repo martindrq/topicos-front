@@ -22,5 +22,23 @@
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
         "frecuency": "7",
         "date":"05-08-2021"
-    }
+    },
+    {
+        "id": 4,
+        "name": "Consumo de energia",
+        "unit": "kw/H",
+        "frecuency": "1",
+        "type": "Directa",
+        "description": "Toma directa realizada por la empresa de un modulo de energia",
+        "date": "16/07/2021"
+      },
+      {
+        "id": 2,
+        "name": "Consumo de agua",
+        "unit": "L",
+        "frecuency": "3",
+        "type": "Directa",
+        "description": "Toma directa realizada por la empresa de una corriente de agua",
+        "date": "12/07/2021"
+      }
 ]
