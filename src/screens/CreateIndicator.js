@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import {TextField, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select} from '@mui/material/';
+import {TextField, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Paper, Tooltip, Fab, Link} from '@mui/material/';
 import {Add} from '@mui/icons-material';
 
-import listUnits from '../listUnits.js'
-import listIndicators from '../listIndicators.js'
-import listOperators from '../listOperators.js'
-import listFrequency from '../listFrequency'
+import listUnits from '../mock-data/units'
+import listIndicators from '../mock-data/indicators'
+import listOperators from '../mock-data/operators'
+import listFrequency from '../mock-data/frequency'
 
 
 const AddIndicator = () => { 
     
-    const [disable, setDisable] = useState(true);
+    const [hide, setHide] = useState('hidden')
 
     const [datosForm, setDatosForm] = useState({
         name: '',
@@ -32,15 +32,15 @@ const AddIndicator = () => {
         })
 
         if (event.target.name === 'radioSelect')
-            hide(event.target.value)
+            isHide(event.target.value)
     }
 
-    function hide(state){
+    function isHide(state){
         if (state === 'D') {
-            setDisable(true)
+            setHide('hidden')
         }
         if (state === 'I') {
-            setDisable(false)
+            setHide('visible')
         }
     }
 
@@ -53,7 +53,7 @@ const AddIndicator = () => {
         else {
             setError(false)
         }
-        console.log('Enviando datos...  ' + datosForm.name + ' '  + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
+        console.log('Enviando datos...  ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
     }
 
     return(
@@ -110,8 +110,8 @@ const AddIndicator = () => {
                         </RadioGroup>
                 </FormControl>  
                 
-                <Stack direction="row" alignItems="center" spacing={0}>
-                    <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1" disabled={disable}>
+                <Stack direction="row" alignItems="center" spacing={0} visibility={hide}>
+                    <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1">
                         <InputLabel id="i1">1er Indicador</InputLabel>
                         <Select
                             labelId="i1"
@@ -127,7 +127,7 @@ const AddIndicator = () => {
                         <FormHelperText>Seleccione el primer indicador</FormHelperText>
                     </FormControl>
 
-                    <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2" disabled={disable}>
+                    <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2">
                         <InputLabel id="i1">Operador</InputLabel>
                         <Select
                             id="id_operador_1"
@@ -142,7 +142,7 @@ const AddIndicator = () => {
                         <FormHelperText>Seleccione el operador</FormHelperText>
                     </FormControl>
 
-                    <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3" disabled={disable}>
+                    <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3">
                         <InputLabel id="i2">2do Indicador</InputLabel>
                         <Select
                             labelId="i2"
@@ -161,15 +161,13 @@ const AddIndicator = () => {
             </Stack>  
 
             <Stack direction="column" alignItems="center" spacing={2} >
-                <Stack direction="row"  spacing={12} >
-                    <Button
-                        type="submit" 
-                        color="primary" 
-                        variant="contained"
-                        endIcon={<Add/>}>
-                        Crear
-                    </Button>
-                </Stack>  
+                <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
+                    <Tooltip title="Crear" placement="right">  
+                        <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} type="submit" color="primary" aria-label="Crear">
+                        <Add/>
+                        </Fab>
+                    </Tooltip>
+                </Paper>
             </Stack>  
             
         </form>
