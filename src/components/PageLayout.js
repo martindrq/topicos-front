@@ -4,7 +4,7 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import {Menu, ChevronLeft, Notifications, HomeOutlined, Assignment, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined} from "@mui/icons-material";
+import {Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined, ListAltOutlined, AddBoxOutlined} from "@mui/icons-material";
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
@@ -65,16 +65,25 @@ export const mainListItems = (
       <ListItemText primary="Inicio" />
     </ListItem>
 
+
+    <ListItem button component={Link} to="/muestras">
+      <ListItemIcon>
+        <ListAltOutlined/>
+      </ListItemIcon>
+      <ListItemText primary="Muestras" />
+    </ListItem>
+
     <ListItem button component={Link} to="/indicadors">
       <ListItemIcon>
-        <Assignment/>
+        <AssignmentOutlined/>
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
     </ListItem>
+    
 
     <ListItem button component={Link} to="/datos">
       <ListItemIcon>
-        <Assignment/>
+        <AddBoxOutlined/>
       </ListItemIcon>
       <ListItemText primary="Datos" />
     </ListItem>

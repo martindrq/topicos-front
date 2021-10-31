@@ -11,6 +11,8 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import AddData from "./screens/AddData";
 import Indicators from "./screens/Indicators";
+import Samples from "./screens/Samples";
+
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
               <Route path="/registro" component={Signup} exact/>
               <Route path="/indicadors" component={Indicators} exact/>
               <Route path="/indicadors/crear" component={CreateIndicator} exact/>
+              <Route path="/muestras" component={Samples} exact/>
               <Route path="/datos" component={AddData} exact/>
             </Grid>
           </Box>
