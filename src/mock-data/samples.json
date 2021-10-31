@@ -1,44 +1,32 @@
 [
     {
         "id": 1,
-        "name": "Consumo de agua superficial directa",
-        "unit": "m3",
-        "description": "Toma directa realizada por la empresa de un curso de agua",
-        "frecuency": "2",
+        "indicator_id": 2,
+        "value": 300,
         "date":"01-10-2021"
     },
     {
         "id": 2,
-        "name": "Consumo de agua superficial / Unidad de producto",
-        "unit": "m3",
-        "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "4",
+        "indicator_id": 4,
+        "value": 800,
         "date":"03-09-2021"
     },
     {
         "id": 3,
-        "name": "Indicador 3",
-        "unit": "m3",
-        "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "7",
+        "indicator_id": 3,
+        "value": 0.543,
         "date":"05-08-2021"
     },
     {
         "id": 4,
-        "name": "Consumo de energia",
-        "unit": "kw/H",
-        "frecuency": "1",
-        "type": "Directa",
-        "description": "Toma directa realizada por la empresa de un modulo de energia",
+        "indicator_id": 5,
+        "value": 12456,
         "date": "16/07/2021"
       },
       {
-        "id": 2,
-        "name": "Consumo de agua",
-        "unit": "L",
-        "frecuency": "3",
-        "type": "Directa",
-        "description": "Toma directa realizada por la empresa de una corriente de agua",
+        "id": 5,
+        "indicator_id": 2,
+        "value": 423,
         "date": "12/07/2021"
       }
 ]

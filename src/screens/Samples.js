@@ -5,19 +5,19 @@ import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete, ExpandMore} from '@mui/icons-material';
 import {useIndicators} from "../hooks";
 
-import data from '../mock-data/indicators.json'
+import data from '../mock-data/samples.json'
   
-const Home = () => {
+const Samples = () => {
 
   //const [indicators] = useIndicators();
   const [list, setList] = useState(data);
  
   const handleRemove = (id) => {
-    const newList = list.filter((indicador) => indicador.id !== id);
+    const newList = list.filter((sample) => sample.id !== id);
     setList(newList);
   }
 
-  const element = list.map( (indicador) => 
+  const element = list.map( (sample) => 
 
   
   <ListItem  key={indicador.id} sx={{mt: 1 , mb: 1}}>
@@ -87,11 +87,11 @@ return (
 
     <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
       <Tooltip title="Agregar" placement="right">  
-        <Fab sx={{ position: 'absolute', bottom: 20, right: 20 }} color="primary" aria-label="add" component={Link} to="/indicador/crear">
+        <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/samples/crear">
           <Add/>
         </Fab>
       </Tooltip>
     </Paper>
   </List>);
 }
-export default Home
+export default Samples
