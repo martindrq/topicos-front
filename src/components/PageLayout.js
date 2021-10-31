@@ -65,7 +65,7 @@ export const mainListItems = (
       <ListItemText primary="Inicio" />
     </ListItem>
 
-    <ListItem button component={Link} to="/indicador">
+    <ListItem button component={Link} to="/indicadors">
       <ListItemIcon>
         <Assignment/>
       </ListItemIcon>

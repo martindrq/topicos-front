@@ -10,7 +10,7 @@ import PageLayout from "./components/PageLayout";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import AddData from "./screens/AddData";
-import Indicator from "./screens/Indicator";
+import Indicators from "./screens/Indicators";
 
 
 function App() {
@@ -24,8 +24,8 @@ function App() {
               <Route path="/inicio" component={Home} exact/>
               <Route path="/inicio-sesion" component={Login} exact/>
               <Route path="/registro" component={Signup} exact/>
-              <Route path="/indicador" component={Indicator} exact/>
-              <Route path="/indicador/crear" component={CreateIndicator} exact/>
+              <Route path="/indicadors" component={Indicators} exact/>
+              <Route path="/indicadors/crear" component={CreateIndicator} exact/>
               <Route path="/datos" component={AddData} exact/>
             </Grid>
           </Box>
