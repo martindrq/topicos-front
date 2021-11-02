@@ -35,9 +35,14 @@ const Indicators = () => {
             {indicador.unit} 
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Typography gutterBottom component="div">
             {indicador.description}
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography gutterBottom component="div">
+            {indicador.area} 
           </Typography>
         </Grid>
         <Grid item xs={1} >
@@ -59,23 +64,28 @@ return (
     <ListItem sx={{mt: 2 , mb: 2}}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container alignItems="center">
-            <Grid item xs={1/2}>
+            <Grid item xs={0.5}>
                 <Typography>
                 </Typography>
             </Grid>
-            <Grid item xs={5/2}>
+            <Grid item xs={2.5}>
               <Typography variant="h6">
                 Nombre y fecha
               </Typography>
             </Grid>
-            <Grid item xs={9/2}>
+            <Grid item xs={3}>
               <Typography variant="h6">
                 Unidad de medida
               </Typography>
             </Grid>
-            <Grid item xs={0}>
+            <Grid item xs={4}>
               <Typography variant="h6">
                 Descripción
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <Typography variant="h6">
+                Area
               </Typography>
             </Grid>
           </Grid>
