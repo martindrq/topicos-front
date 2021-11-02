@@ -26,8 +26,8 @@ function App() {
               <Route path="/inicio" component={Home} exact/>
               <Route path="/inicio-sesion" component={Login} exact/>
               <Route path="/registro" component={Signup} exact/>
-              <Route path="/indicadors" component={Indicators} exact/>
-              <Route path="/indicadors/crear" component={CreateIndicator} exact/>
+              <Route path="/indicadores" component={Indicators} exact/>
+              <Route path="/indicadores/crear" component={CreateIndicator} exact/>
               <Route path="/muestras" component={Samples} exact/>
               <Route path="/datos" component={AddData} exact/>
             </Grid>

@@ -5,7 +5,8 @@
         "unit": "m3",
         "description": "Toma directa realizada por la empresa de un curso de agua",
         "frecuency": "2",
-        "type": "Directa"
+        "type": "Directa",
+        "area": "Agua"
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "unit": "m3",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
         "frecuency": "4",
-        "type": "Directa"
+        "type": "Directa",
+        "area": "Agua"
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "unit": "m3",
         "type": "Directa",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "7"
+        "frecuency": "7",
+        "area": "Polen"
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "unit": "kw/H",
         "frecuency": "1",
         "type": "Directa",
-        "description": "Toma directa realizada por la empresa de un modulo de energia"
+        "description": "Toma directa realizada por la empresa de un modulo de energia",
+        "area": "Luz"
       },
       {
         "id": 5,
@@ -37,6 +41,7 @@
         "unit": "L",
         "frecuency": "3",
         "type": "Directa",
-        "description": "Toma directa realizada por la empresa de una corriente de agua"
+        "description": "Toma directa realizada por la empresa de una corriente de agua",
+        "area": "Agua"
       }
 ]

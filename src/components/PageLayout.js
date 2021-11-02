@@ -73,7 +73,7 @@ export const mainListItems = (
       <ListItemText primary="Muestras" />
     </ListItem>
 
-    <ListItem button component={Link} to="/indicadors">
+    <ListItem button component={Link} to="/indicadores">
       <ListItemIcon>
         <AssignmentOutlined/>
       </ListItemIcon>
