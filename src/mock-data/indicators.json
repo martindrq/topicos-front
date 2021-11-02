@@ -5,7 +5,7 @@
         "unit": "m3",
         "description": "Toma directa realizada por la empresa de un curso de agua",
         "frecuency": "2",
-        "date":"01-10-2021"
+        "type": "Directa"
     },
     {
         "id": 2,
@@ -13,15 +13,15 @@
         "unit": "m3",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
         "frecuency": "4",
-        "date":"03-09-2021"
+        "type": "Directa"
     },
     {
         "id": 3,
         "name": "Indicador 3",
         "unit": "m3",
+        "type": "Directa",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "7",
-        "date":"05-08-2021"
+        "frecuency": "7"
     },
     {
         "id": 4,
@@ -29,16 +29,14 @@
         "unit": "kw/H",
         "frecuency": "1",
         "type": "Directa",
-        "description": "Toma directa realizada por la empresa de un modulo de energia",
-        "date": "16/07/2021"
+        "description": "Toma directa realizada por la empresa de un modulo de energia"
       },
       {
-        "id": 2,
+        "id": 5,
         "name": "Consumo de agua",
         "unit": "L",
         "frecuency": "3",
         "type": "Directa",
-        "description": "Toma directa realizada por la empresa de una corriente de agua",
-        "date": "12/07/2021"
+        "description": "Toma directa realizada por la empresa de una corriente de agua"
       }
 ]
