@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "indicator_id": 2,
+        "value": 300,
+        "date":"01-10-2021"
+    },
+    {
+        "id": 2,
+        "indicator_id": 4,
+        "value": 800,
+        "date":"03-09-2021"
+    },
+    {
+        "id": 3,
+        "indicator_id": 3,
+        "value": 0.543,
+        "date":"05-08-2021"
+    },
+    {
+        "id": 4,
+        "indicator_id": 5,
+        "value": 12456,
+        "date": "16/07/2021"
+      },
+      {
+        "id": 5,
+        "indicator_id": 2,
+        "value": 423,
+        "date": "12/07/2021"
+      }
+]

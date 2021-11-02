@@ -5,22 +5,32 @@ import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete, ExpandMore} from '@mui/icons-material';
 import {useIndicators} from "../hooks";
 
-import data from '../mock-data/indicators.json'
-  
-const Home = () => {
+import data from '../mock-data/samples.json'
+import indicators from '../mock-data/indicators.json'
+
+const Samples = () => {
 
   //const [indicators] = useIndicators();
   const [list, setList] = useState(data);
- 
+
+  const [listIndicators] = useState(indicators);
+
+  const getIndicatorId = (id) => {
+    const indicatorId = listIndicators.filter((indicator) => indicator.id === id);
+    console.log(indicatorId);
+    return indicatorId;
+  }
+
+  
   const handleRemove = (id) => {
-    const newList = list.filter((indicador) => indicador.id !== id);
+    const newList = list.filter((sample) => sample.id !== id);
     setList(newList);
   }
 
-  const element = list.map( (indicador) => 
+  const element = list.map( (sample) => 
 
   
-  <ListItem  key={indicador.id} sx={{mt: 1 , mb: 1}}>
+  <ListItem  key={sample.id} sx={{mt: 1 , mb: 1}}>
     <Accordion style={{height:"100%", width:"100%", backgroundColor: '#f3f3f3'}} >
         <AccordionSummary
           expandIcon={<ExpandMore />}
@@ -30,26 +40,26 @@ const Home = () => {
             <Assignment />
           </Avatar>
           </Grid>
-          <Grid item xs={10}>
-            <ListItemText primary={indicador.name} secondary={"Frecuencia: " + indicador.frecuency + " meses"} />
+          <Grid item xs={8}>
+            <ListItemText primary={ getIndicatorId(sample.indicator_id)[0].name} secondary={sample.date} />
           </Grid>
+          <Grid item xs={4}>
+              <Typography gutterBottom component="div">
+              Valor: {sample.value} {getIndicatorId(sample.indicator_id)[0].unit}
+              </Typography>
+            </Grid>
         </AccordionSummary>
 
         <AccordionDetails>
           <Grid container spacing={2} justifyContent="space-between" >
             <Grid item xs={12}>
               <Typography gutterBottom component="div">
-              Descripción:  {indicador.description}
+              Descripción del indicador:  {getIndicatorId(sample.indicator_id)[0].description}
               </Typography>
             </Grid>
             <Grid item xs={3}>
               <Typography gutterBottom component="div">
-              Tipo de formula:  {indicador.type}
-              </Typography>
-            </Grid>
-            <Grid item xs={8} >
-              <Typography gutterBottom component="div">
-                Unidad de medida: {indicador.unit} 
+              Tipo de formula:  {getIndicatorId(sample.indicator_id)[0].type}
               </Typography>
             </Grid>
             <Grid item xs={5}>
@@ -59,7 +69,7 @@ const Home = () => {
             </Grid>
             <Grid item xs={0}  >
               <Tooltip title="Eliminar" placement="right">
-                <IconButton color="primary" aria-label="Eliminar" onClick={() => handleRemove(indicador.id)}>
+                <IconButton color="primary" aria-label="Eliminar" onClick={() => handleRemove(sample.id)}>
                   <Delete/>
                 </IconButton>
               </Tooltip>
@@ -79,7 +89,7 @@ return (
   <List sx={{mt: 2 , mb: 2}}>
     <ListItem row >
       <Typography variant="h6">
-        Indicadores
+        Muestras
       </Typography>
     </ListItem>
     
@@ -94,4 +104,4 @@ return (
     </Paper>
   </List>);
 }
-export default Home
+export default Samples
