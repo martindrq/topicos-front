@@ -45,9 +45,9 @@ function AddData() {
       </Grid>
 
       <Grid item xs={12} md={6}>
-        <Grid container>
+        <Grid container rowSpacing={4}>
           <Grid item xs={12} >
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 220, marginBottom: "30px" }}>
+            <FormControl variant="standard" fullWidth>
               <InputLabel id="indicator">Indicador</InputLabel>
               <Select
                 labelId="indicator"
