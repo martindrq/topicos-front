@@ -10,21 +10,23 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { Assignment } from "@mui/icons-material";
+import Table from '../components/Table';
 
 function AddData() {
   const [formState, setFormState] = useState({});
-  const [indicators] = useIndicators();
+  const [indicators, indicatorsValues] = useIndicators();
+  const [rows, setRows] = useState([]);
 
   const handleSubmit = () => {
     console.log("About to sumit", formState);
   };
 
   const handleChange = (event) => {
-    console.log(event);
     setFormState({
       ...formState,
       [event.target.name]: event.target.value,
     });
+    setRows(indicatorsValues.filter(iv => iv.indicator_id === event.target.value))
   };
 
   const handleDate = (date) => {
@@ -34,7 +36,18 @@ function AddData() {
     });
   };
 
+  const columns = [
+    { id: 'date', label: 'Fecha', minWidth: 170 },
+    {
+      id: 'value',
+      label: `Valor`, // TODO: add unit
+      minWidth: 170,
+      format: (value) => value.toFixed(2),
+    },
+  ];
+
   return (
+    <>
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <h2>
@@ -103,6 +116,8 @@ function AddData() {
         </Grid>
       </Grid>
     </Grid>
+    {rows.length > 0 ? <Table columns={columns} rows={rows} /> : null}
+    </>
   );
 }
 
