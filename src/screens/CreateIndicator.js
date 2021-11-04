@@ -31,7 +31,7 @@ const Home = () => {
           </Avatar>
           </Grid>
           <Grid item xs={10}>
-            <ListItemText primary={indicador.name} secondary={"Frecuencia: " + indicador.frecuency + " meses"} />
+            <ListItemText primary={indicador.name} secondary={"Frecuencia: " + indicador.frequency + " meses"} />
           </Grid>
         </AccordionSummary>
 

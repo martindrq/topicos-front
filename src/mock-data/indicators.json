@@ -4,7 +4,7 @@
         "name": "Consumo de agua superficial directa",
         "unit": "m3",
         "description": "Toma directa realizada por la empresa de un curso de agua",
-        "frecuency": "2",
+        "frequency": "2",
         "type": "Directa",
         "area": "Agua"
     },
@@ -13,7 +13,7 @@
         "name": "Consumo de agua superficial / Unidad de producto",
         "unit": "m3",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "4",
+        "frequency": "4",
         "type": "Directa",
         "area": "Agua"
     },
@@ -23,14 +23,14 @@
         "unit": "m3",
         "type": "Directa",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
-        "frecuency": "7",
+        "frequency": "7",
         "area": "Polen"
     },
     {
         "id": 4,
         "name": "Consumo de energia",
         "unit": "kw/H",
-        "frecuency": "1",
+        "frequency": "1",
         "type": "Directa",
         "description": "Toma directa realizada por la empresa de un modulo de energia",
         "area": "Luz"
@@ -39,7 +39,7 @@
         "id": 5,
         "name": "Consumo de agua",
         "unit": "L",
-        "frecuency": "3",
+        "frequency": "3",
         "type": "Directa",
         "description": "Toma directa realizada por la empresa de una corriente de agua",
         "area": "Agua"
