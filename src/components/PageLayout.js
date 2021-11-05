@@ -234,9 +234,11 @@ function PageLayout({children}) {
             px: [1],
           }}
         >
-          <IconButton onClick={() => {history.push("/inicio");}}> 
-            <img src={mdTheme.palette.mode === 'dark' ? require('../assets/images').deresLogoBlack : require('../assets/images').deresLogo} alt="DERES logo" width={150} />
-          </IconButton>
+          {open ? 
+            <IconButton onClick={() => {history.push("/inicio");}}> 
+              <img src={mdTheme.palette.mode === 'dark' ? require('../assets/images').deresLogoBlack : require('../assets/images').deresLogo} alt="DERES logo" width={150} />
+            </IconButton>
+          : null}
           <IconButton onClick={toggleDrawer}>
             <ChevronLeft />
           </IconButton>
