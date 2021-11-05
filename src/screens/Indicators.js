@@ -1,106 +1,121 @@
-import React, { useState } from 'react';
-import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, Stack, Box, IconButton, Paper, Tooltip, Fab, List} from '@mui/material';
-import {green, yellow, red, grey} from '@mui/material/colors';
-import {Link } from 'react-router-dom';
-import {Assignment, Add, Delete} from '@mui/icons-material';
-import {useIndicators} from "../hooks";
+import React, { useState } from "react";
+import {
+  ListItem,
+  ListItemText,
+  Avatar,
+  Divider,
+  Grid,
+  Typography,
+  Stack,
+  Box,
+  IconButton,
+  Paper,
+  Tooltip,
+  Fab,
+  List,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import { green, yellow, red, grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
+import { Assignment, Add, Delete, ExpandMore } from "@mui/icons-material";
+import { useIndicators } from "../hooks";
 
-import data from '../mock-data/indicators.json'
-  
+import data from "../mock-data/indicators.json";
+
 const Indicators = () => {
+  const [indicators] = useIndicators();
 
-  //const [indicators] = useIndicators();
-  const [list, setList] = useState(data);
- 
   const handleRemove = (id) => {
+    /* Esto no es necesario ya que lo hace el backend  
     const newList = list.filter((indicador) => indicador.id !== id);
     setList(newList);
-  }
+    */
+  };
 
-  const element = list.map( (indicador) => 
+  const element = indicators.map((indicator) => (
+    <ListItem key={indicator.id} sx={{ mt: 1, mb: 1 }}>
+      <Accordion
+        style={{ height: "100%", width: "100%", backgroundColor: "#f3f3f3" }}
+      >
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Grid item xs={1}>
+            <Avatar sx={{ bgcolor: grey[500] }}>
+              <Assignment />
+            </Avatar>
+          </Grid>
+          <Grid item xs={8}>
+            <ListItemText primary={indicator.name} secondary={indicator.area} />
+          </Grid>
+          <Grid item xs={4}>
+            <Typography gutterBottom component="div">
+              <small>Unidad de medida:</small> {indicator.value}{" "}
+              {indicator.unit}
+            </Typography>
+          </Grid>
+        </AccordionSummary>
 
-  <ListItem  key={indicador.id} sx={{mt: 2 , mb: 2}}>
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container  spacing={3} alignItems="center">
-        <Grid item xs={0}>
-          <Avatar sx={{bgcolor: grey[500]}}>
-            <Assignment />
-          </Avatar>
-        </Grid>
-        <Grid item xs={3}>
-          <ListItemText primary={indicador.name} secondary={indicador.date} />
-        </Grid>
-        <Grid item xs={2}>
-          <Typography gutterBottom component="div">
-            {indicador.unit} 
-          </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography gutterBottom component="div">
-            {indicador.description}
-          </Typography>
-        </Grid>
-        <Grid item xs={1}>
-          <Typography gutterBottom component="div">
-            {indicador.area} 
-          </Typography>
-        </Grid>
-        <Grid item xs={1} >
-          <Tooltip title="Eliminar" placement="right">
-            <IconButton color="primary" aria-label="Eliminar" onClick={() => handleRemove(indicador.id)}>
-              <Delete/>
-            </IconButton>
-          </Tooltip>
-        </Grid>
-      </Grid>
-      <Divider sx={{mt: 5 , mb: 2}}></Divider>
-    </Box>
-  </ListItem>
-);
-
-return (
- 
-  <List>
-    <ListItem sx={{mt: 2 , mb: 2}}>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container alignItems="center">
-            <Grid item xs={0.5}>
-                <Typography>
-                </Typography>
-            </Grid>
-            <Grid item xs={2.5}>
-              <Typography variant="h6">
-                Nombre y fecha
+        <AccordionDetails>
+          <Grid container spacing={2} justifyContent="space-between">
+            <Grid item xs={12}>
+              <Typography gutterBottom component="div">
+                {indicator.description}
               </Typography>
             </Grid>
             <Grid item xs={3}>
-              <Typography variant="h6">
-                Unidad de medida
+              <Typography gutterBottom component="div">
+                Tipo de formula: {indicator.type}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography variant="h6">
-                Descripción
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <Typography variant="h6">
-                Area
-              </Typography>
+            {indicator.type !== "Directa" && (
+              <Grid item xs={5}>
+                <Typography gutterBottom component="div">
+                  Formula:
+                </Typography>
+              </Grid>
+            )}
+            <Grid item xs={0}>
+              <Tooltip title="Eliminar" placement="right">
+                <IconButton
+                  color="primary"
+                  aria-label="Eliminar"
+                  onClick={() => handleRemove(indicator.id)}
+                >
+                  <Delete />
+                </IconButton>
+              </Tooltip>
             </Grid>
           </Grid>
-        </Box>
-      </ListItem>
-    
-    {element}
+        </AccordionDetails>
+      </Accordion>
 
-    <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
-      <Tooltip title="Agregar" placement="right">  
-        <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/indicadores/crear">
-          <Add/>
-        </Fab>
-      </Tooltip>
-    </Paper>
-  </List>);
-}
-export default Indicators
+      <Divider sx={{ mt: 5, mb: 2 }}></Divider>
+    </ListItem>
+  ));
+
+  return (
+    <List sx={{ mt: 2, mb: 2 }}>
+      <ListItem row>
+        <Typography variant="h6">Indicadores</Typography>
+      </ListItem>
+
+      {element}
+
+      <Paper sx={{ position: "fixed", bottom: 0, right: 0 }} elevation={0}>
+        <Tooltip title="Agregar" placement="right">
+          <Fab
+            sx={{ position: "absolute", bottom: 20, right: 20 }}
+            color="primary"
+            aria-label="add"
+            component={Link}
+            to="/indicadores/crear"
+          >
+            <Add />
+          </Fab>
+        </Tooltip>
+      </Paper>
+    </List>
+  );
+};
+export default Indicators;
