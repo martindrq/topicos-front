@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import {Grid, Typography, Paper, Tooltip, Fab, List} from '@mui/material';
-import {Link } from 'react-router-dom';
+import React from 'react';
+import {Grid, Typography, Paper, Tooltip, Fab} from '@mui/material';
+import {Link} from 'react-router-dom';
 import {Add} from '@mui/icons-material';
-import {useIndicators} from "../hooks";
-
   
 const Home = () => {
 

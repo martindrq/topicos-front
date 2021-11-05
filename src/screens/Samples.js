@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, Stack, Box, IconButton, Paper, Tooltip, Fab, List, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import {green, yellow, red, grey} from '@mui/material/colors';
+import {ListItem, ListItemText, Avatar, Divider, Grid, Typography, IconButton, Paper, Tooltip, Fab, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import {grey} from '@mui/material/colors';
 import {Link } from 'react-router-dom';
 import {Assignment, Add, Delete, ExpandMore} from '@mui/icons-material';
-import {useIndicators} from "../hooks";
 
 import data from '../mock-data/samples.json'
 import indicators from '../mock-data/indicators.json'
 
 const Samples = () => {
 
-  //const [indicators] = useIndicators();
   const [list, setList] = useState(data);
 
   const [listIndicators] = useState(indicators);
