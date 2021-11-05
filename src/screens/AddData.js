@@ -9,8 +9,18 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import { Assignment } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 import Table from '../components/Table';
+
+const columns = [
+  { id: 'date', label: 'Fecha', minWidth: 170 },
+  {
+    id: 'value',
+    label: `Valor`, // TODO: add unit
+    minWidth: 170,
+    format: (value) => value.toFixed(2),
+  },
+];
 
 function AddData() {
   const [formState, setFormState] = useState({});
@@ -36,24 +46,13 @@ function AddData() {
     });
   };
 
-  const columns = [
-    { id: 'date', label: 'Fecha', minWidth: 170 },
-    {
-      id: 'value',
-      label: `Valor`, // TODO: add unit
-      minWidth: 170,
-      format: (value) => value.toFixed(2),
-    },
-  ];
-
   return (
     <>
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <h2>
-          <Assignment />
-          Agregar datos{" "}
-        </h2>
+      <Typography variant="h4">
+        Agregar datos
+      </Typography>
         <p>Agregar datos referenciados a un indicador</p>
       </Grid>
 

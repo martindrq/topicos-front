@@ -4,7 +4,8 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import {Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined, ListAltOutlined, AddBoxOutlined} from "@mui/icons-material";
+import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, LoginOutlined, PersonAddAltOutlined, ListAltOutlined, AddBoxOutlined } from "@mui/icons-material";
+import { Chip, Avatar } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
@@ -54,7 +55,21 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+mdTheme.typography.h4 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [mdTheme.breakpoints.up('md')]: {
+    fontSize: '2.4rem',
+  },
+};
 
 export const mainListItems = (
   <div>
@@ -142,6 +157,7 @@ function PageLayout({children}) {
           <IconButton size="large" color="inherit" component={Link} to="/registro">
               <PersonAddAltOutlined fontSize="inherit" />
           </IconButton>
+          {/* <Chip avatar={<Avatar>M</Avatar>} label="Username" /> */}
 
           <IconButton size="large" color="inherit" component={Link} to="/notificacion">
             <Badge badgeContent={4} color="secondary">

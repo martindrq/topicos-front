@@ -31,7 +31,7 @@ const Samples = () => {
 
   
   <ListItem  key={sample.id} sx={{mt: 1 , mb: 1}}>
-    <Accordion style={{height:"100%", width:"100%", backgroundColor: '#f3f3f3'}} >
+    <Accordion style={{height:"100%", width:"100%"}} >
         <AccordionSummary
           expandIcon={<ExpandMore />}
         >
@@ -85,13 +85,12 @@ const Samples = () => {
 );
 
 return (
- 
-  <List sx={{mt: 2 , mb: 2}}>
-    <ListItem row >
-      <Typography variant="h6">
+  <Grid container spacing={2}>
+    <Grid item xs={12}>
+      <Typography variant="h4">
         Muestras
       </Typography>
-    </ListItem>
+    </Grid>
     
     {element}
 
@@ -102,6 +101,7 @@ return (
         </Fab>
       </Tooltip>
     </Paper>
-  </List>);
+  </Grid>
+  );
 }
 export default Samples
