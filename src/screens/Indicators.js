@@ -47,7 +47,7 @@ const Indicators = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h4">
+        <Typography variant="h4" style={{ marginBottom: 20 }}>
           Indicadores
         </Typography>
         <Table columns={columns} rows={rows}/>
