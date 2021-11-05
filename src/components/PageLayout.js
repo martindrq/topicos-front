@@ -8,6 +8,7 @@ import { FormControlLabel, Menu, ChevronLeft, Notifications, HomeOutlined, Assig
 import { Chip, Avatar } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -147,6 +148,8 @@ function PageLayout({children}) {
   const [open, setOpen] = React.useState(true);
   const [theme, setTheme] = React.useState('dark');
 
+  const history = useHistory();
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -226,11 +229,13 @@ function PageLayout({children}) {
         <Toolbar
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
             px: [1],
           }}
         >
+          <IconButton onClick={() => {history.push("/inicio");}}> 
+            <img src={mdTheme.palette.mode === 'dark' ? require('../assets/images').deresLogoBlack : require('../assets/images').deresLogo} alt="DERES logo" width={150} />
+          </IconButton>
           <IconButton onClick={toggleDrawer}>
             <ChevronLeft />
           </IconButton>
