@@ -168,6 +168,7 @@ function PageLayout({children}) {
     [mdTheme.breakpoints.up('md')]: {
       fontSize: '2.4rem',
     },
+    color: mdTheme.palette.mode === 'dark' ?  'white' : '#3576cb'
   };
   
   const handleTheme = () => {
