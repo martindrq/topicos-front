@@ -6,7 +6,14 @@
         "description": "Toma directa realizada por la empresa de un curso de agua",
         "frequency": "2",
         "type": "Directa",
-        "area": "Agua"
+        "area": {
+            "id": 1,
+            "name": "Agua",
+            "company": {
+                "id": 1,
+                "name": "Tata"
+            }
+        }
     },
     {
         "id": 2,
@@ -15,7 +22,14 @@
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
         "frequency": "4",
         "type": "Directa",
-        "area": "Agua"
+        "area": {
+            "id": 1,
+            "name": "Agua",
+            "company": {
+                "id": 1,
+                "name": "Tata"
+            }
+        }
     },
     {
         "id": 3,
@@ -24,7 +38,14 @@
         "type": "Directa",
         "description": "Explicacion de lo que es el indicador, para que sirve o lo que sea que quieran agregarle en detalles.",
         "frequency": "7",
-        "area": "Polen"
+        "area": {
+            "id": 2,
+            "name": "Polen",
+            "company": {
+                "id": 1,
+                "name": "Tata"
+            }
+        }
     },
     {
         "id": 4,
@@ -33,15 +54,29 @@
         "frequency": "1",
         "type": "Directa",
         "description": "Toma directa realizada por la empresa de un modulo de energia",
-        "area": "Luz"
-      },
-      {
-        "id": 5,
-        "name": "Consumo de agua",
-        "unit": "L",
-        "frequency": "3",
-        "type": "Directa",
-        "description": "Toma directa realizada por la empresa de una corriente de agua",
-        "area": "Agua"
-      }
+        "area": {
+            "id": 3,
+            "name": "Luz",
+            "company": {
+                "id": 1,
+                "name": "Tata"
+            }
+        }
+    },
+    {
+    "id": 5,
+    "name": "Consumo de agua",
+    "unit": "L",
+    "frequency": "3",
+    "type": "Directa",
+    "description": "Toma directa realizada por la empresa de una corriente de agua",
+    "area": {
+        "id": 1,
+        "name": "Agua",
+        "company": {
+            "id": 1,
+            "name": "Tata"
+        }
+    }
+    }
 ]
