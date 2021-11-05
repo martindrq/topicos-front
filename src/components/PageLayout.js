@@ -135,7 +135,7 @@ export const mainListItems = (
       <ListItemText primary="Datos" />
     </ListItem>
      
-    <ListItem button component={Link} to="/reporte">
+    <ListItem button component={Link} to="/reportes">
       <ListItemIcon>
         <AssessmentOutlined />
       </ListItemIcon>
