@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Paper, Tooltip, Fab, Typography} from '@mui/material/';
-import {Add} from '@mui/icons-material';
+import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography} from '@mui/material/';
 
 import listUnits from '../mock-data/units'
 import listIndicators from '../mock-data/indicators'
