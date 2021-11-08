@@ -1,5 +1,5 @@
 import indicatorsMock from "../../mock-data/indicators.json";
-import dataMock from "../../mock-data/data.json";
+import dataMock from "../../mock-data/samples.json";
 
 const indicatorsService = {
   getIndicators: async function () {
