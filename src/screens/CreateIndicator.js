@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography} from '@mui/material/';
+import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab} from '@mui/material/';
+import {Add} from '@mui/icons-material';
 
 import listUnits from '../mock-data/units'
 import listIndicators from '../mock-data/indicators'
@@ -164,6 +165,16 @@ const AddIndicator = () => {
                             </FormControl>
                         </Stack>  
                     </Stack>
+
+                    <Stack direction="column" alignItems="center" spacing={2} >
+                        <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
+                            <Tooltip title="Crear" placement="right">  
+                                <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} type="submit" color="primary" aria-label="Crear">
+                                <Add/>
+                                </Fab>
+                            </Tooltip>
+                        </Paper>
+                    </Stack>  
                 </form>
             </Grid>
         </Grid>
