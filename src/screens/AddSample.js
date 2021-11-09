@@ -51,7 +51,7 @@ function AddData() {
     <Grid container spacing={2}>
       <Grid item xs={12}>
       <Typography variant="h4">
-        Agregar datos
+        Agregar muestra
       </Typography>
         <p>Agregar datos referenciados a un indicador</p>
       </Grid>
