@@ -1,16 +1,11 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import React, { useState } from 'react';
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Tooltip, IconButton} from '@mui/material';
+import { Delete } from '@mui/icons-material';
+
 
 export default function StickyHeadTable({ columns, rows }) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -21,20 +16,59 @@ export default function StickyHeadTable({ columns, rows }) {
     setPage(0);
   };
 
+  const [selected, setSelected] = useState([]);
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.id);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, id) => {
+  
+    const selectedIndex = selected.indexOf(id);
+      let newSelected = [];
+
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+  }
+    setSelected(newSelected);
+
+    console.log(selected)   //Borrar, para pruebas nada mas.
+  };
+
+  const isSelected = (id) => selected.indexOf(id) !== -1;
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
+            
             <TableRow>
-              {columns.map((column) => (
+              <TableCell padding="checkbox">
+                <Checkbox onChange={handleSelectAllClick} />
+              </TableCell>
+                {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
-                </TableCell>
+              </TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -42,8 +76,25 @@ export default function StickyHeadTable({ columns, rows }) {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                
+                const isItemSelected = isSelected(row.id);
+               
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                     <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                    >
+                    <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isItemSelected}
+                        />
+                      </TableCell>
+                    
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -60,6 +111,20 @@ export default function StickyHeadTable({ columns, rows }) {
           </TableBody>
         </Table>
       </TableContainer>
+      <TableContainer>
+        {selected.length > 0 ? (
+            <Tooltip title="Borrar">
+              <IconButton>
+                <Delete />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip>
+              <IconButton>
+              </IconButton>
+            </Tooltip>
+          )}
+
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
@@ -69,6 +134,8 @@ export default function StickyHeadTable({ columns, rows }) {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      </TableContainer>
+      
     </Paper>
   );
 }
