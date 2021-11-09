@@ -64,19 +64,19 @@
         }
     },
     {
-    "id": 5,
-    "name": "Consumo de agua",
-    "unit": "L",
-    "frequency": "3",
-    "type": "Directa",
-    "description": "Toma directa realizada por la empresa de una corriente de agua",
-    "area": {
-        "id": 1,
-        "name": "Agua",
-        "company": {
+        "id": 5,
+        "name": "Consumo de agua",
+        "unit": "L",
+        "frequency": "3",
+        "type": "Directa",
+        "description": "Toma directa realizada por la empresa de una corriente de agua",
+        "area": {
             "id": 1,
-            "name": "Tata"
+            "name": "Agua",
+            "company": {
+                "id": 1,
+                "name": "Tata"
+            }
         }
-    }
     }
 ]
