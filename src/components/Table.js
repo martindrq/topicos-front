@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Tooltip, IconButton} from '@mui/material';
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Tooltip, IconButton, Toolbar, Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 
@@ -50,9 +50,45 @@ export default function StickyHeadTable({ columns, rows }) {
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
+  
+  const [action, setAction] = useState('');
+
+  const handleChangeAction = (event) => {
+    setAction(event.target.value);
+  };
+
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Toolbar>
+        {selected.length > 0 ? (
+        <TableContainer sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        }}
+        > 
+          <Typography>
+            {selected.length} seleccionados
+          </Typography>
+
+          <FormControl variant="filled" sx={{ minWidth: 120}}>
+            <InputLabel id="a">Acción</InputLabel>
+              <Select
+                labelId ='a'
+                value={action}
+                onChange={handleChangeAction}
+              >
+                <MenuItem value="">
+                  <em>-</em>
+                </MenuItem>
+                <MenuItem value={1}>Borrar</MenuItem>
+               </Select>
+          </FormControl>
+        </TableContainer>
+          
+        ) : null}
+    </Toolbar>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -111,15 +147,6 @@ export default function StickyHeadTable({ columns, rows }) {
           </TableBody>
         </Table>
       </TableContainer>
-      <TableContainer>
-        {selected.length > 0 ? (
-            <Tooltip title="Borrar">
-              <IconButton>
-                <Delete />
-              </IconButton>
-            </Tooltip>
-          ) : null}
-
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
@@ -129,8 +156,6 @@ export default function StickyHeadTable({ columns, rows }) {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      </TableContainer>
-      
     </Paper>
   );
 }
