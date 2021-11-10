@@ -1,15 +1,8 @@
-import * as React from "react";
-import { useState } from "react";
-import { useIndicators } from "../hooks";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import React, { useState } from 'react';
+import {TextField, Grid, FormControl, InputLabel, MenuItem, Select, Typography, Button} from '@mui/material/';
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import { Typography } from "@mui/material";
+
+import { useIndicators } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [

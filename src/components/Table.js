@@ -118,12 +118,7 @@ export default function StickyHeadTable({ columns, rows }) {
                 <Delete />
               </IconButton>
             </Tooltip>
-          ) : (
-            <Tooltip>
-              <IconButton>
-              </IconButton>
-            </Tooltip>
-          )}
+          ) : null}
 
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
