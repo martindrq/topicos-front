@@ -4,17 +4,16 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
 // screens
 import Home from './screens/Home';
-import CreateIndicator from './screens/CreateIndicator';
-// components
-import PageLayout from "./components/PageLayout";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Reports from "./screens/Reports";
-import AddData from "./screens/AddData";
-import Indicators from "./screens/Indicators";
 import Samples from "./screens/Samples";
+import AddSample from "./screens/AddSample";
+import Indicators from "./screens/Indicators";
+import CreateIndicator from './screens/CreateIndicator';
 
-
+// components
+import PageLayout from "./components/PageLayout";
 
 function App() {
   return (
@@ -30,7 +29,7 @@ function App() {
               <Route path="/indicadores" component={Indicators} exact/>
               <Route path="/indicadores/crear" component={CreateIndicator} exact/>
               <Route path="/muestras" component={Samples} exact/>
-              <Route path="/datos" component={AddData} exact/>
+              <Route path="/muestras/agregar" component={AddSample} exact/>
               <Route path="/reportes" component={Reports} exact/>
             </Grid>
           </Box>

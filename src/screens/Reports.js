@@ -1,25 +1,11 @@
-import * as React from "react";
-import { useState } from "react";
-import { useIndicators } from "../hooks";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import React, { useState } from 'react';
+import {TextField, Grid, FormControl, InputLabel, MenuItem, Select, Paper} from '@mui/material/';
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { sub } from "date-fns";
-
-import Paper from "@material-ui/core/Paper";
-import {
-  Chart,
-  BarSeries,
-  Title,
-  ArgumentAxis,
-  ValueAxis,
-  Tooltip,
-} from "@devexpress/dx-react-chart-material-ui";
+import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis, Tooltip } from "@devexpress/dx-react-chart-material-ui";
 import { EventTracker } from "@devexpress/dx-react-chart";
+
+import { useIndicators } from "../hooks";
 
 const data = [
   { year: "1950", population: 2.525 },
