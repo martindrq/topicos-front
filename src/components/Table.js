@@ -43,8 +43,6 @@ export default function StickyHeadTable({ columns, rows }) {
         );
   }
     setSelected(newSelected);
-
-    console.log(selected)   //Borrar, para pruebas nada mas.
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
@@ -58,35 +56,34 @@ export default function StickyHeadTable({ columns, rows }) {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <Toolbar>
-        {selected.length > 0 ? (
-        <TableContainer sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-        }}
-        > 
-          <Typography>
-            {selected.length} seleccionados
-          </Typography>
+      {selected.length > 0 ? (
+        <Toolbar>
+          <TableContainer sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+          }}
+          > 
+            <Typography style={{marginRight: 10}}>
+              {`${selected.length} seleccionado${selected.length > 1 ? 's' : ''}`} 
+            </Typography>
 
-          <FormControl variant="filled" sx={{ minWidth: 120}}>
-            <InputLabel id="a">Acción</InputLabel>
-              <Select
-                labelId ='a'
-                value={action}
-                onChange={handleChangeAction}
-              >
-                <MenuItem value="">
-                  <em>-</em>
-                </MenuItem>
-                <MenuItem value={1}>Borrar</MenuItem>
-               </Select>
-          </FormControl>
-        </TableContainer>
-          
-        ) : null}
-    </Toolbar>
+            <FormControl variant="filled" sx={{ minWidth: 120}}>
+              <InputLabel id="a">Acción</InputLabel>
+                <Select
+                  labelId ='a'
+                  value={action}
+                  onChange={handleChangeAction}
+                >
+                  <MenuItem value="">
+                    <em>-</em>
+                  </MenuItem>
+                  <MenuItem value={1}>Borrar</MenuItem>
+                </Select>
+            </FormControl>
+          </TableContainer>
+        </Toolbar>
+      ) : null}
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
