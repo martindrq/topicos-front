@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Tooltip, IconButton, Toolbar, Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
-import { Delete } from '@mui/icons-material';
-
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Toolbar, Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 
 export default function StickyHeadTable({ columns, rows }) {
   const [page, setPage] = useState(0);
