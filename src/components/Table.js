@@ -114,15 +114,19 @@ export default function StickyHeadTable({ columns, rows }) {
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
+            
             <TableRow>
-              {columns.map((column) => (
+              <TableCell padding="checkbox">
+                <Checkbox onChange={handleSelectAllClick} />
+              </TableCell>
+                {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
-                </TableCell>
+              </TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -130,8 +134,25 @@ export default function StickyHeadTable({ columns, rows }) {
             {listFilter
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                
+                const isItemSelected = isSelected(row.id);
+               
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                     <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                    >
+                    <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isItemSelected}
+                        />
+                      </TableCell>
+                    
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
