@@ -18,12 +18,15 @@ const AddIndicator = () => {
         unidad: '',
         indicadorValue1: '',
         indicadorValue2: '',
+        constantValue2: '',
         operadorValue1: '',
         frecuencia: '',
         radioSelect: 'D'
     })
     
     const [error, setError] = useState(false)
+
+    const [showValueField, setShowValueField] = useState(false)
     
     const handleInputChange = (event) => {
         setDatosForm({
@@ -117,7 +120,7 @@ const AddIndicator = () => {
                         </FormControl>  
                         
                         <Stack direction="row" alignItems="center" spacing={0} visibility={hide}>
-                            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_1">
+                            <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_1">
                                 <InputLabel id="i1">1er Indicador</InputLabel>
                                 <Select
                                     labelId="i1"
@@ -127,13 +130,13 @@ const AddIndicator = () => {
                                     name='indicadorValue1'
                                     onChange={handleInputChange}
                                 >
-                                    <MenuItem value=""><em>Valor</em></MenuItem>
+                                    <MenuItem value=""><em>None</em></MenuItem>
                                     {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Seleccione el primer indicador</FormHelperText>
                             </FormControl>
 
-                            <FormControl variant="filled" sx={{ m: 1, minWidth: 2 }} id="id_form_2">
+                            <FormControl variant="filled" sx={{ m: 1, minWidth: 20 }} id="id_form_2">
                                 <InputLabel id="i1">Operador</InputLabel>
                                 <Select
                                     id="id_operador_1"
@@ -148,7 +151,7 @@ const AddIndicator = () => {
                                 <FormHelperText>Seleccione el operador</FormHelperText>
                             </FormControl>
 
-                            <FormControl sx={{ m: 1, minWidth: 2 }} id="id_form_3">
+                            <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_3">
                                 <InputLabel id="i2">2do Indicador</InputLabel>
                                 <Select
                                     labelId="i2"
@@ -158,11 +161,18 @@ const AddIndicator = () => {
                                     name='indicadorValue2'
                                     onChange={handleInputChange}
                                 >
-                                    <MenuItem value=""><em>Valor</em></MenuItem>
+                                    <MenuItem value="value">Una constante</MenuItem>
                                     {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Seleccione el segundo indicador</FormHelperText>
-                            </FormControl>
+                                    { (datosForm.indicadorValue2 === 'value') && (
+                                        <TextField label="Valor" variant="outlined" fullWidth required autocomplete="none" 
+                                        name='constantValue2'
+                                        value={datosForm.constantValue2}
+                                        onChange={handleInputChange}
+                                    />
+                                    )}
+                                </FormControl>
                         </Stack>  
                     </Stack>
 
