@@ -25,8 +25,6 @@ const AddIndicator = () => {
     })
     
     const [error, setError] = useState(false)
-
-    const [showValueField, setShowValueField] = useState(false)
     
     const handleInputChange = (event) => {
         setDatosForm({
