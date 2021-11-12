@@ -14,18 +14,21 @@ import CreateIndicator from './screens/CreateIndicator';
 
 // components
 import PageLayout from "./components/PageLayout";
+import AuthLayout from "./components/AuthLayout";
 
 function App() {
-  return (
+  const [loggedIn, /*setLoggedIn*/ ] = React.useState(true)
 
+  // TODO: use setLoggedIn after logged in
+
+  return (
       <BrowserRouter>
+        {loggedIn ? 
         <PageLayout>
           <Box sx={{ flexGrow:1 }}>
             <Grid item xs={12} md={12} lg={12}>
               <Route path="/" render={() => <Redirect to="/inicio"/>} />
               <Route path="/inicio" component={Home} exact/>
-              <Route path="/inicio-sesion" component={Login} exact/>
-              <Route path="/registro" component={Signup} exact/>
               <Route path="/indicadores" component={Indicators} exact/>
               <Route path="/indicadores/crear" component={CreateIndicator} exact/>
               <Route path="/muestras" component={Samples} exact/>
@@ -33,8 +36,13 @@ function App() {
               <Route path="/reportes" component={Reports} exact/>
             </Grid>
           </Box>
-        </PageLayout>
-      
+        </PageLayout> : 
+          <AuthLayout>
+            <Route path="/" render={() => <Redirect to="/inicio-sesion"/>} />
+            <Route path="/inicio-sesion" component={Login} exact/>
+            <Route path="/registro" component={Signup} exact/>
+          </AuthLayout>
+        }
       </BrowserRouter>
   );
 }
