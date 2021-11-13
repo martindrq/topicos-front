@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import indicatorsService from "../services/indicators";
+import areasService from "../services/areas";
 
 export const useIndicators = () => {
   const [indicators, setIndicators] = useState([])
@@ -29,4 +30,20 @@ export const useIndicators = () => {
   }, [])
 
   return [indicators, indicatorsValues, addIndicator, addIndicatorValue]
+}
+
+export const useAreas = () => {
+
+  const [areas, setAreas] = useState([])
+
+  const getAreas = async () => {
+    const response = await areasService.getAreas();
+    setAreas(response)
+  }
+
+  useEffect(() => {
+    getAreas()
+  }, [])
+
+  return [areas]
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Agua",
+    "description": "Area como categoria"
+  },
+  {
+    "id": 2,
+    "name": "Polen",
+    "description": "Polen es el area"
+  },
+  {
+    "id": 3,
+    "name": "Electricidad",
+    "description": "Electricidad el area"
+  }
+]
