@@ -25,6 +25,7 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [selected, setSelected] = useState([]);
 
   // Alert
   const [alertTitle, setAlertTitle] = useState('');
@@ -39,8 +40,6 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  const [selected, setSelected] = useState([]);
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -103,10 +102,11 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
 
           <FormControl variant="filled" sx={{ minWidth: 120}}>
             <InputLabel id="a">Acción</InputLabel>
-              <Select // TODO disable when there are no selected rows
+              <Select
                 labelId ='a'
                 value={action}
                 onChange={handleChangeAction}
+                disabled={selected.length === 0}
               >
                 <MenuItem value="">
                   <em>-</em>
