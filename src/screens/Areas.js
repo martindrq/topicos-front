@@ -17,12 +17,20 @@ const columns = [
 
 const Areas = () => {
 
-  const [areas] = useAreas();
+  const [areas,,, deleteArea] = useAreas();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     setRows(areas)
   }, [areas])
+
+  const onEdit = (item) => {
+    // TODO: redirect to edit area screen
+  }
+
+  const onDelete = async (item) => {
+    await deleteArea({ item })
+  }
 
   return (
     <Grid container spacing={2}>
@@ -30,7 +38,7 @@ const Areas = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Areas
         </Typography>
-        <Table columns={columns} rows={rows}/>
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  

@@ -19,12 +19,17 @@ function PaperComponent(props) {
   );
 }
 
-export default function Alert({ title, description, cancelText, okText, open, setOpen, onClose }) {
+export default function Alert({ title, description, cancelText, okText, open, setOpen, onClose, onConfirm }) {
 
   const handleClose = () => {
     setOpen(false);
     onClose();
   };
+
+  const handleConfirm = () => {
+    onConfirm()
+    handleClose()
+  }
 
   if (!open) return null
 
@@ -48,7 +53,7 @@ export default function Alert({ title, description, cancelText, okText, open, se
           <Button autoFocus onClick={handleClose}>
             {cancelText}
           </Button>
-          <Button onClick={handleClose}>{okText}</Button>
+          <Button onClick={handleConfirm}>{okText}</Button>
         </DialogActions>
       </Dialog>
     </div> 

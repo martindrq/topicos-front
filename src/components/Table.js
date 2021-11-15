@@ -20,7 +20,7 @@ import {
 
 import Alert from './Alert'
 
-export default function StickyHeadTable({ columns, rows, loading = false }) {
+export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
@@ -73,20 +73,34 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
   const isSelected = (id) => selected.indexOf(id) !== -1;
   
   const handleChangeAction = (event) => {
-    // Index 1 -> Delete
-    console.log('action', event.target)
     setAction(event.target.value)
-    setShowAlert(true)
     switch (event.target.value) {
-      case 1:
+      case 2:
+        // Index 2 -> Delete
+        setShowAlert(true)
         setAlertTitle('Eliminar registro')
         setAlertOkText('Eliminar')
-        setAlertDescription('Estas seguro de que deseas eliminar este registro? Esto no se puede deshacer')
+        setAlertDescription(`Desea eliminar esta${selected.length > 1 ? 's' : ''} fila${selected.length > 1 ? 's' : ''}? Esto no se podrá deshacer.`)
         return
       default:
         return
     }
   };
+
+  const onConfirmAction = () => {
+    switch (action) {
+      case 1:
+        onEdit(selected[0])
+        return
+      case 2:
+        for (let item of selected) {
+          onDelete(item)
+        }
+        return
+      default:
+        return
+    }
+  }
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -111,7 +125,8 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
                 <MenuItem value="">
                   <em>-</em>
                 </MenuItem>
-                <MenuItem value={1} name="delete">Borrar</MenuItem>
+                {selected.length === 1 ? <MenuItem value={1} name="edit">Editar</MenuItem> : null }
+                <MenuItem value={2} name="delete">Borrar</MenuItem>
               </Select>
           </FormControl>
         </TableContainer>
@@ -190,6 +205,7 @@ export default function StickyHeadTable({ columns, rows, loading = false }) {
         open={showAlert} 
         setOpen={setShowAlert}
         onClose={() => setAction('')}
+        onConfirm={onConfirmAction}
       />
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
