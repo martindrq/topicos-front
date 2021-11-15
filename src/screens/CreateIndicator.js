@@ -3,14 +3,18 @@ import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormL
 import {Add} from '@mui/icons-material';
 
 import listUnits from '../mock-data/units'
+import listAreas from '../mock-data/areas'
 import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
 
+import { useIndicators } from "../hooks";
 
 const AddIndicator = () => { 
     
     const [hide, setHide] = useState('hidden')
+
+    const [,,addIndicator] = useIndicators();
 
     const [datosForm, setDatosForm] = useState({
         name: '',
@@ -21,7 +25,8 @@ const AddIndicator = () => {
         constantValue2: '',
         operadorValue1: '',
         frecuencia: '',
-        radioSelect: 'D'
+        radioSelect: 'D',
+        area: '',
     })
     
     const [error, setError] = useState(false)
@@ -54,7 +59,14 @@ const AddIndicator = () => {
         else {
             setError(false)
         }
-        console.log('Enviando datos...  ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
+        addIndicator({
+            name: datosForm.name,
+            unit: datosForm.unidad,
+            type: datosForm.radioSelect,
+            frequency: datosForm.frecuencia,
+            areaId: datosForm.area,
+            // formula: datosForm.formula, // TODO: add formula
+        })
     }
 
     return(
@@ -78,6 +90,21 @@ const AddIndicator = () => {
                             onChange={handleInputChange} 
                         />
                         <Stack direction="row" alignItems="center" spacing={0}>
+
+                            <FormControl sx={{ m: 1, minWidth: 4 }}>
+                                <InputLabel id="a">Area *</InputLabel>
+                                <Select labelId="a" 
+                                    name='area'
+                                    value={datosForm.area}
+                                    onChange={handleInputChange}
+                                    error={error}
+                                >
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {listAreas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
+                                </Select>
+                                <FormHelperText>Area perteneciente</FormHelperText>
+                            </FormControl>
+
                             <FormControl sx={{ m: 1, minWidth: 2 }}>
                                 <InputLabel id="u">Unidad *</InputLabel>
                                 <Select labelId="u" 
