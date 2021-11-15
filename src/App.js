@@ -11,6 +11,8 @@ import Samples from "./screens/Samples";
 import AddSample from "./screens/AddSample";
 import Indicators from "./screens/Indicators";
 import CreateIndicator from './screens/CreateIndicator';
+import Areas from './screens/Areas';
+import CreateArea from './screens/CreateArea';
 
 // components
 import PageLayout from "./components/PageLayout";
@@ -34,6 +36,8 @@ function App() {
               <Route path="/muestras" component={Samples} exact/>
               <Route path="/muestras/agregar" component={AddSample} exact/>
               <Route path="/reportes" component={Reports} exact/>
+              <Route path="/areas" component={Areas} exact/>
+              <Route path="/areas/crear" component={CreateArea} exact/>
             </Grid>
           </Box>
         </PageLayout> : 
