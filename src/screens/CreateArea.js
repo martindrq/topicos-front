@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Stack, Typography, Button} from '@mui/material/';
-
+import {TextField, Grid, Stack, Typography, Paper, Tooltip, Fab} from '@mui/material/';
+import {Add} from '@mui/icons-material';
 
 const CreateArea = () => { 
     
     const [datosForm, setDatosForm] = useState({
         name: '',
         description: '',
-        unidad: '',
-        indicadorValue1: '',
-        indicadorValue2: '',
-        constantValue2: '',
-        operadorValue1: '',
-        frecuencia: '',
-        radioSelect: 'D'
     })
         
     const handleInputChange = (event) => {
@@ -25,12 +18,8 @@ const CreateArea = () => {
 
     const enviarDatosForm = (event) => {
         event.preventDefault()
-        console.log('Enviando datos...  ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia + ' ' +  datosForm.description)
+        console.log('Enviando datos...  ' + datosForm.name + ' ' +  datosForm.description)     //  Tados a enviar, BORRAR.
     }
-
-    const handleSubmit = () => {
-      console.log("About to sumit", datosForm);
-    };
 
     return(
         <Grid container spacing={2}>
@@ -52,18 +41,20 @@ const CreateArea = () => {
                             value={datosForm.description}
                             onChange={handleInputChange} 
                         />
-                      </Stack> 
+                    </Stack> 
+                
+                    <Stack direction="column" alignItems="center" spacing={2} >
+                        <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
+                            <Tooltip title="Crear" placement="right">  
+                                <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} type="submit" color="primary" aria-label="Crear">
+                                <Add/>
+                                </Fab>
+                            </Tooltip>
+                        </Paper>
+                    </Stack>  
                 </form>
-                <Button
-                  type="submit"
-                  onClick={handleSubmit}
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Crear
-                </Button>
-            </Grid>
         </Grid>
+    </Grid>
     );
  }
 
