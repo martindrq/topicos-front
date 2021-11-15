@@ -29,8 +29,6 @@ const AddIndicator = () => {
         area: '',
     })
     
-    const [error, setError] = useState(false)
-    
     const handleInputChange = (event) => {
         setDatosForm({
             ...datosForm,
@@ -53,12 +51,6 @@ const AddIndicator = () => {
     const enviarDatosForm = (event) => {
         event.preventDefault()
         
-        if ( datosForm.unidad  === '') {
-            setError(true)
-        }
-        else {
-            setError(false)
-        }
         addIndicator({
             name: datosForm.name,
             unit: datosForm.unidad,
@@ -67,6 +59,8 @@ const AddIndicator = () => {
             areaId: datosForm.area,
             // formula: datosForm.formula, // TODO: add formula
         })
+ 
+        //console.log('Enviando datos...  ' + datosForm.name + ' ' +  datosForm.description + ' ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia )
     }
 
     return(
@@ -97,9 +91,8 @@ const AddIndicator = () => {
                                     name='area'
                                     value={datosForm.area}
                                     onChange={handleInputChange}
-                                    error={error}
+                                    required
                                 >
-                                    <MenuItem value=""><em>None</em></MenuItem>
                                     {listAreas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
@@ -111,9 +104,8 @@ const AddIndicator = () => {
                                     name='unidad'
                                     value={datosForm.unidad}
                                     onChange={handleInputChange}
-                                    error={error}
+                                    required
                                 >
-                                    <MenuItem value=""><em>None</em></MenuItem>
                                     {listUnits.map( (unit) => <MenuItem value={unit.id}>{unit.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Métrica de medida</FormHelperText>
@@ -129,7 +121,7 @@ const AddIndicator = () => {
                                         name='frecuencia'
                                         onChange={handleInputChange}
                                     >
-                                        <MenuItem value=""><em>None</em></MenuItem>
+                                        <MenuItem value=""><em>Vacia</em></MenuItem>
                                         {listFrequency.map( (frequency) => <MenuItem value={frequency.id}>{frequency.name}</MenuItem> )}
                                     </Select>
                                 <FormHelperText>Frecuencia de medida en meses</FormHelperText>
@@ -144,61 +136,67 @@ const AddIndicator = () => {
                                 </RadioGroup>
                         </FormControl>  
                         
-                        <Stack direction="row" alignItems="center" spacing={0} visibility={hide}>
-                            <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_1">
-                                <InputLabel id="i1">1er Indicador</InputLabel>
-                                <Select
-                                    labelId="i1"
-                                    id="id_indicador1"
-                                    value={datosForm.indicadorValue1}
-                                    label=""
-                                    name='indicadorValue1'
-                                    onChange={handleInputChange}
-                                >
-                                    <MenuItem value=""><em>None</em></MenuItem>
-                                    {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
-                                </Select>
-                                <FormHelperText>Seleccione el primer indicador</FormHelperText>
-                            </FormControl>
+                        { (hide === 'visible') &&
 
-                            <FormControl variant="filled" sx={{ m: 1, minWidth: 20 }} id="id_form_2">
-                                <InputLabel id="i1">Operador</InputLabel>
-                                <Select
-                                    id="id_operador_1"
-                                    value={datosForm.operadorValue1}
-                                    label=""
-                                    name='operadorValue1'
-                                    onChange={handleInputChange}
-                                >
-                                    <MenuItem value=""><em>None</em></MenuItem>
-                                    {listOperators.map( (operator) => <MenuItem value={operator.id}>{operator.name}</MenuItem> )}
-                                </Select>
-                                <FormHelperText>Seleccione el operador</FormHelperText>
-                            </FormControl>
-
-                            <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_3">
-                                <InputLabel id="i2">2do Indicador</InputLabel>
-                                <Select
-                                    labelId="i2"
-                                    id="id_indicador2"
-                                    value={datosForm.indicadorValue2}
-                                    label=""
-                                    name='indicadorValue2'
-                                    onChange={handleInputChange}
-                                >
-                                    <MenuItem value="value">Una constante</MenuItem>
-                                    {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
-                                </Select>
-                                <FormHelperText>Seleccione el segundo indicador</FormHelperText>
-                                    { (datosForm.indicadorValue2 === 'value') && (
-                                        <TextField label="Valor" variant="outlined" fullWidth required autocomplete="none" 
-                                        name='constantValue2'
-                                        value={datosForm.constantValue2}
+                            <Stack direction="row" alignItems="center" spacing={0} visibility={hide}>
+                            
+                                <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_1">
+                                    <InputLabel id="i1">1er Indicador</InputLabel>
+                                    <Select
+                                        labelId="i1"
+                                        id="id_indicador1"
+                                        value={datosForm.indicadorValue1}
+                                        label=""
+                                        name='indicadorValue1'
                                         onChange={handleInputChange}
-                                    />
-                                    )}
+                                        required
+                                    >
+                                        {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                    </Select>
+                                    <FormHelperText>Seleccione el primer indicador</FormHelperText>
                                 </FormControl>
-                        </Stack>  
+
+                                <FormControl variant="filled" sx={{ m: 1, minWidth: 20 }} id="id_form_2">
+                                    <InputLabel id="i1">Operador</InputLabel>
+                                    <Select
+                                        id="id_operador_1"
+                                        value={datosForm.operadorValue1}
+                                        label=""
+                                        name='operadorValue1'
+                                        onChange={handleInputChange}
+                                        required
+                                    >
+                                        {listOperators.map( (operator) => <MenuItem value={operator.id}>{operator.name}</MenuItem> )}
+                                    </Select>
+                                    <FormHelperText>Seleccione el operador</FormHelperText>
+                                </FormControl>
+
+                                <FormControl sx={{ m: 1, minWidth: 20 }} id="id_form_3">
+                                    <InputLabel id="i2">2do Indicador</InputLabel>
+                                    
+                                        <Select
+                                            labelId="i2"
+                                            id="id_indicador2"
+                                            value={datosForm.indicadorValue2}
+                                            label=""
+                                            name='indicadorValue2'
+                                            onChange={handleInputChange} 
+                                            required
+                                        >
+                                            <MenuItem value="value">Una constante</MenuItem>
+                                            {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                        </Select> 
+                                    <FormHelperText>Seleccione el segundo indicador</FormHelperText>
+                                        { (datosForm.indicadorValue2 === 'value') && (
+                                            <TextField label="Valor" variant="outlined" fullWidth required autocomplete="none" 
+                                            name='constantValue2'
+                                            value={datosForm.constantValue2}
+                                            onChange={handleInputChange}
+                                        />
+                                        )}
+                                    </FormControl>
+                            </Stack>  
+                        }   
                     </Stack>
 
                     <Stack direction="column" alignItems="center" spacing={2} >
