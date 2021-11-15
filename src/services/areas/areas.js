@@ -11,6 +11,14 @@ const areasService = {
     });
     return response;
   },
+  addArea: async function (data) {
+    const response = await axios.get(BACKEND_URL + "/area/create", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  },
 };
 
 export default areasService;

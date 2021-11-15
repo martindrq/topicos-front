@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Stack, Typography, Paper, Tooltip, Fab} from '@mui/material/';
-import {Add} from '@mui/icons-material';
+import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab } from '@mui/material/';
+import { Add } from '@mui/icons-material';
+
+import { useAreas } from "../hooks";
 
 const CreateArea = () => { 
     
+    const [,addArea] = useAreas();
+
     const [datosForm, setDatosForm] = useState({
         name: '',
         description: '',
@@ -18,7 +22,7 @@ const CreateArea = () => {
 
     const enviarDatosForm = (event) => {
         event.preventDefault()
-        console.log('Enviando datos...  ' + datosForm.name + ' ' +  datosForm.description)     //  Tados a enviar, BORRAR.
+        addArea(datosForm)
     }
 
     return(
