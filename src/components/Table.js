@@ -1,9 +1,35 @@
 import React, { useState } from 'react';
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Checkbox, Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
+import {
+  Paper, 
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Checkbox,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Backdrop,
+  CircularProgress
+} from '@mui/material';
 
-export default function StickyHeadTable({ columns, rows }) {
+import Alert from './Alert'
+
+export default function StickyHeadTable({ columns, rows, loading = false }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [action, setAction] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+
+  // Alert
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertOkText, setAlertOkText] = useState('');
+  const [alertDescription, setAlertDescription] = useState('');
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,12 +73,21 @@ export default function StickyHeadTable({ columns, rows }) {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
   
-  const [action, setAction] = useState('');
-
   const handleChangeAction = (event) => {
-    setAction(event.target.value);
+    // Index 1 -> Delete
+    console.log('action', event.target)
+    setAction(event.target.value)
+    setShowAlert(true)
+    switch (event.target.value) {
+      case 1:
+        setAlertTitle('Eliminar registro')
+        setAlertOkText('Eliminar')
+        setAlertDescription('Estas seguro de que deseas eliminar este registro? Esto no se puede deshacer')
+        return
+      default:
+        return
+    }
   };
-
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -68,7 +103,7 @@ export default function StickyHeadTable({ columns, rows }) {
 
           <FormControl variant="filled" sx={{ minWidth: 120}}>
             <InputLabel id="a">Acción</InputLabel>
-              <Select
+              <Select // TODO disable when there are no selected rows
                 labelId ='a'
                 value={action}
                 onChange={handleChangeAction}
@@ -76,7 +111,7 @@ export default function StickyHeadTable({ columns, rows }) {
                 <MenuItem value="">
                   <em>-</em>
                 </MenuItem>
-                <MenuItem value={1}>Borrar</MenuItem>
+                <MenuItem value={1} name="delete">Borrar</MenuItem>
               </Select>
           </FormControl>
         </TableContainer>
@@ -147,6 +182,21 @@ export default function StickyHeadTable({ columns, rows }) {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      <Alert 
+        title={alertTitle}
+        okText={alertOkText}
+        description={alertDescription}
+        cancelText="Cancelar" 
+        open={showAlert} 
+        setOpen={setShowAlert}
+        onClose={() => setAction('')}
+      />
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Paper>
   );
 }
