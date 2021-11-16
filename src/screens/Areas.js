@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAreas } from "../hooks";
 import Table from '../components/Table';
@@ -18,6 +18,8 @@ const columns = [
 const Areas = () => {
 
   const [areas,,, deleteArea] = useAreas();
+  const history = useHistory();
+
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const Areas = () => {
   }, [areas])
 
   const onEdit = (item) => {
-    // TODO: redirect to edit area screen
+    history.push('/areas/editar', { isEdit: true, areaId: item })
   }
 
   const onDelete = async (item) => {

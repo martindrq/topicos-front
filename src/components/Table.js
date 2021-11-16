@@ -75,6 +75,10 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
   const handleChangeAction = (event) => {
     setAction(event.target.value)
     switch (event.target.value) {
+      case 1:
+        // Index 1 -> Edit
+        onEdit(selected[0])
+        return
       case 2:
         // Index 2 -> Delete
         setShowAlert(true)
@@ -89,9 +93,6 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
 
   const onConfirmAction = () => {
     switch (action) {
-      case 1:
-        onEdit(selected[0])
-        return
       case 2:
         for (let item of selected) {
           onDelete(item)
