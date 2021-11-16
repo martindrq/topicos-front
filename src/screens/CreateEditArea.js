@@ -5,15 +5,14 @@ import { Add } from '@mui/icons-material';
 import { useAreas } from "../hooks";
 
 const CreateEditArea = ({ location }) => { 
-    console.log('loc', location)
     const isEdit = location?.state?.isEdit || false
-    const areaId = location?.state?.areaId
+    const item = location?.state?.item
     
     const [, addArea, editArea] = useAreas();
 
     const [datosForm, setDatosForm] = useState({
-        name: '',
-        description: '',
+        name: item?.name || '',
+        description: item?.description || '',
     })
         
     const handleInputChange = (event) => {
@@ -26,7 +25,7 @@ const CreateEditArea = ({ location }) => {
     const enviarDatosForm = (event) => {
         event.preventDefault()
         if (isEdit) {
-            editArea({...datosForm, areaId})
+            editArea({...datosForm, id: item?.id})
         } else {
             addArea(datosForm)
         } 

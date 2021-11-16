@@ -2,7 +2,7 @@ import areasMock from "../../mock-data/areas.json";
 
 const areasService = {
   getAreas: async function () {
-    return areasMock;
+    return { data: areasMock };
   },
   addArea: async function (data) {
     return {...data, id: 4};

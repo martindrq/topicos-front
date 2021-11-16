@@ -4,7 +4,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const areasService = {
   getAreas: async function () {
-    const response = await axios.get(BACKEND_URL + "/areas", {
+    const response = await axios.get(BACKEND_URL + "/area", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -12,7 +12,7 @@ const areasService = {
     return response;
   },
   addArea: async function (data) {
-    const response = await axios.get(BACKEND_URL + "/area/create", data, {
+    const response = await axios.post(BACKEND_URL + "/area/create", data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +20,7 @@ const areasService = {
     return response;
   },
   editArea: async function (data) {
-    const response = await axios.get(BACKEND_URL + "/area/modify", data, {
+    const response = await axios.put(BACKEND_URL + "/area/modify", data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -28,7 +28,7 @@ const areasService = {
     return response;
   },
   deleteArea: async function (data) {
-    const response = await axios.get(BACKEND_URL + `/area/delete?id=${data.id}`, {
+    const response = await axios.delete(BACKEND_URL + `/area/delete?id=${data.id}`, {
       headers: {
         "Content-Type": "application/json",
       },
