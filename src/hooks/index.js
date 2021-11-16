@@ -38,7 +38,7 @@ export const useAreas = () => {
 
   const getAreas = async () => {
     const response = await areasService.getAreas();
-    setAreas(response)
+    setAreas(response.data)
   }
 
   const addArea = async (data) => {

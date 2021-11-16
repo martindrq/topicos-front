@@ -31,7 +31,7 @@ const Areas = () => {
   }
 
   const onDelete = async (item) => {
-    await deleteArea({ item })
+    await deleteArea({ id: item })
   }
 
   return (

@@ -26,7 +26,7 @@ const CreateEditArea = ({ location }) => {
     const enviarDatosForm = (event) => {
         event.preventDefault()
         if (isEdit) {
-            editArea({...datosForm, areaId})
+            editArea({...datosForm, id: areaId})
         } else {
             addArea(datosForm)
         } 
