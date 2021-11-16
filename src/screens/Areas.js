@@ -26,8 +26,9 @@ const Areas = () => {
     setRows(areas)
   }, [areas])
 
-  const onEdit = (item) => {
-    history.push('/areas/editar', { isEdit: true, areaId: item })
+  const onEdit = (itemId) => {
+    const item = rows.find(item => item.id === itemId)
+    history.push('/areas/editar', { isEdit: true, item, })
   }
 
   const onDelete = async (item) => {
