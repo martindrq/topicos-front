@@ -41,9 +41,24 @@ export const useAreas = () => {
     setAreas(response)
   }
 
+  const addArea = async (data) => {
+    const response = await areasService.addArea(data);
+    return response
+  }
+
+  const editArea = async (data) => {
+    const response = await areasService.editArea(data);
+    return response
+  }
+
+  const deleteArea = async (data) => {
+    const response = await areasService.deleteArea(data);
+    return response
+  }
+
   useEffect(() => {
     getAreas()
   }, [])
 
-  return [areas]
+  return [areas, addArea, editArea, deleteArea]
 }

@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Stack, Typography, Paper, Tooltip, Fab} from '@mui/material/';
-import {Add} from '@mui/icons-material';
+import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, Button } from '@mui/material/';
+import { Add } from '@mui/icons-material';
 
-const CreateArea = () => { 
+import { useAreas } from "../hooks";
+
+const CreateEditArea = ({ location }) => { 
+    console.log('loc', location)
+    const isEdit = location?.state?.isEdit || false
+    const areaId = location?.state?.areaId
     
+    const [, addArea, editArea] = useAreas();
+
     const [datosForm, setDatosForm] = useState({
         name: '',
         description: '',
@@ -18,14 +25,18 @@ const CreateArea = () => {
 
     const enviarDatosForm = (event) => {
         event.preventDefault()
-        console.log('Enviando datos...  ' + datosForm.name + ' ' +  datosForm.description)     //  Tados a enviar, BORRAR.
+        if (isEdit) {
+            editArea({...datosForm, areaId})
+        } else {
+            addArea(datosForm)
+        } 
     }
 
     return(
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h4">
-                Crear area
+                {`${isEdit ? 'Editar' : 'Crear'} area`}
                 </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -43,6 +54,15 @@ const CreateArea = () => {
                         />
                     </Stack> 
                 
+                    {isEdit ? 
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Editar
+                    </Button>
+                    : 
                     <Stack direction="column" alignItems="center" spacing={2} >
                         <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
                             <Tooltip title="Crear" placement="right">  
@@ -51,11 +71,11 @@ const CreateArea = () => {
                                 </Fab>
                             </Tooltip>
                         </Paper>
-                    </Stack>  
+                    </Stack>}
                 </form>
         </Grid>
     </Grid>
     );
  }
 
-export default CreateArea;
+export default CreateEditArea;

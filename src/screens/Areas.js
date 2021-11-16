@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAreas } from "../hooks";
 import Table from '../components/Table';
@@ -17,12 +17,22 @@ const columns = [
 
 const Areas = () => {
 
-  const [areas] = useAreas();
+  const [areas,,, deleteArea] = useAreas();
+  const history = useHistory();
+
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     setRows(areas)
   }, [areas])
+
+  const onEdit = (item) => {
+    history.push('/areas/editar', { isEdit: true, areaId: item })
+  }
+
+  const onDelete = async (item) => {
+    await deleteArea({ item })
+  }
 
   return (
     <Grid container spacing={2}>
@@ -30,7 +40,7 @@ const Areas = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Areas
         </Typography>
-        <Table columns={columns} rows={rows}/>
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
