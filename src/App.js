@@ -8,7 +8,7 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Reports from "./screens/Reports";
 import Samples from "./screens/Samples";
-import AddSample from "./screens/AddSample";
+import CreateEditSample from "./screens/CreateEditSample";
 import Indicators from "./screens/Indicators";
 import CreateEditIndicator from './screens/CreateEditIndicator';
 import Areas from './screens/Areas';
@@ -35,7 +35,8 @@ function App() {
               <Route path="/indicadores/crear" component={CreateEditIndicator} exact/>
               <Route path="/indicadores/editar" component={CreateEditIndicator} exact/>
               <Route path="/muestras" component={Samples} exact/>
-              <Route path="/muestras/agregar" component={AddSample} exact/>
+              <Route path="/muestras/agregar" component={CreateEditSample} exact/>
+              <Route path="/muestras/editar" component={CreateEditSample} exact/>
               <Route path="/reportes" component={Reports} exact/>
               <Route path="/areas" component={Areas} exact/>
               <Route path="/areas/crear" component={CreateEditArea} exact/>

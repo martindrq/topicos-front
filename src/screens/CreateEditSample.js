@@ -15,13 +15,29 @@ const columns = [
   },
 ];
 
-function AddData() {
+function CreateEditSample ({ location }) {
+  const isEdit = location?.state?.isEdit || false
+  const sampleId = location?.state?.sampleId
+  const indicatorId = location?.state?.indicatorId
+
   const [formState, setFormState] = useState({});
-  const [indicators, indicatorsValues] = useIndicators();
+  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators();
   const [rows, setRows] = useState([]);
 
   const handleSubmit = () => {
-    console.log("About to sumit", formState);
+    if (isEdit) {
+      editIndicatorValue({
+          ...formState,
+          id: sampleId,
+          indicatorId,
+          companyId: 1 // FIXME: add real companyId
+      })
+  } else {
+      addIndicatorValue({
+        ...formState,
+        companyId: 1 // FIXME: add real companyId
+      })
+  } 
   };
 
   const handleChange = (event) => {
@@ -44,20 +60,20 @@ function AddData() {
     <Grid container spacing={2}>
       <Grid item xs={12}>
       <Typography variant="h4">
-        Agregar muestra
+      {`${isEdit ? 'Editar' : 'Agregar'} muestra`}
       </Typography>
         <p>Agregar datos referenciados a un indicador</p>
       </Grid>
 
       <Grid item xs={12} md={6}>
         <Grid container rowSpacing={4}>
-          <Grid item xs={12} >
+          {!indicatorId ? <Grid item xs={12} >
             <FormControl variant="standard" fullWidth>
               <InputLabel id="indicator">Indicador</InputLabel>
               <Select
                 labelId="indicator"
                 id="indicator"
-                name="indicator"
+                name="indicatorId"
                 value={formState.indicator || ""}
                 fullWidth
                 onChange={handleChange}
@@ -71,7 +87,7 @@ function AddData() {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> : null}
           <Grid item xs={6}>
             <FormControl variant="standard" fullWidth>
               <DesktopDatePicker
@@ -103,7 +119,7 @@ function AddData() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Agregar dato
+            {`${isEdit ? 'Editar' : 'Agregar'} dato`}
           </Button>
         </Grid>
       </Grid>
@@ -113,4 +129,4 @@ function AddData() {
   );
 }
 
-export default AddData;
+export default CreateEditSample ;
