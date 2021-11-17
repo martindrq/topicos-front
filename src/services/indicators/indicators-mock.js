@@ -3,7 +3,7 @@ import dataMock from "../../mock-data/samples.json";
 
 const indicatorsService = {
   getIndicators: async function () {
-    return indicatorsMock;
+    return {data: indicatorsMock};
   },
   getIndicatorsValues: async () => {
     return dataMock;
