@@ -9,10 +9,22 @@ const indicatorsService = {
     return dataMock;
   },
   addIndicator: async (data) => {
-    return true;
+    return {...data, id: 6};
   },
   addIndicatorValue: async (data) => {
     return true;
+  },
+  editIndicator: async function (data) {
+    return data;
+  },
+  editIndicatorValue: async function (data) {
+    return data;
+  },
+  deleteIndicator: async function (data) {
+    return {};
+  },
+  deleteIndicatorValue: async function (data) {
+    return {};
   },
 };
 export default indicatorsService;

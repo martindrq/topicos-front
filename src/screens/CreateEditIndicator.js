@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab} from '@mui/material/';
+import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab, Button} from '@mui/material/';
 import {Add} from '@mui/icons-material';
 
 import listUnits from '../mock-data/units'
@@ -10,11 +10,14 @@ import listFrequency from '../mock-data/frequency'
 
 import { useIndicators } from "../hooks";
 
-const AddIndicator = () => { 
+const CreateEditIndicator = ({ location }) => { 
     
+    const isEdit = location?.state?.isEdit || false
+    const indicatorId = location?.state?.indicatorId
+
     const [hide, setHide] = useState('hidden')
 
-    const [,,addIndicator] = useIndicators();
+    const [,, addIndicator,, editIndicator] = useIndicators();
 
     const [datosForm, setDatosForm] = useState({
         name: '',
@@ -50,24 +53,37 @@ const AddIndicator = () => {
 
     const enviarDatosForm = (event) => {
         event.preventDefault()
+
+        if (isEdit) {
+            editIndicator({
+                id: indicatorId,
+                name: datosForm.name,
+                unit: datosForm.unidad,
+                type: datosForm.radioSelect,
+                frequency: datosForm.frecuencia,
+                areaId: datosForm.area,
+                description: datosForm.description,
+                // formula: datosForm.formula, // TODO: add formula
+            })
+        } else {
+            addIndicator({
+                name: datosForm.name,
+                unit: datosForm.unidad,
+                type: datosForm.radioSelect,
+                frequency: datosForm.frecuencia,
+                areaId: datosForm.area,
+                description: datosForm.description,
+                // formula: datosForm.formula, // TODO: add formula
+            })
+        } 
         
-        addIndicator({
-            name: datosForm.name,
-            unit: datosForm.unidad,
-            type: datosForm.radioSelect,
-            frequency: datosForm.frecuencia,
-            areaId: datosForm.area,
-            // formula: datosForm.formula, // TODO: add formula
-        })
- 
-        //console.log('Enviando datos...  ' + datosForm.name + ' ' +  datosForm.description + ' ' + datosForm.unidad + ' ' + datosForm.indicadorValue1 + ' ' + datosForm.indicadorValue2 + ' '  + datosForm.operadorValue1 + ' '  + datosForm.frecuencia )
     }
 
     return(
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h4">
-                Crear indicador
+                {`${isEdit ? 'Editar' : 'Crear'} indicador`}
                 </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -106,7 +122,7 @@ const AddIndicator = () => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listUnits.map( (unit) => <MenuItem value={unit.id}>{unit.name}</MenuItem> )}
+                                    {listUnits.map( (unit) => <MenuItem key={unit.id} value={unit.name}>{unit.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Métrica de medida</FormHelperText>
                             </FormControl>
@@ -198,20 +214,29 @@ const AddIndicator = () => {
                             </Stack>  
                         }   
                     </Stack>
-
-                    <Stack direction="column" alignItems="center" spacing={2} >
-                        <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
-                            <Tooltip title="Crear" placement="right">  
-                                <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} type="submit" color="primary" aria-label="Crear">
-                                <Add/>
-                                </Fab>
-                            </Tooltip>
-                        </Paper>
-                    </Stack>  
+                    {isEdit ? 
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Editar
+                        </Button>
+                        : 
+                        <Stack direction="column" alignItems="center" spacing={2} >
+                            <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
+                                <Tooltip title="Crear" placement="right">  
+                                    <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} type="submit" color="primary" aria-label="Crear">
+                                    <Add/>
+                                    </Fab>
+                                </Tooltip>
+                            </Paper>
+                        </Stack>  
+                    }
                 </form>
             </Grid>
         </Grid>
     );
  }
 
-export default AddIndicator;
+export default CreateEditIndicator;
