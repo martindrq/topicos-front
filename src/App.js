@@ -10,7 +10,7 @@ import Reports from "./screens/Reports";
 import Samples from "./screens/Samples";
 import AddSample from "./screens/AddSample";
 import Indicators from "./screens/Indicators";
-import CreateIndicator from './screens/CreateIndicator';
+import CreateEditIndicator from './screens/CreateEditIndicator';
 import Areas from './screens/Areas';
 import CreateEditArea from './screens/CreateEditArea';
 
@@ -32,7 +32,8 @@ function App() {
               <Route path="/" render={() => <Redirect to="/inicio"/>} />
               <Route path="/inicio" component={Home} exact/>
               <Route path="/indicadores" component={Indicators} exact/>
-              <Route path="/indicadores/crear" component={CreateIndicator} exact/>
+              <Route path="/indicadores/crear" component={CreateEditIndicator} exact/>
+              <Route path="/indicadores/editar" component={CreateEditIndicator} exact/>
               <Route path="/muestras" component={Samples} exact/>
               <Route path="/muestras/agregar" component={AddSample} exact/>
               <Route path="/reportes" component={Reports} exact/>

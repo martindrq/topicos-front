@@ -8,7 +8,7 @@ export const useIndicators = () => {
 
   const getIndicators = async () => {
     const response = await indicatorsService.getIndicators();
-    setIndicators(response)
+    setIndicators(response.data)
   }
   
   const getIndicatorsValues = async () => {
@@ -17,11 +17,30 @@ export const useIndicators = () => {
   }
 
   const addIndicator = async (data) => {
-    await indicatorsService.addIndicator(data);
+    const response = await indicatorsService.addIndicator(data);
+    return response
   }
 
   const addIndicatorValue = async (data) => {
     await indicatorsService.addIndicatorValue(data);
+  }
+
+  const editIndicator = async (data) => {
+    const response = await indicatorsService.editIndicator(data);
+    return response
+  }
+
+  const editIndicatorValue = (data) => {
+    // TODO
+  }
+
+  const deleteIndicator = async (data) => {
+    const response = await indicatorsService.deleteIndicator(data);
+    return response
+  }
+
+  const deleteIndicatorValue = async (data) => {
+    // TODO
   }
 
   useEffect(() => {
@@ -29,7 +48,7 @@ export const useIndicators = () => {
     getIndicatorsValues()
   }, [])
 
-  return [indicators, indicatorsValues, addIndicator, addIndicatorValue]
+  return [indicators, indicatorsValues, addIndicator, addIndicatorValue, editIndicator, editIndicatorValue, deleteIndicator, deleteIndicatorValue]
 }
 
 export const useAreas = () => {
