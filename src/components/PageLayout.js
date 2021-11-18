@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Switch, CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Switch, CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText, Chip, Avatar } from "@mui/material";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, PersonAddAltOutlined, ListAltOutlined } from "@mui/icons-material";
+import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, ListAltOutlined } from "@mui/icons-material";
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { useHistory } from 'react-router-dom';
@@ -205,21 +205,18 @@ function PageLayout({children}) {
           >
           </Typography>
 
-          <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme}/>
-          
-          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion">
-              <LoginOutlined fontSize="inherit"/>
-          </IconButton>
+          <Chip avatar={<Avatar>M</Avatar>} label="Nombre empresa" style={{color: 'white'}}/>
 
-          <IconButton size="large" color="inherit" component={Link} to="/registro">
-              <PersonAddAltOutlined fontSize="inherit" />
-          </IconButton>
-          {/* <Chip avatar={<Avatar>M</Avatar>} label="Username" /> */}
+          <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme} />
 
-          <IconButton size="large" color="inherit" component={Link} to="/notificacion">
+          <IconButton size="large" color="inherit" component={Link} to="/notificaciones">
             <Badge badgeContent={4} color="secondary">
               <Notifications fontSize="inherit"/>
             </Badge>
+          </IconButton>
+          
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion"> {/* TODO: logout */}
+              <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
         </Toolbar>
