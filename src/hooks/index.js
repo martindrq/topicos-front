@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import indicatorsService from "../services/indicators";
 import areasService from "../services/areas";
+import authService from "../services/auth";
 
 export const useIndicators = () => {
   const [indicators, setIndicators] = useState([])
@@ -82,4 +83,19 @@ export const useAreas = () => {
   }, [])
 
   return [areas, addArea, editArea, deleteArea]
+}
+
+export const useAuth = () => {
+
+  const register = async (data) => {
+    const response = await authService.register(data);
+    return response
+  }
+
+  const login = async (data) => {
+    const response = await authService.login(data);
+    return response
+  }
+
+  return [register, login]
 }
