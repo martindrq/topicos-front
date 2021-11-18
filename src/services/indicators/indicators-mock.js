@@ -6,7 +6,7 @@ const indicatorsService = {
     return {data: indicatorsMock};
   },
   getIndicatorsValues: async () => {
-    return dataMock;
+    return {data: dataMock};
   },
   addIndicator: async (data) => {
     return {...data, id: 6};

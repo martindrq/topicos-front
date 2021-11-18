@@ -13,7 +13,7 @@ export const useIndicators = () => {
   
   const getIndicatorsValues = async () => {
     const response = await indicatorsService.getIndicatorsValues();
-    setIndicatorsValues(response)
+    setIndicatorsValues(response.data)
   }
 
   const addIndicator = async (data) => {
@@ -30,8 +30,9 @@ export const useIndicators = () => {
     return response
   }
 
-  const editIndicatorValue = (data) => {
-    // TODO
+  const editIndicatorValue = async (data) => {
+    const response = await indicatorsService.editIndicatorValue(data);
+    return response
   }
 
   const deleteIndicator = async (data) => {
@@ -40,7 +41,8 @@ export const useIndicators = () => {
   }
 
   const deleteIndicatorValue = async (data) => {
-    // TODO
+    const response = await indicatorsService.deleteIndicatorValue(data);
+    return response
   }
 
   useEffect(() => {

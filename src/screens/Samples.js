@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Add } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 
 import { useIndicators } from "../hooks";
 import Table from '../components/Table';
@@ -27,11 +28,20 @@ const columns = [
 const Samples = () => {
 
   const [rows, setRows] = useState([]);
-  const [, indicatorsValues] = useIndicators();  
+  const [, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators();  
+  const history = useHistory();
   
   useEffect(() => {
-    setRows(indicatorsValues.map(value => ({...value, indicator: value.indicator.name})))
+    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name})))
   }, [indicatorsValues])
+
+  const onEdit = (item) => {
+    history.push('/muestras/editar', { isEdit: true, sampleId: item, indicatorId: indicatorsValues.find(iv => iv.id === item)?.indicator?.id })
+  }
+
+  const onDelete = async (item) => {
+    await deleteIndicatorValue({ id: item })
+  }
 
   return (
     <Grid container spacing={2}>
@@ -39,7 +49,7 @@ const Samples = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Muestras
         </Typography>
-        <Table columns={columns} rows={rows}/>
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
