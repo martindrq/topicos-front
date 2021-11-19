@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAreas } from "../hooks";
+import { useCompanies } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [
@@ -12,22 +12,22 @@ const columns = [
 
 const Companies = () => {
 
-  const [areas,,, deleteArea] = useAreas();
+  const [companies,,, deleteCompany] = useCompanies();
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    setRows(areas)
-  }, [areas])
+    setRows(companies)
+  }, [companies])
 
   const onEdit = (itemId) => {
     const item = rows.find(item => item.id === itemId)
-    history.push('/areas/editar', { isEdit: true, item, })
+    history.push('/empresas/editar', { isEdit: true, item, })
   }
 
   const onDelete = async (item) => {
-    await deleteArea({ id: item })
+    await deleteCompany({ id: item })
   }
 
   return (

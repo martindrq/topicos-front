@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, Button } from '@mui/material/';
 import { Add } from '@mui/icons-material';
 
-import { useAreas } from "../hooks";
+import { useCompanies } from "../hooks";
 
 const CreateEditCompany = ({ location }) => { 
     const isEdit = location?.state?.isEdit || false
     const item = location?.state?.item
     
-    const [, addArea, editArea] = useAreas();
+    const [, addCompany, editCompany] = useCompanies();
 
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
@@ -24,9 +24,9 @@ const CreateEditCompany = ({ location }) => {
     const enviarDatosForm = (event) => {
         event.preventDefault()
         if (isEdit) {
-            editArea({...datosForm, id: item?.id})
+            editCompany({...datosForm, id: item?.id})
         } else {
-            addArea(datosForm)
+            addCompany(datosForm)
         } 
     }
 

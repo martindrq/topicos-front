@@ -45,6 +45,7 @@ function App() {
               <Route path="/areas/editar" component={CreateEditArea} exact/>
               <Route path="/empresas" component={Companies} exact/>
               <Route path="/empresas/crear" component={CreateEditCompany} exact/>
+              <Route path="/empresas/editar" component={CreateEditCompany} exact/>
             </Grid>
           </Box>
         </PageLayout> : 
