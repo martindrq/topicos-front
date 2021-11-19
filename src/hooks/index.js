@@ -3,6 +3,7 @@ import indicatorsService from "../services/indicators";
 import areasService from "../services/areas";
 import authService from "../services/auth";
 import companiesService from "../services/companies";
+import usersService from "../services/users";
 
 export const useIndicators = () => {
   const [indicators, setIndicators] = useState([])
@@ -130,4 +131,30 @@ export const useCompanies = () => {
   }, [])
 
   return [companies, addCompany, editCompany, deleteCompany]
+}
+
+export const useUsers = () => {
+
+  const [users, setUsers] = useState([])
+
+  const getUsers = async () => {
+    const response = await usersService.getUsers();
+    setUsers(response.data)
+  }
+
+  const addUser = async (data) => {
+    const response = await usersService.addUser(data);
+    return response
+  }
+
+  const deleteUser = async (data) => {
+    const response = await usersService.deleteUser(data);
+    return response
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  return [users, addUser, deleteUser]
 }

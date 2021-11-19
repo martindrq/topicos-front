@@ -15,6 +15,8 @@ import Areas from './screens/Areas';
 import CreateEditArea from './screens/CreateEditArea';
 import Companies from './screens/Companies';
 import CreateEditCompany from './screens/CreateEditCompany';
+import Users from './screens/Users';
+import CreateUser from './screens/CreateUser';
 
 // components
 import PageLayout from "./components/PageLayout";
@@ -46,6 +48,8 @@ function App() {
               <Route path="/empresas" component={Companies} exact/>
               <Route path="/empresas/crear" component={CreateEditCompany} exact/>
               <Route path="/empresas/editar" component={CreateEditCompany} exact/>
+              <Route path="/usuarios" component={Users} exact/>
+              <Route path="/usuarios/crear" component={CreateUser} exact/>
             </Grid>
           </Box>
         </PageLayout> : 
