@@ -11,11 +11,17 @@ const indicatorsService = {
     });
     return response;
   },
-  getIndicatorsValues: async () => {
+  getIndicatorsValues: async (companyId=null, indicatorId=null, from=null, to=null) => {
     const response = await axios.get(BACKEND_URL + "/indicator_value", {
       headers: {
         "Content-Type": "application/json",
       },
+      params: {
+        company: companyId,
+        indicator: indicatorId,
+        from: from,
+        to: to
+      }
     });
     return response;
   },
