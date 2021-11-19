@@ -23,7 +23,6 @@ const Users = () => {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    console.log(users)
     setRows(users)
   }, [users])
 
