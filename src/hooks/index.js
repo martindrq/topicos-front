@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import indicatorsService from "../services/indicators";
 import areasService from "../services/areas";
 import authService from "../services/auth";
+import companiesService from "../services/companies";
 
 export const useIndicators = () => {
   const [indicators, setIndicators] = useState([])
@@ -98,4 +99,35 @@ export const useAuth = () => {
   }
 
   return [register, login]
+}
+
+export const useCompanies = () => {
+
+  const [companies, setCompanies] = useState([])
+
+  const getCompanies = async () => {
+    const response = await companiesService.getCompanies();
+    setCompanies(response.data)
+  }
+
+  const addCompany = async (data) => {
+    const response = await companiesService.addCompany(data);
+    return response
+  }
+
+  const editCompany = async (data) => {
+    const response = await companiesService.editCompany(data);
+    return response
+  }
+
+  const deleteCompany = async (data) => {
+    const response = await companiesService.deleteCompany(data);
+    return response
+  }
+
+  useEffect(() => {
+    getCompanies()
+  }, [])
+
+  return [companies, addCompany, editCompany, deleteCompany]
 }
