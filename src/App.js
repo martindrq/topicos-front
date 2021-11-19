@@ -13,6 +13,8 @@ import Indicators from "./screens/Indicators";
 import CreateEditIndicator from './screens/CreateEditIndicator';
 import Areas from './screens/Areas';
 import CreateEditArea from './screens/CreateEditArea';
+import Companies from './screens/Companies';
+import CreateEditCompany from './screens/CreateEditCompany';
 
 // components
 import PageLayout from "./components/PageLayout";
@@ -41,6 +43,8 @@ function App() {
               <Route path="/areas" component={Areas} exact/>
               <Route path="/areas/crear" component={CreateEditArea} exact/>
               <Route path="/areas/editar" component={CreateEditArea} exact/>
+              <Route path="/empresas" component={Companies} exact/>
+              <Route path="/empresas/crear" component={CreateEditCompany} exact/>
             </Grid>
           </Box>
         </PageLayout> : 
