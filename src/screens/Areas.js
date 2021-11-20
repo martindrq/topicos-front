@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useAreas } from "../hooks";
 import Table from '../components/Table';
+import Notification from '../components/Notification';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170 },
@@ -21,6 +22,7 @@ const Areas = () => {
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
     setRows(areas)
@@ -32,11 +34,16 @@ const Areas = () => {
   }
 
   const onDelete = async (item) => {
-    await deleteArea({ id: item })
+    try {
+      await deleteArea({ id: item })
+    } catch(err) {
+      setErrorText(err.message)
+    }
   }
 
   return (
     <Grid container spacing={2}>
+      {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Areas

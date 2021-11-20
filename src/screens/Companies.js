@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useCompanies } from "../hooks";
 import Table from '../components/Table';
+import Notification from '../components/Notification';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170 },
@@ -16,6 +17,7 @@ const Companies = () => {
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
     setRows(companies)
@@ -27,11 +29,16 @@ const Companies = () => {
   }
 
   const onDelete = async (item) => {
-    await deleteCompany({ id: item })
+    try{
+      await deleteCompany({ id: item })
+    } catch(err) {
+      setErrorText(err.message)
+    }
   }
 
   return (
     <Grid container spacing={2}>
+      {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Empresas
