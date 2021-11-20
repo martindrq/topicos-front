@@ -1,5 +1,5 @@
 const authService = {
-  register: async function (data) {
+  activate: async function (data, params) {
     return data;
   },
   login: async function (data, token) {

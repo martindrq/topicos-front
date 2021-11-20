@@ -93,8 +93,8 @@ export const useAreas = () => {
 
 export const useAuth = () => {
 
-  const register = async (data) => {
-    const response = await authService.register(data);
+  const activate = async (data) => {
+    const response = await authService.activate(data);
     return response
   }
 
@@ -103,7 +103,7 @@ export const useAuth = () => {
     return response
   }
 
-  return [register, login]
+  return [activate, login]
 }
 
 export const useCompanies = () => {

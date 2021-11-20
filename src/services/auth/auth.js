@@ -3,8 +3,8 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const authService = {
-  register: async (data) => {
-    const response = await axios.post(BACKEND_URL + "/register", data, {
+  activate: async (data, params) => {
+    const response = await axios.post(BACKEND_URL + `/user/activate${params}`, data, {
       headers: {
         "Content-Type": "application/json",
       },

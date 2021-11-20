@@ -4,12 +4,14 @@ import { LockOutlined } from '@mui/icons-material';
 
 import { useAuth } from '../hooks'
 
-const Login = () => {
+const paperStyle={padding :20,height:'42vh',width:500}
+const avatarStyle={backgroundColor:'#1bbd7e'}
 
-    const [, login] = useAuth();
+const Login = ({location}) => {
 
-    const paperStyle={padding :20,height:'42vh',width:500}
-    const avatarStyle={backgroundColor:'#1bbd7e'}
+    const params = location?.search
+
+    const [activate, login] = useAuth();
     
     const [data, setData] = useState({
         email: '',
@@ -25,11 +27,12 @@ const Login = () => {
 
     const enviarDatosForm = async (event) => {
         event.preventDefault()
-        const response = await login({
-            email: data.email,
-            password: data.password
-        })
-        console.log('response from login', response)
+
+        if (params) {
+            activate(data, params)
+        } else {
+            login(data)   
+        }
     }
 
     return(

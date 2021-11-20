@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 // screens
 import Home from './screens/Home';
 import Login from "./screens/Login";
-import Signup from "./screens/Signup";
 import Reports from "./screens/Reports";
 import Samples from "./screens/Samples";
 import CreateEditSample from "./screens/CreateEditSample";
@@ -54,9 +53,7 @@ function App() {
           </Box>
         </PageLayout> : 
           <AuthLayout>
-            <Route path="/" render={() => <Redirect to="/inicio-sesion"/>} />
             <Route path="/inicio-sesion" component={Login} exact/>
-            <Route path="/registro" component={Signup} exact/>
           </AuthLayout>
         }
       </BrowserRouter>
