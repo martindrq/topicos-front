@@ -83,3 +83,18 @@ export const useAreas = () => {
 
   return [areas, addArea, editArea, deleteArea]
 }
+
+export const useReports = () => {
+
+  const [report, setReport] = useState([]);
+  const [loadingReport, setLoadingReport] = useState([]);
+  const companyId = 1; //must use useContext
+  
+  const generateReport = async (indicatorsIds, from, to) => {
+    setLoadingReport(true);
+    const response = await Promise.all(indicatorsIds.map(i => indicatorsService.getIndicatorsValues(companyId, i, from, to)));
+    setReport(response.map(r => r.data));
+    setLoadingReport(false);
+  }
+  return [report, loadingReport, generateReport];
+}
