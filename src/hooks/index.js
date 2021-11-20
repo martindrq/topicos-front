@@ -39,7 +39,9 @@ export const useIndicators = () => {
   }
 
   const deleteIndicator = async (data) => {
-    const response = await indicatorsService.deleteIndicator(data);
+    const response = await indicatorsService.deleteIndicator(data).catch(() => {
+      throw new Error("No se puede eliminar este indicador debido a que tiene valores asociados.") // FIXME: this could be not an error, just a 500 code
+    });
     return response
   }
 
@@ -76,7 +78,9 @@ export const useAreas = () => {
   }
 
   const deleteArea = async (data) => {
-    const response = await areasService.deleteArea(data);
+    const response = await areasService.deleteArea(data).catch(() => {
+      throw new Error("No se puede eliminar esta area debido a que tiene indicadores asociados.") // FIXME: this could be not an error, just a 500 code
+    });
     return response
   }
 
@@ -122,7 +126,9 @@ export const useCompanies = () => {
   }
 
   const deleteCompany = async (data) => {
-    const response = await companiesService.deleteCompany(data);
+    const response = await companiesService.deleteCompany(data).catch(() => {
+      throw new Error("No se puede eliminar esta empresa debido a que tiene usuarios asociados.") // FIXME: this could be not an error, just a 500 code
+    });
     return response
   }
 
