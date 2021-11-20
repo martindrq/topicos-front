@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, Typography} from '@mui/material';
   
-import DonutChart from '../components/DonutChart'
+// import DonutChart from '../components/DonutChart'
 
 const Home = () => {
 
@@ -93,7 +93,7 @@ return (
     </Grid>
 
     <Grid xs={3}>
-        <DonutChart/>
+        {/* <DonutChart/> */}
       </Grid>
     <Grid xs={12} >
 
