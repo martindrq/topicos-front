@@ -26,5 +26,12 @@ const indicatorsService = {
   deleteIndicatorValue: async function (data) {
     return {};
   },
+  getNotifyIndicators: async () => {
+    return {data: dataMock};
+  },
+
+  getAmountNotifyIndicators: async function (data) {
+    return {data: 15};
+  },
 };
 export default indicatorsService;

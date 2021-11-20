@@ -73,5 +73,40 @@ const indicatorsService = {
     });
     return response;
   },
+
+
+  //Modificar y adaptar ambos.  getNotifyIndicators && getAmountNotifyIndicators
+
+  getNotifyIndicators: async (companyId=null, indicatorId=null, from=null, to=null) => {
+    const response = await axios.get(BACKEND_URL + "/indicator_value", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        company: companyId,
+        indicator: indicatorId,
+        from: from,
+        to: to
+      }
+    });
+    return response;
+  },
+
+  getAmountNotifyIndicators: async (companyId=null, indicatorId=null, from=null, to=null) => {
+    const response = await axios.get(BACKEND_URL + "/indicator_value", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        company: companyId,
+        indicator: indicatorId,
+        from: from,
+        to: to
+      }
+    });
+    return response;
+  },
+
+
 };
 export default indicatorsService;

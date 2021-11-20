@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import {Grid, Box} from '@mui/material';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
@@ -16,16 +16,16 @@ import Companies from './screens/Companies';
 import CreateEditCompany from './screens/CreateEditCompany';
 import Users from './screens/Users';
 import CreateUser from './screens/CreateUser';
+import Notify from './screens/Notify';
 
 // components
 import PageLayout from "./components/PageLayout";
 import AuthLayout from "./components/AuthLayout";
 
 function App() {
-  const [loggedIn, /*setLoggedIn*/ ] = React.useState(true)
+  const [loggedIn, /*setLoggedIn*/ ] = useState(true)
 
   // TODO: use setLoggedIn after logged in
-
   return (
       <BrowserRouter>
         {loggedIn ? 
@@ -49,6 +49,7 @@ function App() {
               <Route path="/empresas/editar" component={CreateEditCompany} exact/>
               <Route path="/usuarios" component={Users} exact/>
               <Route path="/usuarios/crear" component={CreateUser} exact/>
+              <Route path="/notificaciones" component={Notify} exact/>
             </Grid>
           </Box>
         </PageLayout> : 

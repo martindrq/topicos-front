@@ -20,7 +20,7 @@ import {
 
 import Alert from './Alert'
 
-export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true }) {
+export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
@@ -123,11 +123,9 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
                 onChange={handleChangeAction}
                 disabled={selected.length === 0}
               >
-                <MenuItem value="">
-                  <em>-</em>
-                </MenuItem>
-                {selected.length === 1 && canEdit ? <MenuItem value={1} name="edit">Editar</MenuItem> : null }
-                <MenuItem value={2} name="delete">Borrar</MenuItem>
+                <MenuItem value=""> <em>-</em> </MenuItem>
+                { selected.length === 1 && canEdit ? <MenuItem value={1} name="edit">Editar</MenuItem> : null }
+                { canDelete && <MenuItem value={2} name="delete">Borrar</MenuItem> }
               </Select>
           </FormControl>
         </TableContainer>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from 'react';
 import { Switch, CssBaseline, Box, Container, Toolbar, IconButton, Typography, Badge, Divider, List, Grid, ListItem, ListItemIcon, ListItemText, Chip, Avatar } from "@mui/material";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -8,8 +8,11 @@ import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, Ass
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { useHistory } from 'react-router-dom';
+import {useNotify} from "../hooks";
 
 const drawerWidth = 240;
+
+
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -102,6 +105,8 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
+
+
 export const mainListItems = (
   <div>
     <ListItem button component={Link} to="/inicio">
@@ -158,8 +163,18 @@ export const mainListItems = (
 );
 
 function PageLayout({children}) {
-  const [open, setOpen] = React.useState(true);
-  const [theme, setTheme] = React.useState('dark');
+  const [open, setOpen] = useState(true);
+  const [theme, setTheme] = useState('dark');
+
+  const [,amountNotifyIndicators] = useNotify();
+
+  const [amountNotifications, setAmountNotifications] = useState(0)
+
+  useEffect(() => {
+
+    console.log(amountNotifyIndicators)
+    setAmountNotifications( amountNotifyIndicators)
+  }, [amountNotifyIndicators])
 
   const history = useHistory();
 
@@ -225,7 +240,7 @@ function PageLayout({children}) {
           <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme} />
 
           <IconButton size="large" color="inherit" component={Link} to="/notificaciones">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={ amountNotifications } color="secondary">
               <Notifications fontSize="inherit"/>
             </Badge>
           </IconButton>
