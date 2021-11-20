@@ -4,7 +4,7 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, ListAltOutlined } from "@mui/icons-material";
+import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, ListAltOutlined, Business, PeopleOutline } from "@mui/icons-material";
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { useHistory } from 'react-router-dom';
@@ -139,6 +139,21 @@ export const mainListItems = (
        </ListItemIcon>
        <ListItemText primary="Areas"/>
      </ListItem>
+     
+     <ListItem button component={Link} to="/empresas">
+       <ListItemIcon>
+         <Business />
+       </ListItemIcon>
+       <ListItemText primary="Empresas"/>
+     </ListItem>
+
+     <ListItem button component={Link} to="/usuarios">
+       <ListItemIcon>
+         <PeopleOutline />
+       </ListItemIcon>
+       <ListItemText primary="Usuarios"/>
+     </ListItem>
+     
   </div>
 );
 

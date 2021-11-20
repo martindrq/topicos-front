@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import {useIndicators} from "../hooks";
 import Table from '../components/Table';
+import Notification from '../components/Notification';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170 },
@@ -38,6 +39,7 @@ const columns = [
 const Indicators = () => {
 
   const [rows, setRows] = useState([]);
+  const [errorText, setErrorText] = useState('');
 
   const [indicators,,,,,, deleteIndicator] = useIndicators();
   const history = useHistory();
@@ -51,11 +53,16 @@ const Indicators = () => {
   }
 
   const onDelete = async (item) => {
-    await deleteIndicator({ id: item })
+    try {
+      await deleteIndicator({ id: item })
+    } catch(err) {
+      setErrorText(err.message)
+    }
   }
 
   return (
     <Grid container spacing={2}>
+      {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Indicadores

@@ -3,56 +3,49 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAreas } from "../hooks";
+import { useUsers } from "../hooks";
 import Table from '../components/Table';
-import Notification from '../components/Notification';
 
 const columns = [
-  { id: 'name', label: 'Nombre', minWidth: 170 },
-  {
-    id: 'description',
-    label: 'Descripcion',
-    minWidth: 170,
-  },
+  { id: 'username', label: 'Nombre', minWidth: 170 },
+  // {
+  //   id: 'description',
+  //   label: 'Descripcion',
+  //   minWidth: 170,
+  // },
 ];
 
-const Areas = () => {
+const Users = () => {
 
-  const [areas,,, deleteArea] = useAreas();
+  const [users,, deleteUser] = useUsers();
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
-  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
-    setRows(areas)
-  }, [areas])
+    setRows(users)
+  }, [users])
 
   const onEdit = (itemId) => {
     const item = rows.find(item => item.id === itemId)
-    history.push('/areas/editar', { isEdit: true, item, })
+    history.push('/usuarios/editar', { isEdit: true, item, })
   }
 
   const onDelete = async (item) => {
-    try {
-      await deleteArea({ id: item })
-    } catch(err) {
-      setErrorText(err.message)
-    }
+    await deleteUser({ id: item })
   }
 
   return (
     <Grid container spacing={2}>
-      {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
-          Areas
+          Usuarios
         </Typography>
-        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} canEdit={false} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
-          <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/areas/crear">
+          <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/usuarios/crear">
             <Add/>
           </Fab>
         </Tooltip>
@@ -60,4 +53,4 @@ const Areas = () => {
     </Grid>
   );
 }
-export default Areas
+export default Users

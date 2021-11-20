@@ -2,26 +2,37 @@ import React, { useState } from 'react';
 import { Grid, Paper, Avatar, TextField, Button, Typography, IconButton, Stack} from '@mui/material'
 import { LockOutlined } from '@mui/icons-material';
 
-const Login = () => {
+import { useAuth } from '../hooks'
 
-    const paperStyle={padding :20,height:'42vh',width:500}
-    const avatarStyle={backgroundColor:'#1bbd7e'}
+const paperStyle={padding :20,height:'42vh',width:500}
+const avatarStyle={backgroundColor:'#1bbd7e'}
+
+const Login = ({location}) => {
+
+    const params = location?.search
+
+    const [activate, login] = useAuth();
     
-    const [datos, setDatos] = useState({
+    const [data, setData] = useState({
         email: '',
-        pass: '',
+        password: '',
     })
 
     const handleInputChange = (event) => {
-        setDatos({
-            ...datos,
+        setData({
+            ...data,
             [event.target.name] : event.target.value
         })
     }
 
-    const enviarDatosForm = (event) => {
+    const enviarDatosForm = async (event) => {
         event.preventDefault()
-        console.log('enviando datos...  ' + datos.email + ' ' + datos.pass)
+
+        if (params) {
+            activate(data, params)
+        } else {
+            login(data)   
+        }
     }
 
     return(
@@ -38,9 +49,9 @@ const Login = () => {
                                 ¡Bienvenido!
                             </Typography>
                         </Grid>
-                        <TextField label='Correo electrónico' placeholder='Ingrese su correo electrónico' fullWidth required name='email' value={datos.email} onChange={handleInputChange}/>
-                        <TextField label='Contraseña' placeholder='Ingrese la contraseña' type='password' fullWidth required name='pass' value={datos.pass} onChange={handleInputChange}/>
-                        <Button type='submit' color='primary' variant="contained" fullWidth style={{height: 50}}>Iniciar sesion</Button>
+                        <TextField label='Correo electrónico' placeholder='Ingrese su correo electrónico' fullWidth required name='email' value={data.email} onChange={handleInputChange}/>
+                        <TextField label='Contraseña' placeholder='Ingrese la contraseña' type='password' fullWidth required name='password' value={data.password} onChange={handleInputChange}/>
+                        <Button type='submit' color='primary' variant="contained" fullWidth style={{height: 50}}>Iniciar sesión</Button>
                     </Stack>  
                 </form>
             </Paper>

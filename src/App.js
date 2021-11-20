@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 // screens
 import Home from './screens/Home';
 import Login from "./screens/Login";
-import Signup from "./screens/Signup";
 import Reports from "./screens/Reports";
 import Samples from "./screens/Samples";
 import CreateEditSample from "./screens/CreateEditSample";
@@ -13,6 +12,10 @@ import Indicators from "./screens/Indicators";
 import CreateEditIndicator from './screens/CreateEditIndicator';
 import Areas from './screens/Areas';
 import CreateEditArea from './screens/CreateEditArea';
+import Companies from './screens/Companies';
+import CreateEditCompany from './screens/CreateEditCompany';
+import Users from './screens/Users';
+import CreateUser from './screens/CreateUser';
 
 // components
 import PageLayout from "./components/PageLayout";
@@ -41,13 +44,16 @@ function App() {
               <Route path="/areas" component={Areas} exact/>
               <Route path="/areas/crear" component={CreateEditArea} exact/>
               <Route path="/areas/editar" component={CreateEditArea} exact/>
+              <Route path="/empresas" component={Companies} exact/>
+              <Route path="/empresas/crear" component={CreateEditCompany} exact/>
+              <Route path="/empresas/editar" component={CreateEditCompany} exact/>
+              <Route path="/usuarios" component={Users} exact/>
+              <Route path="/usuarios/crear" component={CreateUser} exact/>
             </Grid>
           </Box>
         </PageLayout> : 
           <AuthLayout>
-            <Route path="/" render={() => <Redirect to="/inicio-sesion"/>} />
             <Route path="/inicio-sesion" component={Login} exact/>
-            <Route path="/registro" component={Signup} exact/>
           </AuthLayout>
         }
       </BrowserRouter>

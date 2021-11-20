@@ -3,39 +3,34 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAreas } from "../hooks";
+import { useCompanies } from "../hooks";
 import Table from '../components/Table';
 import Notification from '../components/Notification';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170 },
-  {
-    id: 'description',
-    label: 'Descripcion',
-    minWidth: 170,
-  },
 ];
 
-const Areas = () => {
+const Companies = () => {
 
-  const [areas,,, deleteArea] = useAreas();
+  const [companies,,, deleteCompany] = useCompanies();
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
-    setRows(areas)
-  }, [areas])
+    setRows(companies)
+  }, [companies])
 
   const onEdit = (itemId) => {
     const item = rows.find(item => item.id === itemId)
-    history.push('/areas/editar', { isEdit: true, item, })
+    history.push('/empresas/editar', { isEdit: true, item, })
   }
 
   const onDelete = async (item) => {
-    try {
-      await deleteArea({ id: item })
+    try{
+      await deleteCompany({ id: item })
     } catch(err) {
       setErrorText(err.message)
     }
@@ -46,13 +41,13 @@ const Areas = () => {
       {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
-          Areas
+          Empresas
         </Typography>
         <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
-          <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/areas/crear">
+          <Fab sx={{ position: 'absolute', bottom: 40, right: 50 }} color="primary" aria-label="add" component={Link} to="/empresas/crear">
             <Add/>
           </Fab>
         </Tooltip>
@@ -60,4 +55,4 @@ const Areas = () => {
     </Grid>
   );
 }
-export default Areas
+export default Companies
