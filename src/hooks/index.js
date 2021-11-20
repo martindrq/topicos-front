@@ -164,3 +164,18 @@ export const useUsers = () => {
 
   return [users, addUser, deleteUser]
 }
+
+export const useReports = () => {
+
+  const [report, setReport] = useState([]);
+  const [loadingReport, setLoadingReport] = useState([]);
+  const companyId = 1; // FIXME: use useContext
+  
+  const generateReport = async (indicatorsIds, from, to) => {
+    setLoadingReport(true);
+    const response = await Promise.all(indicatorsIds.map(i => indicatorsService.getIndicatorsValues(companyId, i, from, to)));
+    setReport(response.map(r => r.data));
+    setLoadingReport(false);
+  }
+  return [report, loadingReport, generateReport];
+}
