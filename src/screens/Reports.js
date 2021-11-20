@@ -8,6 +8,7 @@ import {
   Select,
   Paper,
   Button,
+  Typography
 } from "@mui/material/";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import {
@@ -135,7 +136,11 @@ const Reports = () => {
 
   return (
     <Grid container rowSpacing={3}>
-      <h2>Reportes</h2>
+      <Grid item xs={12}>
+        <Typography variant="h4" style={{ marginBottom: 20 }}>
+            Reportes
+        </Typography>
+      </Grid>
       {indicators.map((indicator, idx) => {
         return (
           <Grid item xs={12} key={idx}>
