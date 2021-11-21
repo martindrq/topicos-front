@@ -184,3 +184,26 @@ export const useReports = () => {
 export const useUserContext = () => {
   return useContext(UserContext)
 }
+
+export const useNotify = () => {
+
+  const [notifyIndicators, setNotifyIndicators] = useState([])
+  const [amountNotifyIndicators, setAmountNotifyIndicators] = useState([])
+
+  const getNotifyIndicators = async () => {
+    const response = await indicatorsService.getNotifyIndicators();
+    setNotifyIndicators(response.data)    
+  }
+
+  const getAmountNotifyIndicators = async () => {
+    const response = await indicatorsService.getAmountNotifyIndicators();
+    setAmountNotifyIndicators(response.data)    
+  }
+
+  useEffect(() => {
+    getNotifyIndicators()
+    getAmountNotifyIndicators()
+  }, [])
+
+  return [notifyIndicators, amountNotifyIndicators]
+}

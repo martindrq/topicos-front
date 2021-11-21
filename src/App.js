@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import {Grid, Box} from '@mui/material';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import Companies from './screens/Companies';
 import CreateEditCompany from './screens/CreateEditCompany';
 import Users from './screens/Users';
 import CreateUser from './screens/CreateUser';
+import Notify from './screens/Notify';
 
 // components
 import PageLayout from "./components/PageLayout";

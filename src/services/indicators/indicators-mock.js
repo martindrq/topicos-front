@@ -1,5 +1,6 @@
 import indicatorsMock from "../../mock-data/indicators.json";
 import dataMock from "../../mock-data/samples.json";
+import notifyMock from "../../mock-data/notify.json";
 
 const indicatorsService = {
   getIndicators: async function () {
@@ -25,6 +26,13 @@ const indicatorsService = {
   },
   deleteIndicatorValue: async function (data) {
     return {};
+  },
+  getNotifyIndicators: async () => {
+    return {data: notifyMock};
+  },
+
+  getAmountNotifyIndicators: async function (data) {
+    return {data: notifyMock.length};
   },
 };
 export default indicatorsService;
