@@ -1,11 +1,17 @@
 import React from 'react';
 import {Grid, Typography} from '@mui/material';
   
+import { useUserContext } from '../hooks'
+import { constants } from '../constants'
 // import DonutChart from '../components/DonutChart'
 
 const Home = () => {
 
-  const renderCompany = () => (
+  const {user} = useUserContext()
+
+  const isDeres = user?.company === constants.deres
+
+  const renderCompanyDescription = () => (
     <>
       <Typography align="justify" variant="body1" style={textStyle}>
         Te permitirá el registro y seguimiento de un conjunto de indicadores. 
@@ -25,47 +31,78 @@ const Home = () => {
     </>
   )
 
-  // const renderDeres = () => (
-  //   <>
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       Te permitirá definir indicadores, áreas y empresas. Podrás invitar usuarios de las empresas a través de un link que se activará por correo electrónico.
-  //     </Typography>
+  const renderDeresDescription = () => (
+    <>
+      <Typography align="justify" variant="body1" style={textStyle}>
+        Te permitirá definir indicadores, áreas y empresas. Podrás invitar usuarios de las empresas a través de un link que se activará por correo electrónico.
+      </Typography>
 
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       Para registrar empresas, deberás ingresar: Nombre, Razón Social, RUT y Rubro.
-  //     </Typography>
+      <Typography align="justify" variant="body1" style={textStyle}>
+        Para registrar empresas, deberás ingresar: Nombre, Razón Social, RUT y Rubro. Podrás editar y eliminar los usuarios y las empresas que desees.
+      </Typography>
 
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       En cuanto a los indicadores, podrás proveer un criterio que incluye Nombre, Descripción, Área, Unidad de medida y Frecuencia de registro (opcional). 
-  //     </Typography>
+      <Typography align="justify" variant="body1" style={textStyle}>
+        En cuanto a los indicadores, podrás proveer un criterio que incluye Nombre, Descripción, Área, Unidad de medida y Frecuencia de registro (opcional). 
+      </Typography>
 
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       Los indicadores podrán ser de tipo directo o indirecto. Los indirectos pueden ser computados en base al resultado de un cálculo o a la aplicación de un coeficiente.
-  //     </Typography>
+      <Typography align="justify" variant="body1" style={textStyle}>
+        Los indicadores podrán ser de tipo directo o indirecto. Los indirectos pueden ser computados en base al resultado de un cálculo o a la aplicación de un coeficiente.
+      </Typography>
 
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       Se ofrece la posibilidad de editar y borrar indicadores.
-  //     </Typography>
+      <Typography align="justify" variant="body1" style={textStyle}>
+        Se ofrece la posibilidad de editar y borrar indicadores.
+      </Typography>
 
-  //     <Typography align="justify" variant="body1" style={textStyle}>
-  //       Además, la plataforma registrará logs de todos los cambios efectuados por los usuarios.
-  //     </Typography>
-  //   </>
-  // )
+      <Typography align="justify" variant="body1" style={textStyle}>
+        Además, la plataforma registrará logs de todos los cambios efectuados por los usuarios.
+      </Typography>
+    </>
+  )
 
-return (
-  <>
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="h4">
-          Nombre empresa
+  const renderPlatformDescription = () => {
+    if (isDeres) return renderDeresDescription()
+    return renderCompanyDescription()
+  }
+
+  const renderDeresStats = () => (
+    <>
+      <Grid xs={3}>
+        <Typography sx={{fontSize: 80}}>
+          71
         </Typography>
-        <Typography variant="h5" style={{fontWeight: 200}}>
-          Nombre usuario
+        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
+          EMPRESAS
         </Typography>
       </Grid>
-    </Grid>
-    <Grid container style={{marginTop: 50, marginBottom: 50}} xs={12}>
+      <Grid xs={3}>
+        <Typography sx={{fontSize: 80}}>  
+          2.3k
+        </Typography>
+        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
+          USUARIOS
+        </Typography>
+      </Grid>
+      <Grid xs={3}>
+        <Typography sx={{fontSize: 80}}>
+          222
+        </Typography>
+        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
+          INDICADORES
+        </Typography>
+      </Grid>
+      <Grid xs={3}>
+        <Typography sx={{fontSize: 80}}>
+          56
+        </Typography>
+        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
+          AREAS
+        </Typography>
+      </Grid>
+    </>
+  )
+
+  const renderCompanyStats = () => (
+    <>
       <Grid xs={3}>
         <Typography sx={{fontSize: 80}}>
           222
@@ -90,26 +127,46 @@ return (
           AREAS
         </Typography>
       </Grid>
-    </Grid>
+    </>
+  )
 
-    <Grid xs={3}>
+  const renderRoleStats = () => {
+    if (isDeres) return renderDeresStats()
+    return renderCompanyStats()
+  }
+
+  return (
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h4">
+            {user ? user.company : null}
+          </Typography>
+          <Typography variant="h5" style={{fontWeight: 200}}>
+            {user ? user.email : null}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container style={{marginTop: 50, marginBottom: 50}} xs={12}>
+        {user ? renderRoleStats() : null}
+      </Grid>
+
+      <Grid xs={3}>
         {/* <DonutChart/> */}
       </Grid>
-    <Grid xs={12} >
+      <Grid xs={12} >
 
-      <Typography align="justify" variant="body1" style={textStyle}>
-        Esta plataforma se construyó para brindar apoyo a la gestión medioambiental de empresas.
-      </Typography>
+        <Typography align="justify" variant="body1" style={textStyle}>
+          Esta plataforma se construyó para brindar apoyo a la gestión medioambiental de empresas.
+        </Typography>
 
-      {renderCompany()}
+        {user ? renderPlatformDescription() : null}
 
-      {/* {renderDeres()} */}
-
-      <Typography align="justify" variant="body1" style={textStyle}>
-        Bienvenido a la plataforma que trabaja por el desarrollo sostenible!
-      </Typography>
-    </Grid>
-  </>
+        <Typography align="justify" variant="body1" style={textStyle}>
+          ¡Bienvenido a la plataforma que trabaja por el desarrollo sostenible!
+        </Typography>
+      </Grid>
+    </>
   );
 }
 

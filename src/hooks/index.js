@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import indicatorsService from "../services/indicators";
 import areasService from "../services/areas";
 import authService from "../services/auth";
 import companiesService from "../services/companies";
 import usersService from "../services/users";
+import { UserContext } from '../App'
 
 export const useIndicators = () => {
   const [indicators, setIndicators] = useState([])
@@ -178,4 +179,8 @@ export const useReports = () => {
     setLoadingReport(false);
   }
   return [report, loadingReport, generateReport];
+}
+
+export const useUserContext = () => {
+  return useContext(UserContext)
 }

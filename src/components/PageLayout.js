@@ -4,10 +4,13 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, ListAltOutlined, Business, PeopleOutline } from "@mui/icons-material";
+import { Menu, ChevronLeft, Notifications, HomeOutlined, AssignmentOutlined, AssessmentOutlined, CategoryOutlined, LoginOutlined, ListAltOutlined, Business, PeopleOutline, SettingsSuggestRounded } from "@mui/icons-material";
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { useHistory } from 'react-router-dom';
+
+import { useUserContext } from '../hooks'
+import { constants } from "../constants";
 
 const drawerWidth = 240;
 
@@ -102,35 +105,25 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export const mainListItems = (
+const renderHomeItem = (
+  <ListItem button component={Link} to="/inicio">
+    <ListItemIcon>
+      <HomeOutlined/>
+    </ListItemIcon>
+    <ListItemText primary="Inicio" />
+  </ListItem>
+)
+
+export const renderDeresItems = (
   <div>
-    <ListItem button component={Link} to="/inicio">
-      <ListItemIcon>
-        <HomeOutlined/>
-      </ListItemIcon>
-      <ListItemText primary="Inicio" />
-    </ListItem>
 
-
-    <ListItem button component={Link} to="/muestras">
-      <ListItemIcon>
-        <ListAltOutlined/>
-      </ListItemIcon>
-      <ListItemText primary="Muestras" />
-    </ListItem>
+    {renderHomeItem}
 
     <ListItem button component={Link} to="/indicadores">
       <ListItemIcon>
         <AssignmentOutlined/>
       </ListItemIcon>
       <ListItemText primary="Indicadores" />
-    </ListItem>
-     
-    <ListItem button component={Link} to="/reportes">
-      <ListItemIcon>
-        <AssessmentOutlined />
-      </ListItemIcon>
-      <ListItemText primary="Reportes"/>
     </ListItem>
      
      <ListItem button component={Link} to="/areas">
@@ -155,6 +148,28 @@ export const mainListItems = (
      </ListItem>
      
   </div>
+)
+
+export const renderCompanyItems = (
+  <div>
+
+    {renderHomeItem}
+
+    <ListItem button component={Link} to="/muestras">
+      <ListItemIcon>
+        <ListAltOutlined/>
+      </ListItemIcon>
+      <ListItemText primary="Muestras" />
+    </ListItem>
+      
+    <ListItem button component={Link} to="/reportes">
+      <ListItemIcon>
+        <AssessmentOutlined />
+      </ListItemIcon>
+      <ListItemText primary="Reportes"/>
+    </ListItem>
+     
+  </div>
 );
 
 function PageLayout({children}) {
@@ -162,7 +177,10 @@ function PageLayout({children}) {
   const [theme, setTheme] = React.useState('dark');
 
   const history = useHistory();
+  const {user, setUser} = useUserContext();
 
+  const isDeres = user?.company === constants.deres
+ 
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -220,7 +238,7 @@ function PageLayout({children}) {
           >
           </Typography>
 
-          <Chip avatar={<Avatar>M</Avatar>} label="Nombre empresa" style={{color: 'white'}}/>
+          {user ? <Chip avatar={<Avatar>{user.email[0].toUpperCase()}</Avatar>} label={user.company} style={{color: 'white'}}/> : null}
 
           <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme} />
 
@@ -230,7 +248,7 @@ function PageLayout({children}) {
             </Badge>
           </IconButton>
           
-          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion"> {/* TODO: logout */}
+          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion" onClick={() => setUser(null)}>
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 
@@ -254,7 +272,7 @@ function PageLayout({children}) {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{isDeres ? renderDeresItems : renderCompanyItems}</List>
         <Divider />
         <List></List>
       </Drawer>
