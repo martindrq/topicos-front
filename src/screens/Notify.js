@@ -21,7 +21,7 @@ const Notify = () => {
   const [ notifyIndicators,] = useNotify();    //USAR este en vez de indicatorsValues
   
   useEffect(() => {
-    setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, delay: statusColor( Math.floor(Math.random() * 6 + 1))})))
+    setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, delay: statusColor(value?.delay)}) ))
   }, [notifyIndicators])
 
   const [rows, setRows] = useState([]);
