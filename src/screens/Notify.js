@@ -18,7 +18,7 @@ const columns = [
   
 const Notify = () => { 
   
-  const [ notifyIndicators,] = useNotify();    //USAR este en vez de indicatorsValues
+  const [ notifyIndicators,] = useNotify();    // TODO: use this instead of using indicatorsValues
   
   useEffect(() => {
     setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, delay: statusColor(value?.delay)}) ))
@@ -80,7 +80,7 @@ const Notify = () => {
       {errorText !== '' ? <Notification text={errorText} setText={setErrorText} /> : null}
       <Grid item xs={12}>
         <Typography variant="h4" style={{ marginBottom: 20 }}>
-          Recordaorios
+          Recordatorios
         </Typography>
         <Table columns={columns} rows={rows} canEdit={false} canDelete={false} />
       </Grid>

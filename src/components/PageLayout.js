@@ -12,8 +12,6 @@ import {useNotify} from "../hooks";
 
 const drawerWidth = 240;
 
-
-
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -171,9 +169,7 @@ function PageLayout({children}) {
   const [amountNotifications, setAmountNotifications] = useState(0)
 
   useEffect(() => {
-
-    console.log(amountNotifyIndicators)
-    setAmountNotifications( amountNotifyIndicators)
+    setAmountNotifications(amountNotifyIndicators)
   }, [amountNotifyIndicators])
 
   const history = useHistory();

@@ -125,7 +125,7 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
               >
                 <MenuItem value=""> <em>-</em> </MenuItem>
                 { selected.length === 1 && canEdit ? <MenuItem value={1} name="edit">Editar</MenuItem> : null }
-                { canDelete && <MenuItem value={2} name="delete">Borrar</MenuItem> }
+                { canDelete ? <MenuItem value={2} name="delete">Borrar</MenuItem> : null }
               </Select>
           </FormControl>
         </TableContainer>

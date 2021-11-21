@@ -74,8 +74,7 @@ const indicatorsService = {
     return response;
   },
 
-
-  //Modificar y adaptar ambos.  getNotifyIndicators && getAmountNotifyIndicators
+  // TODO: integrate both getNotifyIndicators and getAmountNotifyIndicators
 
   getNotifyIndicators: async (companyId=null, indicatorId=null, from=null, to=null) => {
     const response = await axios.get(BACKEND_URL + "/indicator_value", {
