@@ -42,8 +42,6 @@ const CreateEditIndicator = ({ location }) => {
 
         if (event.target.name === 'radioSelect')
             isHide(event.target.value)
-
-        console.log(item)
     }
 
     function isHide(state){
