@@ -207,3 +207,18 @@ export const useNotify = () => {
 
   return [notifyIndicators, amountNotifyIndicators]
 }
+
+export const useStats = (token) => {
+  const [stats, setStats] = useState()
+
+  const getStats = async () => {
+    const response = await usersService.getStats(token);
+    setStats(response.data)
+  }
+
+  useEffect(() => {    
+    getStats()
+  }, [])
+
+  return [stats]
+}
