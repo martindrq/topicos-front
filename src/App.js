@@ -27,7 +27,7 @@ export const UserContext = React.createContext()
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
 
-  const [user, setUser] = React.useState()
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('userDeresPlatform')))
 
   React.useEffect(() => {
     if (user) {

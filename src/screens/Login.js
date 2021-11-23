@@ -35,10 +35,12 @@ const Login = ({location}) => {
             response = await login(data)   
         }
         if (response.data) {
-            setUser({
+            const userData = {
                 mail: data.mail, 
                 ...response.data
-            })
+            }
+            setUser(userData)
+            localStorage.setItem('userDeresPlatform', JSON.stringify(userData))
         } 
     }
 
