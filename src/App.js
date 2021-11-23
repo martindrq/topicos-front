@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import {Grid, Box} from '@mui/material';
-import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 
 // screens
 import Home from './screens/Home';
@@ -44,7 +44,6 @@ function App() {
           <PageLayout>
             <Box sx={{ flexGrow:1 }}>
               <Grid item xs={12} md={12} lg={12}>
-                <Route path="/" render={() => <Redirect to="/inicio"/>} />
                 <Route path="/inicio" component={Home} exact/>
                 <Route path="/indicadores" component={Indicators} exact/>
                 <Route path="/indicadores/crear" component={CreateEditIndicator} exact/>
@@ -62,12 +61,13 @@ function App() {
                 <Route path="/usuarios" component={Users} exact/>
                 <Route path="/usuarios/crear" component={CreateUser} exact/>
                 <Route path="/notificaciones" component={Notify} exact/>
+                {/* <Route path="/" render={() => <Redirect to="/inicio"/>}/> */}
               </Grid>
             </Box>
           </PageLayout> : 
           <AuthLayout>
-            <Route path="/iniciar-sesion" component={Login}/>
-            <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} />
+              <Route path="/iniciar-sesion" component={Login}/>
+              {/* <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} /> */}
           </AuthLayout>
         }
         </UserContext.Provider>

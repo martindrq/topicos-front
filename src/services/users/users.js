@@ -31,7 +31,7 @@ const usersService = {
     return response;
   },
   getStats: async function (token) {
-    const response = await axios.delete(BACKEND_URL + `/user/stats`, {
+    const response = await axios.get(BACKEND_URL + `/stats`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": token,

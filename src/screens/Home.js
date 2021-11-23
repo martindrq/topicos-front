@@ -3,7 +3,23 @@ import {Grid, Typography} from '@mui/material';
   
 import { useUserContext, useStats } from '../hooks'
 import { constants } from '../constants'
-// import DonutChart from '../components/DonutChart'
+
+const getStatText = (text, isDeres) => {
+  switch (text) {
+    case 'indicators':
+      return 'INDICADORES'
+    case 'areas': 
+      return 'AREAS'
+    case 'companies': 
+      return 'EMPRESAS'
+    case 'indicatorsValues':
+      return 'MUESTRAS'
+    case 'users':
+      return isDeres ? 'USUARIOS' : 'COMPAÑEROS'
+    default:
+      return ''
+  }
+}
 
 const Home = () => {
 
@@ -66,15 +82,23 @@ const Home = () => {
   }
 
   const renderStats = () => { 
-    return user ? (
+    return user && stats ? (
       <>
-        {stats?.map(sta => (
+        {Object.entries(stats).filter(sta => {
+          if (!isDeres && sta[0] === 'companies') {
+            return false
+          } else if (isDeres && sta[0] === 'indicatorsValues') {
+            return false
+          } else {
+            return true
+          }
+        }).map(sta => (
           <Grid xs={3}>
             <Typography sx={statsStyle}>
-              {sta.value}
+              {sta[1]}
             </Typography>
             <Typography sx={statsDescStyle}>
-              {sta.name}
+              {getStatText(sta[0])}
             </Typography>
           </Grid>
         ))}
@@ -97,10 +121,7 @@ const Home = () => {
       <Grid container style={{marginTop: 50, marginBottom: 50}} xs={12}>
         {renderStats()}
       </Grid>
-
-      <Grid xs={3}>
-        {/* <DonutChart/> */}
-      </Grid>
+      
       <Grid xs={12} >
 
         <Typography align="justify" variant="body1" style={textStyle}>
