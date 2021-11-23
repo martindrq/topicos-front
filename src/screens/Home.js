@@ -67,7 +67,7 @@ const Home = () => {
   const renderDeresStats = () => (
     <>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>
+        <Typography sx={statsStyle}>
           71
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -75,7 +75,7 @@ const Home = () => {
         </Typography>
       </Grid>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>  
+        <Typography sx={statsStyle}>  
           2.3k
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -83,7 +83,7 @@ const Home = () => {
         </Typography>
       </Grid>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>
+        <Typography sx={statsStyle}>
           222
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -91,7 +91,7 @@ const Home = () => {
         </Typography>
       </Grid>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>
+        <Typography sx={statsStyle}>
           56
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -104,7 +104,7 @@ const Home = () => {
   const renderCompanyStats = () => (
     <>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>
+        <Typography sx={statsStyle}>
           222
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -112,7 +112,15 @@ const Home = () => {
         </Typography>
       </Grid>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>  
+        <Typography sx={statsStyle}>  
+          2.3k
+        </Typography>
+        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
+          COMPAÑEROS
+        </Typography>
+      </Grid>
+      <Grid xs={3}>
+        <Typography sx={statsStyle}>  
           2.3k
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -120,7 +128,7 @@ const Home = () => {
         </Typography>
       </Grid>
       <Grid xs={3}>
-        <Typography sx={{fontSize: 80}}>
+        <Typography sx={statsStyle}>
           56
         </Typography>
         <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
@@ -173,6 +181,11 @@ const Home = () => {
 const textStyle = {
   color: 'gray', 
   fontSize: 20
+}
+
+const statsStyle = {
+  color: '#ffa343',
+  fontSize: 80,
 }
 
 export default Home
