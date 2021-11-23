@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import {Grid, Box} from '@mui/material';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
@@ -22,14 +22,14 @@ import Notify from './screens/Notify';
 import PageLayout from "./components/PageLayout";
 import AuthLayout from "./components/AuthLayout";
 
-export const UserContext = React.createContext()
+export const UserContext = createContext()
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
-  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('userDeresPlatform')))
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('userDeresPlatform')))
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       setLoggedIn(true)
     } else {
