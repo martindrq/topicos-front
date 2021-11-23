@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { Grid, Paper, Avatar, TextField, Button, Typography, IconButton, Stack} from '@mui/material'
 import { LockOutlined } from '@mui/icons-material';
 
-import { useAuth } from '../hooks'
+import { useAuth, useUserContext } from '../hooks'
 
 const paperStyle={padding :20,height:'42vh',width:500}
 const avatarStyle={backgroundColor:'#1bbd7e'}
 
 const Login = ({location}) => {
 
-    const params = location?.search
+    const token = location?.search?.replace('?token=', '')
 
     const [activate, login] = useAuth();
+    const {setUser} = useUserContext();
     
     const [data, setData] = useState({
-        email: '',
+        mail: '',
         password: '',
     })
 
@@ -27,12 +28,20 @@ const Login = ({location}) => {
 
     const enviarDatosForm = async (event) => {
         event.preventDefault()
-
-        if (params) {
-            activate(data, params)
+        let response
+        if (token) {
+            response = await activate(data, token)
         } else {
-            login(data)   
+            response = await login(data)   
         }
+        if (response.data) {
+            const userData = {
+                mail: data.mail, 
+                ...response.data
+            }
+            setUser(userData)
+            localStorage.setItem('userDeresPlatform', JSON.stringify(userData))
+        } 
     }
 
     return(
@@ -49,7 +58,7 @@ const Login = ({location}) => {
                                 ¡Bienvenido!
                             </Typography>
                         </Grid>
-                        <TextField label='Correo electrónico' placeholder='Ingrese su correo electrónico' fullWidth required name='email' value={data.email} onChange={handleInputChange}/>
+                        <TextField label='Correo electrónico' placeholder='Ingrese su correo electrónico' fullWidth required name='mail' value={data.mail} onChange={handleInputChange}/>
                         <TextField label='Contraseña' placeholder='Ingrese la contraseña' type='password' fullWidth required name='password' value={data.password} onChange={handleInputChange}/>
                         <Button type='submit' color='primary' variant="contained" fullWidth style={{height: 50}}>Iniciar sesión</Button>
                     </Stack>  

@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import {useIndicators} from "../hooks";
+import {useIndicators, useUserContext} from "../hooks";
 import Table from '../components/Table';
 import Notification from '../components/Notification';
 
@@ -41,7 +41,9 @@ const Indicators = () => {
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
 
-  const [indicators,,,,,, deleteIndicator] = useIndicators();
+  const {user} = useUserContext();
+
+  const [indicators,,,,,, deleteIndicator] = useIndicators(user?.token);
   const history = useHistory();
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Add } from '@mui/icons-material';
 import { useHistory } from 'react-router-dom';
 
-import { useIndicators } from "../hooks";
+import { useIndicators, useUserContext } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [
@@ -28,7 +28,9 @@ const columns = [
 const Samples = () => {
 
   const [rows, setRows] = useState([]);
-  const [, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators();  
+  
+  const {user} = useUserContext();
+  const [, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token);  
   const history = useHistory();
   
   useEffect(() => {

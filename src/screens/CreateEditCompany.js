@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, Button } from '@mui/material/';
 import { Add } from '@mui/icons-material';
 
-import { useCompanies } from "../hooks";
+import { useCompanies, useUserContext } from "../hooks";
 
 const CreateEditCompany = ({ location }) => { 
     const isEdit = location?.state?.isEdit || false
     const item = location?.state?.item
     
-    const [, addCompany, editCompany] = useCompanies();
+    const {user} = useUserContext();
+    const [, addCompany, editCompany] = useCompanies(user?.token);
 
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
