@@ -96,7 +96,7 @@ function CreateEditSample ({ location }) {
                 label="Fecha del dato"
                 inputFormat="MM/dd/yyyy"
                 onChange={handleDate}
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params} required />}
               />
             </FormControl>
           </Grid>
