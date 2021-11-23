@@ -50,8 +50,9 @@ const Indicators = () => {
     setRows(indicators?.map(indicator => ({...indicator, area: indicator?.area?.name})))
   }, [indicators])
 
-  const onEdit = (item) => {
-    history.push('/indicadores/editar', { isEdit: true, indicatorId: item })
+  const onEdit = (itemId) => {
+    const item = rows.find(item => item.id === itemId)
+    history.push('/indicadores/editar', { isEdit: true, item })
   }
 
   const onDelete = async (item) => {

@@ -15,22 +15,23 @@ const CreateEditIndicator = ({ location }) => {
     const isEdit = location?.state?.isEdit || false
     const indicatorId = location?.state?.indicatorId
 
+    const item = location?.state?.item
+
     const [hide, setHide] = useState('hidden')
     
     const {user} = useUserContext();
     const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
 
     const [datosForm, setDatosForm] = useState({
-        name: '',
-        description: '',
-        unidad: '',
-        indicadorValue1: '',
-        indicadorValue2: '',
-        constantValue2: '',
-        operadorValue1: '',
-        frecuencia: '',
-        radioSelect: 'D',
-        area: '',
+        name: item?.name || '',
+        description: item?.description || '',
+        unidad: item?.unit || '',
+        indicadorValue1: item?.indicadorValue1 || '',
+        indicadorValue2: item?.indicadorValue2 || '',
+        constantValue2: item?.constantValue2 || '',
+        frecuencia: item?.frequency|| '',
+        radioSelect: (item?.type === 'Directa' ? 'D' : 'I')  || 'D',
+        area: item?.area || '',
     })
     
     const handleInputChange = (event) => {
@@ -41,6 +42,8 @@ const CreateEditIndicator = ({ location }) => {
 
         if (event.target.name === 'radioSelect')
             isHide(event.target.value)
+
+        console.log(item)
     }
 
     function isHide(state){
@@ -110,7 +113,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listAreas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
+                                    {listAreas.map( (area) => <MenuItem  key={area.id} value={area.name}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>
@@ -130,16 +133,13 @@ const CreateEditIndicator = ({ location }) => {
 
                             <FormControl sx={{ m: 1, minWidth: 2 }}>
                                 <InputLabel id="f">Frecuencia</InputLabel>
-                                    <Select
-                                        labelId="f"
-                                        id="id_frecuencia"
-                                        value={datosForm.frecuencia}
-                                        label=""
+                                    <Select labelId="f"
                                         name='frecuencia'
+                                        value={datosForm.frecuencia}
                                         onChange={handleInputChange}
                                     >
                                         <MenuItem value=""><em>Vacia</em></MenuItem>
-                                        {listFrequency.map( (frequency) => <MenuItem value={frequency.id}>{frequency.name}</MenuItem> )}
+                                        {listFrequency.map( (frequency) => <MenuItem key={frequency.id} value={frequency.name}>{frequency.name}</MenuItem> )}
                                     </Select>
                                 <FormHelperText>Frecuencia de medida en meses</FormHelperText>
                             </FormControl>
