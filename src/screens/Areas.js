@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAreas } from "../hooks";
+import { useAreas, useUserContext } from "../hooks";
 import Table from '../components/Table';
 import Notification from '../components/Notification';
 
@@ -18,7 +18,8 @@ const columns = [
 
 const Areas = () => {
 
-  const [areas,,, deleteArea] = useAreas();
+  const {user} = useUserContext();
+  const [areas,,, deleteArea] = useAreas(user?.token);
   const history = useHistory();
 
   const [rows, setRows] = useState([]);

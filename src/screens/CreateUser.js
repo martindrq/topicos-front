@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, MenuItem, FormControl, InputLabel, Select } from '@mui/material/';
 import { Add } from '@mui/icons-material';
 
-import { useUsers, useCompanies } from "../hooks";
+import { useUsers, useCompanies, useUserContext } from "../hooks";
 
 const CreateEditArea = ({ location }) => { 
     const item = location?.state?.item
     
-    const [, addUser] = useUsers();
-    const [companies] = useCompanies();
+    const {user} = useUserContext();
+    const [, addUser] = useUsers(user?.token);
+    const [companies] = useCompanies(user?.token);
 
     const [datosForm, setDatosForm] = useState({
         username: item?.username || '',
@@ -21,9 +22,9 @@ const CreateEditArea = ({ location }) => {
         })
     }
 
-    const enviarDatosForm = (event) => {
+    const enviarDatosForm = async (event) => {
         event.preventDefault()
-        addUser(datosForm)
+        await addUser(datosForm)
     }
 
     return(
@@ -36,11 +37,6 @@ const CreateEditArea = ({ location }) => {
             <Grid item xs={12}>
                 <form onSubmit={enviarDatosForm}>
                     <Stack direction="column" alignItems="center" spacing={2} >
-                        <TextField label="Nombre" variant="outlined" fullWidth required autocomplete="none" 
-                            name='username'
-                            value={datosForm.username}
-                            onChange={handleInputChange}
-                        />
                         <TextField label='Correo electrónico' fullWidth required name='mail' value={datosForm.mail} onChange={handleInputChange}/>
                         <FormControl
                           style={{width: '100%'}}

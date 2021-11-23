@@ -188,7 +188,7 @@ function PageLayout({children}) {
   const history = useHistory();
   const {user, setUser} = useUserContext();
 
-  const isDeres = user?.company === constants.deres
+  const isDeres = user?.company?.name  === constants.deres
  
   const toggleDrawer = () => {
     setOpen(!open);
@@ -247,7 +247,7 @@ function PageLayout({children}) {
           >
           </Typography>
 
-          {user ? <Chip avatar={<Avatar>{user.email[0].toUpperCase()}</Avatar>} label={user.company} style={{color: 'white'}}/> : null}
+          {user ? <Chip avatar={<Avatar>{user.mail[0].toUpperCase()}</Avatar>} label={user?.company?.name} style={{color: 'white'}}/> : null}
 
           <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme} />
 
@@ -257,7 +257,7 @@ function PageLayout({children}) {
             </Badge>
           </IconButton>
           
-          <IconButton size="large" color="inherit" component={Link} to="/inicio-sesion" onClick={() => setUser(null)}>
+          <IconButton size="large" color="inherit" component={Link} to="/iniciar-sesion" onClick={() => setUser(null)}>
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 

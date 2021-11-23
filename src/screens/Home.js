@@ -9,7 +9,7 @@ const Home = () => {
 
   const {user} = useUserContext()
 
-  const isDeres = user?.company === constants.deres
+  const isDeres = user?.company?.name === constants.deres
 
   const renderCompanyDescription = () => (
     <>
@@ -140,10 +140,10 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h4">
-            {user ? user.company : null}
+            {user ? user.company.name : null}
           </Typography>
           <Typography variant="h5" style={{fontWeight: 200}}>
-            {user ? user.email : null}
+            {user ? user.mail : null}
           </Typography>
         </Grid>
       </Grid>

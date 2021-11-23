@@ -3,21 +3,17 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useUsers } from "../hooks";
+import { useUsers, useUserContext } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [
   { id: 'username', label: 'Nombre', minWidth: 170 },
-  // {
-  //   id: 'description',
-  //   label: 'Descripcion',
-  //   minWidth: 170,
-  // },
 ];
 
 const Users = () => {
 
-  const [users,, deleteUser] = useUsers();
+  const {user} = useUserContext();
+  const [users,, deleteUser] = useUsers(user?.token);
   const history = useHistory();
 
   const [rows, setRows] = useState([]);

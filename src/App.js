@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Grid, Box} from '@mui/material';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
@@ -24,15 +24,10 @@ import AuthLayout from "./components/AuthLayout";
 
 export const UserContext = React.createContext()
 
-const defaultUser = {
-  email: 'juan@mail.com',
-  company: 'DERES',
-}
-
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
 
-  const [user, setUser] = React.useState(defaultUser)
+  const [user, setUser] = React.useState()
 
   React.useEffect(() => {
     if (user) {
@@ -44,8 +39,8 @@ function App() {
 
   return (
       <BrowserRouter>
-        {loggedIn ? 
         <UserContext.Provider value={{user, setUser}}>
+        {loggedIn ? 
           <PageLayout>
             <Box sx={{ flexGrow:1 }}>
               <Grid item xs={12} md={12} lg={12}>
@@ -66,14 +61,16 @@ function App() {
                 <Route path="/empresas/editar" component={CreateEditCompany} exact/>
                 <Route path="/usuarios" component={Users} exact/>
                 <Route path="/usuarios/crear" component={CreateUser} exact/>
+                <Route path="/notificaciones" component={Notify} exact/>
               </Grid>
             </Box>
-          </PageLayout>
-        </UserContext.Provider> : 
+          </PageLayout> : 
           <AuthLayout>
-            <Route path="/inicio-sesion" component={Login} exact/>
+            <Route path="/iniciar-sesion" component={Login}/>
+            <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} />
           </AuthLayout>
         }
+        </UserContext.Provider>
       </BrowserRouter>
   );
 }

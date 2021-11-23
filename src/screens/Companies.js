@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useCompanies } from "../hooks";
+import { useCompanies, useUserContext } from "../hooks";
 import Table from '../components/Table';
 import Notification from '../components/Notification';
 
@@ -13,7 +13,8 @@ const columns = [
 
 const Companies = () => {
 
-  const [companies,,, deleteCompany] = useCompanies();
+  const {user} = useUserContext();
+  const [companies,,, deleteCompany] = useCompanies(user?.token);
   const history = useHistory();
 
   const [rows, setRows] = useState([]);

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, Button } from '@mui/material/';
 import { Add } from '@mui/icons-material';
 
-import { useAreas } from "../hooks";
+import { useAreas, useUserContext } from "../hooks";
 
 const CreateEditArea = ({ location }) => { 
     const isEdit = location?.state?.isEdit || false
     const item = location?.state?.item
     
-    const [, addArea, editArea] = useAreas();
+    const {user} = useUserContext();
+    const [, addArea, editArea] = useAreas(user?.token);
 
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',

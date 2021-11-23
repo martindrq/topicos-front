@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {TextField, Grid, FormControl, InputLabel, MenuItem, Select, Typography, Button} from '@mui/material/';
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
-import { useIndicators } from "../hooks";
+import { useIndicators, useUserContext } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [
@@ -20,8 +20,10 @@ function CreateEditSample ({ location }) {
   const sampleId = location?.state?.sampleId
   const indicatorId = location?.state?.indicatorId
 
+  const {user} = useUserContext();
+
   const [formState, setFormState] = useState({});
-  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators();
+  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
   const [rows, setRows] = useState([]);
 
   const handleSubmit = () => {

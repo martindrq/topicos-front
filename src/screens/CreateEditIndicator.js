@@ -8,7 +8,7 @@ import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
 
-import { useIndicators } from "../hooks";
+import { useIndicators, useUserContext } from "../hooks";
 
 const CreateEditIndicator = ({ location }) => { 
     
@@ -16,8 +16,9 @@ const CreateEditIndicator = ({ location }) => {
     const indicatorId = location?.state?.indicatorId
 
     const [hide, setHide] = useState('hidden')
-
-    const [,, addIndicator,, editIndicator] = useIndicators();
+    
+    const {user} = useUserContext();
+    const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
 
     const [datosForm, setDatosForm] = useState({
         name: '',

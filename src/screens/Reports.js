@@ -21,11 +21,13 @@ import {
 } from "date-fns";
 import { Line } from "react-chartjs-2";
 
-import { useIndicators, useReports } from "../hooks";
+import { useIndicators, useReports, useUserContext } from "../hooks";
 
 const Reports = () => {
-  const [bseIndicatorsData] = useIndicators();
-  const [report, loadingNewReport, generateReport] = useReports();
+
+  const {user} = useUserContext();
+  const [bseIndicatorsData] = useIndicators(user?.token);
+  const [report, loadingNewReport, generateReport] = useReports(user?.token);
 
   const colors = [
     "rgb(168, 115, 244)",
