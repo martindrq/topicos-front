@@ -205,10 +205,16 @@ const CreateEditIndicator = ({ location }) => {
                                         </Select> 
                                     <FormHelperText>Seleccione el segundo indicador</FormHelperText>
                                         { (datosForm.indicadorValue2 === 'value') && (
-                                            <TextField label="Valor" variant="outlined" fullWidth required autocomplete="none" 
+                                            <TextField 
+                                            label="Valor" 
+                                            variant="outlined" 
+                                            fullWidth 
+                                            autocomplete="none" 
                                             name='constantValue2'
                                             value={datosForm.constantValue2}
                                             onChange={handleInputChange}
+                                            required 
+                                            type="number"
                                         />
                                         )}
                                     </FormControl>
