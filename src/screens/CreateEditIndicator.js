@@ -22,6 +22,11 @@ const CreateEditIndicator = ({ location }) => {
     const {user} = useUserContext();
     const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
 
+    const getAreaId = (origin) => {
+        const item = listAreas.find(item => item.name === origin)
+        return item.id
+    }
+
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
         description: item?.description || '',
@@ -30,8 +35,8 @@ const CreateEditIndicator = ({ location }) => {
         indicadorValue2: item?.indicadorValue2 || '',
         constantValue2: item?.constantValue2 || '',
         frecuencia: item?.frequency|| '',
-        radioSelect: (item?.type === 'Directa' ? 'D' : 'I')  || 'D',
-        area: item?.area || '',
+        radioSelect: (item?.type === 'Directa' ? 'D' : (item?.type === 'Indirecta' ? 'I' : 'D')),
+        area: getAreaId(item?.area) || ''
     })
     
     const handleInputChange = (event) => {
@@ -55,6 +60,11 @@ const CreateEditIndicator = ({ location }) => {
 
     const enviarDatosForm = (event) => {
         event.preventDefault()
+        console.log(datosForm)
+
+        console.log("Item: ")
+
+        console.log(item)
 
         if (isEdit) {
             editIndicator({
@@ -78,7 +88,6 @@ const CreateEditIndicator = ({ location }) => {
                 // formula: datosForm.formula, // TODO: add formula
             })
         } 
-        
     }
 
     return(
@@ -111,7 +120,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listAreas.map( (area) => <MenuItem  key={area.id} value={area.name}>{area.name}</MenuItem> )}
+                                    {listAreas.map( (area) => <MenuItem  key={area.id} value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>
@@ -124,7 +133,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listUnits.map( (unit) => <MenuItem key={unit.id} value={unit.name}>{unit.name}</MenuItem> )}
+                                    {listUnits.map( (unit) => <MenuItem key={unit.name} value={unit.name}>{unit.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Métrica de medida</FormHelperText>
                             </FormControl>
@@ -166,7 +175,7 @@ const CreateEditIndicator = ({ location }) => {
                                         onChange={handleInputChange}
                                         required
                                     >
-                                        {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                        {listIndicators.map( (indicator) => <MenuItem key={indicator.id} value={indicator.id}>{indicator.name}</MenuItem> )}
                                     </Select>
                                     <FormHelperText>Seleccione el primer indicador</FormHelperText>
                                 </FormControl>
@@ -181,7 +190,7 @@ const CreateEditIndicator = ({ location }) => {
                                         onChange={handleInputChange}
                                         required
                                     >
-                                        {listOperators.map( (operator) => <MenuItem value={operator.id}>{operator.name}</MenuItem> )}
+                                        {listOperators.map( (operator) => <MenuItem  key={operator.id} value={operator.id}>{operator.name}</MenuItem> )}
                                     </Select>
                                     <FormHelperText>Seleccione el operador</FormHelperText>
                                 </FormControl>
@@ -199,7 +208,7 @@ const CreateEditIndicator = ({ location }) => {
                                             required
                                         >
                                             <MenuItem value="value">Una constante</MenuItem>
-                                            {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                            {listIndicators.map( (indicator) => <MenuItem key={indicator.id} value={indicator.id}>{indicator.name}</MenuItem> )}
                                         </Select> 
                                     <FormHelperText>Seleccione el segundo indicador</FormHelperText>
                                         { (datosForm.indicadorValue2 === 'value') && (

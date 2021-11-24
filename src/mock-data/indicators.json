@@ -55,7 +55,7 @@
         "type": "Directa",
         "description": "Toma directa realizada por la empresa de un modulo de energia",
         "area": {
-            "id": 3,
+            "id": 5,
             "name": "Luz",
             "company": {
                 "id": 1,
