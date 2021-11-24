@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Paper, 
   Table,
@@ -15,12 +15,14 @@ import {
   Select,
   MenuItem,
   Backdrop,
-  CircularProgress
+  CircularProgress,
+  Box,
+  Grid
 } from '@mui/material';
 
 import Alert from './Alert'
 
-export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true}) {
+export default function StickyHeadTable({ columns, rows, load = false, onEdit, onDelete, canEdit = true, canDelete = true}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
@@ -103,6 +105,29 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
     }
   }
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = useRef();
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  const handleLoading = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      timer.current = window.setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
+    }
+  };
+
+
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{
@@ -129,64 +154,74 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
               </Select>
           </FormControl>
         </TableContainer>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+        <TableContainer flex>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox onChange={handleSelectAllClick} />
+                </TableCell>
+                  {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
             
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox onChange={handleSelectAllClick} />
-              </TableCell>
-                {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-              </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                
-                const isItemSelected = isSelected(row.id);
-               
-                return (
-                     <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                    >
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                        />
-                      </TableCell>
+            { !success ? 
+              <TableBody> 
+                <TableRow>
+                  <TableCell colSpan={7} align="center">
+                    <CircularProgress size={50} sx={{ m: 30}}/>
+                  </TableCell>
+                </TableRow>
+              </TableBody> 
+              : 
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
                     
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                    const isItemSelected = isSelected(row.id);
+                  
+                    return (
+                        <TableRow
+                          hover
+                          onClick={(event) => handleClick(event, row.id)}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={row.id}
+                          selected={isItemSelected}
+                        >
+                        <TableCell padding="checkbox">
+                            <Checkbox
+                              checked={isItemSelected}
+                            />
+                          </TableCell>
+                        
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            }
+          </Table>
+        </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
@@ -208,10 +243,11 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
       />
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
+        open={load}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+    
     </Paper>
   );
 }
