@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, Button } from '@mui/material/';
 import { Add } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom'
 
 import { useCompanies, useUserContext } from "../hooks";
 
@@ -10,6 +11,7 @@ const CreateEditCompany = ({ location }) => {
     
     const {user} = useUserContext();
     const [, addCompany, editCompany] = useCompanies(user?.token);
+    const history = useHistory()
 
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
@@ -22,13 +24,14 @@ const CreateEditCompany = ({ location }) => {
         })
     }
 
-    const enviarDatosForm = (event) => {
+    const enviarDatosForm = async (event) => {
         event.preventDefault()
         if (isEdit) {
-            editCompany({...datosForm, id: item?.id})
+            await editCompany({...datosForm, id: item?.id})
         } else {
-            addCompany(datosForm)
+            await addCompany(datosForm)
         } 
+        history.goBack()
     }
 
     return(

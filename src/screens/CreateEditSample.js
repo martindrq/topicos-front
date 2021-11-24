@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {TextField, Grid, FormControl, InputLabel, MenuItem, Select, Typography, Button} from '@mui/material/';
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import { useHistory } from 'react-router-dom'
 
 import { useIndicators, useUserContext } from "../hooks";
 import Table from '../components/Table';
@@ -21,25 +22,27 @@ function CreateEditSample ({ location }) {
   const indicatorId = location?.state?.indicatorId
 
   const {user} = useUserContext();
+  const history = useHistory()
+  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
 
   const [formState, setFormState] = useState({});
-  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
   const [rows, setRows] = useState([]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isEdit) {
-      editIndicatorValue({
+      await editIndicatorValue({
           ...formState,
           id: sampleId,
           indicatorId,
           companyId: 1 // FIXME: add real companyId
       })
-  } else {
-      addIndicatorValue({
-        ...formState,
-        companyId: 1 // FIXME: add real companyId
-      })
-  } 
+    } else {
+        await addIndicatorValue({
+          ...formState,
+          companyId: 1 // FIXME: add real companyId
+        })
+    } 
+    history.goBack()
   };
 
   const handleChange = (event) => {
