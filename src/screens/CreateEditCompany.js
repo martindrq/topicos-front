@@ -49,6 +49,21 @@ const CreateEditCompany = ({ location }) => {
                             value={datosForm.name}
                             onChange={handleInputChange}
                         />
+                        <TextField label="RUT" variant="outlined" fullWidth required autocomplete="none" 
+                            name='rut'
+                            value={datosForm.rut}
+                            onChange={handleInputChange} 
+                        />
+                        <TextField label="Razón social" variant="outlined" fullWidth required autocomplete="none" 
+                            name='businessName'
+                            value={datosForm.businessName}
+                            onChange={handleInputChange} 
+                        />
+                        <TextField label="Rubro" variant="outlined" fullWidth required autocomplete="none" 
+                            name='businessArea'
+                            value={datosForm.businessArea}
+                            onChange={handleInputChange} 
+                        />
                     </Stack> 
                 
                     {isEdit ? 
