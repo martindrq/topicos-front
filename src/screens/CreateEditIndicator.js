@@ -3,12 +3,11 @@ import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormL
 import {Add} from '@mui/icons-material';
 
 import listUnits from '../mock-data/units'
-import listAreas from '../mock-data/areas'
 import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
 
-import { useIndicators, useUserContext } from "../hooks";
+import { useIndicators, useUserContext, useAreas } from "../hooks";
 
 const CreateEditIndicator = ({ location }) => { 
     
@@ -19,6 +18,7 @@ const CreateEditIndicator = ({ location }) => {
     
     const {user} = useUserContext();
     const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
+    const [areas] = useAreas(user?.token);
 
     const [datosForm, setDatosForm] = useState({
         name: '',
@@ -110,7 +110,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listAreas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
+                                    {areas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>
