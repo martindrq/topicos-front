@@ -4,7 +4,7 @@ import {Grid, Typography} from '@mui/material';
 import { useUserContext, useStats } from '../hooks'
 import { constants } from '../constants'
 
-const getStatText = (text, isDeres) => {
+const getStatText = (text, isDeres, companyName) => {
   switch (text) {
     case 'indicators':
       return 'INDICADORES'
@@ -15,7 +15,7 @@ const getStatText = (text, isDeres) => {
     case 'indicatorsValues':
       return 'MUESTRAS'
     case 'users':
-      return isDeres ? 'USUARIOS' : 'COMPAÑEROS'
+      return isDeres ? 'USUARIOS' : `USUARIOS ${companyName}`
     default:
       return ''
   }
@@ -98,7 +98,7 @@ const Home = () => {
               {sta[1]}
             </Typography>
             <Typography sx={statsDescStyle}>
-              {getStatText(sta[0])}
+              {getStatText(sta[0], isDeres, user?.company.name.toUpperCase())}
             </Typography>
           </Grid>
         ))}
