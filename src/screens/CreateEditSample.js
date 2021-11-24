@@ -22,11 +22,12 @@ function CreateEditSample ({ location }) {
   const indicatorId = location?.state?.indicatorId
 
   const {user} = useUserContext();
-  const history = useHistory()
   const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
+  const history = useHistory();
 
   const [formState, setFormState] = useState({});
   const [rows, setRows] = useState([]);
+  const [date, setDate] = useState(new Date().toISOString());
 
   const handleSubmit = async () => {
     if (isEdit) {
@@ -34,13 +35,17 @@ function CreateEditSample ({ location }) {
           ...formState,
           id: sampleId,
           indicatorId,
-          companyId: 1 // FIXME: add real companyId
+          companyId: user?.company.id
       })
     } else {
-        await addIndicatorValue({
+        let variables = {
           ...formState,
-          companyId: 1 // FIXME: add real companyId
-        })
+          companyId: user?.company.id
+        }
+        if (!formState.date) {
+          variables = {...variables, date}
+        }
+        await addIndicatorValue(variables)
     } 
     history.goBack()
   };
@@ -58,78 +63,78 @@ function CreateEditSample ({ location }) {
       ...formState,
       date: date.toISOString(),
     });
+    setDate(date.toISOString())
   };
 
   return (
     <>
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h4">
-        {`${isEdit ? 'Editar' : 'Agregar'} muestra`}
-        </Typography>
-  
-        {isEdit ? 
-        <Typography>
-          Editar datos referenciados a un indicador
-        </Typography>
-        :
-        <Typography>
-          Agregar datos referenciados a un indicador
-        </Typography>}
+      <Typography variant="h4">
+      {`${isEdit ? 'Editar' : 'Agregar'} muestra`}
+      </Typography>
+        <p>Agregar datos referenciados a un indicador</p>
       </Grid>
 
-      <form onSubmit={handleSubmit}>
-        <Grid item xs={12}>
-          <Grid container rowSpacing={6}>
-            {!indicatorId ? 
-            <Grid item xs={12} >
-              <FormControl variant="standard" fullWidth>
-                <InputLabel id="indicator">Indicador</InputLabel>
-                <Select labelId="indicator"
-                  name="indicatorId"
-                  value={formState.indicator}
-                  onChange={handleChange}
-                  required
-                >
-                  {indicators.map((indicator) => ( <MenuItem key={indicator.id} value={indicator.name}>{indicator.name}</MenuItem> ))}
-                </Select>
-              </FormControl>
-            </Grid> : null}
-            <Grid item xs={6}>
-              <FormControl variant="standard" fullWidth>
-                <DesktopDatePicker
-                  label="Fecha del dato"
-                  inputFormat="MM/dd/yyyy"
-                  onChange={handleDate}
-                  renderInput={(params) => <TextField {...params} required />}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={6}>
-              <FormControl variant="standard" fullWidth sx={{ paddingLeft: "30px" }}>
-                <TextField
-                  type="number"
-                  required
-                  value={formState.value}
-                  id="value"
-                  label="Valor"
-                  name="value"
-                  onChange={handleChange}
-                  autoComplete="off"
-                />
-              </FormControl>
-            </Grid>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              {`${isEdit ? 'Editar' : 'Agregar'} dato`}
-            </Button>
+      <Grid item xs={12}>
+        <Grid container rowSpacing={4}>
+          {!indicatorId ? <Grid item xs={12} >
+            <FormControl variant="standard" fullWidth>
+              <InputLabel id="indicator">Indicador</InputLabel>
+              <Select
+                labelId="indicator"
+                id="indicator"
+                name="indicatorId"
+                value={formState.indicatorId || ""}
+                fullWidth
+                onChange={handleChange}
+                label="Indicador"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {indicators.map((indicator) => (
+                  <MenuItem value={indicator.id}>{indicator.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid> : null}
+          <Grid item xs={6}>
+            <FormControl variant="standard" fullWidth>
+              <DesktopDatePicker
+                label="Fecha del dato"
+                inputFormat="MM/dd/yyyy"
+                onChange={handleDate}
+                renderInput={(params) => <TextField {...params} required />}
+                value={date}
+              />
+            </FormControl>
           </Grid>
+
+          <Grid item xs={6}>
+            <FormControl variant="standard" fullWidth sx={{ paddingLeft: "30px" }}>
+              <TextField
+                required
+                fullWidth
+                value={formState.value || ""}
+                id="value"
+                label="Valor"
+                name="value"
+                onChange={handleChange}
+                autoComplete="off"
+              />
+            </FormControl>
+          </Grid>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            {`${isEdit ? 'Editar' : 'Agregar'} dato`}
+          </Button>
         </Grid>
-      </form> 
+      </Grid>
     </Grid>
     {rows.length > 0 ? <Table columns={columns} rows={rows} /> : null}
     </>
