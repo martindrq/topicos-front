@@ -201,8 +201,8 @@ export const useNotify = () => {
   }
 
   useEffect(() => {
-    getNotifyIndicators()
-    getAmountNotifyIndicators()
+    // getNotifyIndicators()
+    // getAmountNotifyIndicators()
   }, [])
 
   return [notifyIndicators, amountNotifyIndicators]
