@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Grid, Paper, Avatar, TextField, Button, Typography, IconButton, Stack} from '@mui/material'
 import { LockOutlined } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom'
 
 import { useAuth, useUserContext } from '../hooks'
+import { constants } from '../constants';
 
 const paperStyle={padding :20,height:'42vh',width:500}
 const avatarStyle={backgroundColor:'#1bbd7e'}
@@ -13,7 +15,8 @@ const Login = ({location}) => {
 
     const [activate, login] = useAuth();
     const {setUser} = useUserContext();
-    
+    const history = useHistory();
+
     const [data, setData] = useState({
         mail: '',
         password: '',
@@ -40,7 +43,8 @@ const Login = ({location}) => {
                 ...response.data
             }
             setUser(userData)
-            localStorage.setItem('userDeresPlatform', JSON.stringify(userData))
+            localStorage.setItem(constants.localStorageUserKey, JSON.stringify(userData))
+            history.push('/inicio')
         } 
     }
 

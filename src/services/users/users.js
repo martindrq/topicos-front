@@ -30,6 +30,15 @@ const usersService = {
     });
     return response;
   },
+  getStats: async function (token) {
+    const response = await axios.get(BACKEND_URL + `/stats`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return response;
+  },
 };
 
 export default usersService;

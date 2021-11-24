@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab, Button} from '@mui/material/';
 import {Add} from '@mui/icons-material';
+import { useHistory } from 'react-router-dom'
 
 import listUnits from '../mock-data/units'
-import listAreas from '../mock-data/areas'
 import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
 
-import { useIndicators, useUserContext } from "../hooks";
+import { useIndicators, useUserContext, useAreas } from "../hooks";
 
 const CreateEditIndicator = ({ location }) => { 
     
@@ -19,6 +19,8 @@ const CreateEditIndicator = ({ location }) => {
     
     const {user} = useUserContext();
     const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
+    const [areas] = useAreas(user?.token);
+    const history = useHistory()
 
     const [datosForm, setDatosForm] = useState({
         name: '',
@@ -52,11 +54,11 @@ const CreateEditIndicator = ({ location }) => {
         }
     }
 
-    const enviarDatosForm = (event) => {
+    const enviarDatosForm = async (event) => {
         event.preventDefault()
 
         if (isEdit) {
-            editIndicator({
+            await editIndicator({
                 id: indicatorId,
                 name: datosForm.name,
                 unit: datosForm.unidad,
@@ -67,7 +69,7 @@ const CreateEditIndicator = ({ location }) => {
                 // formula: datosForm.formula, // TODO: add formula
             })
         } else {
-            addIndicator({
+            await addIndicator({
                 name: datosForm.name,
                 unit: datosForm.unidad,
                 type: datosForm.radioSelect,
@@ -77,7 +79,7 @@ const CreateEditIndicator = ({ location }) => {
                 // formula: datosForm.formula, // TODO: add formula
             })
         } 
-        
+        history.goBack()
     }
 
     return(
@@ -110,7 +112,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {listAreas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
+                                    {areas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>
