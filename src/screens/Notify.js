@@ -12,8 +12,8 @@ import Notification from '../components/Notification';
 const columns = [
   { id: 'delay', label: 'Días restantes', minWidth: 0 },
   { id: 'name', label: 'Nombre', minWidth: 170 },
+  { id: 'frequency', label: 'Frecuencia (meses)', minWidth: 170 },
   { id: 'date', label: 'Última medición', minWidth: 170 },
-
 ];
   
 const Notify = () => { 
@@ -21,7 +21,7 @@ const Notify = () => {
   const [ notifyIndicators,] = useNotify();    // TODO: use this instead of using indicatorsValues
   
   useEffect(() => {
-    setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, delay: statusColor(value?.delay)}) ))
+    setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, frequency: value?.indicator?.frequency,  delay: statusColor(value?.delay)}) ))
   }, [notifyIndicators])
 
   const [rows, setRows] = useState([]);
