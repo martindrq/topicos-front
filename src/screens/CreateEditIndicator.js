@@ -54,7 +54,6 @@ const CreateEditIndicator = ({ location }) => {
         if (state === 'I') {
             setHide('visible')
         }
-    console.log(datosForm)
     }
 
     const getAreaId = (origin) => {
