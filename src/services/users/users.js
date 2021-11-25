@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = 'https://2f22-167-58-12-150.ngrok.io';
 
 const usersService = {
   getUsers: async function (token) {
