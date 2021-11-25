@@ -11,7 +11,7 @@ import { useIndicators, useUserContext, useAreas } from "../hooks";
 const CreateEditIndicator = ({ location }) => { 
     
     const isEdit = location?.state?.isEdit || false
-    const indicatorId = location?.state?.indicatorId
+    const indicatorLocation = location?.state?.indicator
 
     const [hide, setHide] = useState('hidden')
     
@@ -21,16 +21,16 @@ const CreateEditIndicator = ({ location }) => {
     const history = useHistory()
 
     const [datosForm, setDatosForm] = useState({
-        name: '',
-        description: '',
-        unidad: '',
-        indicadorValue1: 0,
-        indicadorValue2: 0,
-        constantValue2: 0,
-        operadorValue1: '',
-        frecuencia: '',
-        radioSelect: 'D',
-        area: '',
+        name: indicatorLocation?.name || '',
+        description: indicatorLocation?.description || '',
+        unidad: indicatorLocation?.unit || '',
+        indicadorValue1: indicatorLocation?.indicadorValue1 || 0,
+        indicadorValue2: indicatorLocation?.indicadorValue2 || 0,
+        constantValue2: indicatorLocation?.constantValue2 || 0,
+        operadorValue1: indicatorLocation?.operadorValue1 || "",
+        frecuencia: indicatorLocation?.frequency|| '',
+        radioSelect: indicatorLocation?.type || 'D',
+        area: indicatorLocation?.area.id || ''
     })
     
     const handleInputChange = (event) => {
@@ -50,14 +50,21 @@ const CreateEditIndicator = ({ location }) => {
         if (state === 'I') {
             setHide('visible')
         }
+        console.log(indicatorLocation)
     }
+
+    const getAreaId = (origin) => {
+        const element = areas.find(item => item.name === origin)
+        return element?.id
+    }
+
 
     const enviarDatosForm = async (event) => {
         event.preventDefault()
 
         if (isEdit) {
             await editIndicator({
-                id: indicatorId,
+                id: indicatorLocation.id,
                 name: datosForm.name,
                 unit: datosForm.unidad,
                 type: datosForm.radioSelect,
