@@ -35,7 +35,7 @@ function CreateEditSample ({ location }) {
           ...formState,
           id: sampleId,
           indicatorId,
-          companyId: user?.company.id
+          date,
       })
     } else {
         let variables = {

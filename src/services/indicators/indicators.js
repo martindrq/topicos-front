@@ -12,7 +12,7 @@ const indicatorsService = {
     });
     return response;
   },
-  getIndicatorsValues: async (token, companyId=undefined, indicatorId=undefined, from=undefined, to=undefined) => {
+  getIndicatorsValues: async (token, companyId=null, indicatorId=null, from=null, to=null) => {
     const response = await axios.get(BACKEND_URL + "/indicator_value", {
       headers: {
         "Content-Type": "application/json",
@@ -82,8 +82,6 @@ const indicatorsService = {
     return response;
   },
 
-  // TODO: integrate both getNotifyIndicators and getAmountNotifyIndicators
-
   getNotifyIndicators: async (token, companyId=null, indicatorId=null, from=null, to=null) => {
     const response = await axios.get(BACKEND_URL + "/indicator_value", {
       headers: {
@@ -99,23 +97,6 @@ const indicatorsService = {
     });
     return response;
   },
-
-  getAmountNotifyIndicators: async (token, companyId=null, indicatorId=null, from=null, to=null) => {
-    const response = await axios.get(BACKEND_URL + "/indicator_value", {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": token
-      },
-      params: {
-        company: companyId,
-        indicator: indicatorId,
-        from: from,
-        to: to
-      }
-    });
-    return response;
-  },
-
 
 };
 export default indicatorsService;
