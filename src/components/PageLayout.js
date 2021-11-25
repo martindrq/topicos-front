@@ -250,11 +250,11 @@ function PageLayout({children}) {
 
           <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={handleTheme} />
 
-          <IconButton size="large" color="inherit" component={Link} to="/notificaciones">
+          {!isDeres ? <IconButton size="large" color="inherit" component={Link} to="/notificaciones">
             <Badge badgeContent={ amountNotifications } color="secondary">
               <Notifications fontSize="inherit"/>
             </Badge>
-          </IconButton>
+          </IconButton> : null}
           
           <IconButton size="large" color="inherit" component={Link} to="/iniciar-sesion" onClick={() => {
             localStorage.removeItem(constants.localStorageUserKey)

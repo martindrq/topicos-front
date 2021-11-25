@@ -34,7 +34,7 @@ const Notify = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Recordatorios
         </Typography>
-        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} />
+        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} canSelect={false}/>
       </Grid>
     </Grid>
   );

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth, useUserContext } from '../hooks'
 import { constants } from '../constants';
 
-const paperStyle={padding :20,height:'42vh',width:500}
+const paperStyle={padding :20,height:550,width:500, marginTop: 100}
 const avatarStyle={backgroundColor:'#1bbd7e'}
 
 const Login = ({location}) => {
