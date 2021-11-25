@@ -20,7 +20,7 @@ import {
 
 import Alert from './Alert'
 
-export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true}) {
+export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true, canSelect=true}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
@@ -105,7 +105,7 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{
+        {canSelect ? <TableContainer sx={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
@@ -128,15 +128,15 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
                 { canDelete ? <MenuItem value={2} name="delete">Borrar</MenuItem> : null }
               </Select>
           </FormControl>
-        </TableContainer>
+        </TableContainer> : null}
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             
             <TableRow>
-              <TableCell padding="checkbox">
+              {canSelect ? <TableCell padding="checkbox">
                 <Checkbox onChange={handleSelectAllClick} />
-              </TableCell>
+              </TableCell> : null}
                 {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -165,11 +165,11 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
                       key={row.id}
                       selected={isItemSelected}
                     >
-                    <TableCell padding="checkbox">
+                    {canSelect ? <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                         />
-                      </TableCell>
+                      </TableCell> : null}
                     
                     {columns.map((column) => {
                       const value = row[column.id];
