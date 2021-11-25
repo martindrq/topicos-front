@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import {Grid, Box} from '@mui/material';
-import {BrowserRouter, Route, /*Redirect, Switch*/} from 'react-router-dom';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
 // screens
 import Home from './screens/Home';
@@ -61,13 +61,13 @@ function App() {
                 <Route path="/usuarios" component={Users} exact/>
                 <Route path="/usuarios/crear" component={CreateUser} exact/>
                 <Route path="/notificaciones" component={Notify} exact/>
-                {/* <Route path="/" render={() => <Redirect to="/inicio"/>}/> */}
+                <Route path="/" render={() => <Redirect to="/inicio"/>}/>
               </Grid>
             </Box>
           </PageLayout> : 
           <AuthLayout>
               <Route path="/iniciar-sesion" component={Login}/>
-              {/* <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} /> */}
+              <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} />
           </AuthLayout>
         }
         </UserContext.Provider>
