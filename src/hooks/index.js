@@ -5,6 +5,7 @@ import authService from "../services/auth";
 import companiesService from "../services/companies";
 import usersService from "../services/users";
 import notificationsService from "../services/notifications";
+import logsService from "../services/logs";
 import { UserContext } from '../App'
 
 export const useIndicators = (token) => {
@@ -219,4 +220,20 @@ export const useStats = (token) => {
   }, [])
 
   return [stats]
+}
+
+export const useLogs = (token) => {
+
+  const [logs, setLogs] = useState([])
+
+  const getLogs = async () => {
+    const response = await logsService.getLogs(token);
+    setLogs(response.data)    
+  }
+  useEffect(() => {
+    getLogs()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return [logs]
 }
