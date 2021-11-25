@@ -82,6 +82,7 @@ const Reports = () => {
         format(dateRange.to, "yyyy-MM-dd")
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [indicators, dateRange]);
 
   const options = {

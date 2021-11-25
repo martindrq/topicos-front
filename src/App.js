@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import {Grid, Box} from '@mui/material';
-import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, /*Redirect, Switch*/} from 'react-router-dom';
 
 // screens
 import Home from './screens/Home';

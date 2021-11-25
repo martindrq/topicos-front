@@ -55,6 +55,7 @@ export const useIndicators = (token) => {
   useEffect(() => {
     getIndicators()
     getIndicatorsValues()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [indicators, indicatorsValues, addIndicator, addIndicatorValue, editIndicator, editIndicatorValue, deleteIndicator, deleteIndicatorValue]
@@ -88,6 +89,7 @@ export const useAreas = (token) => {
 
   useEffect(() => {
     getAreas()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [areas, addArea, editArea, deleteArea]
@@ -136,6 +138,7 @@ export const useCompanies = (token) => {
 
   useEffect(() => {
     getCompanies()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [companies, addCompany, editCompany, deleteCompany]
@@ -162,6 +165,7 @@ export const useUsers = (token) => {
 
   useEffect(() => {
     getUsers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [users, addUser, deleteUser]
@@ -195,6 +199,7 @@ export const useNotify = (token) => {
   }
   useEffect(() => {
     getNotifyIndicators()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [notifyIndicators]
@@ -210,6 +215,7 @@ export const useStats = (token) => {
 
   useEffect(() => {    
     getStats()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [stats]
