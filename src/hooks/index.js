@@ -5,7 +5,7 @@ import authService from "../services/auth";
 import companiesService from "../services/companies";
 import usersService from "../services/users";
 import notificationsService from "../services/notifications";
-import logsService from "../services/logs";
+import logsService from "../services/adminLogs";
 import { UserContext } from '../App'
 
 export const useIndicators = (token) => {
