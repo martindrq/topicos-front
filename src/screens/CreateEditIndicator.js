@@ -22,18 +22,25 @@ const CreateEditIndicator = ({ location }) => {
     const [areas] = useAreas(user?.token);
     const history = useHistory()
 
+    const item = location?.state?.indicatorId
+
+    const getAreaId = (origin) => {
+        const element = areas.find(item => item.name === origin)
+        return element?.id
+    }
+
     const [datosForm, setDatosForm] = useState({
-        name: '',
-        description: '',
-        unidad: '',
-        indicadorValue1: '',
-        indicadorValue2: '',
-        constantValue2: '',
-        operadorValue1: '',
-        frecuencia: '',
-        radioSelect: 'D',
-        area: '',
+        name: item?.name || '',
+        description: item?.description || '',
+        unidad: item?.unit || '',
+        indicadorValue1: item?.indicadorValue1 || '',
+        indicadorValue2: item?.indicadorValue2 || '',
+        constantValue2: item?.constantValue2 || '',
+        frecuencia: item?.frequency|| '',
+        radioSelect: (item?.type === 'Directa' ? 'D' : (item?.type === 'Indirecta' ? 'I' : 'D')),
+        area: getAreaId(item?.area) || ''
     })
+    
     
     const handleInputChange = (event) => {
         setDatosForm({
@@ -112,7 +119,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {areas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
+                                    {areas.map( (area) => <MenuItem key={area.name} value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>

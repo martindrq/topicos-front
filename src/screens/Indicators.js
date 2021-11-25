@@ -50,7 +50,9 @@ const Indicators = () => {
     setRows(indicators?.map(indicator => ({...indicator, area: indicator?.area?.name})))
   }, [indicators])
 
-  const onEdit = (item) => {
+
+  const onEdit = (itemId) => {
+    const item = rows.find(item => item.id === itemId)
     history.push('/indicadores/editar', { isEdit: true, indicatorId: item })
   }
 
