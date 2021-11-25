@@ -17,6 +17,7 @@ import CreateEditCompany from './screens/CreateEditCompany';
 import Users from './screens/Users';
 import CreateUser from './screens/CreateUser';
 import Notify from './screens/Notify';
+import Logs from './screens/Logs';
 
 // components
 import PageLayout from "./components/PageLayout";
@@ -61,6 +62,7 @@ function App() {
                 <Route path="/usuarios" component={Users} exact/>
                 <Route path="/usuarios/crear" component={CreateUser} exact/>
                 <Route path="/notificaciones" component={Notify} exact/>
+                <Route path="/logs" component={Logs} exact/>
                 <Route path="/" render={() => <Redirect to="/inicio"/>}/>
               </Grid>
             </Box>
