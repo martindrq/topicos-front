@@ -31,7 +31,6 @@ const Reports = () => {
 
   const colors = [
     "rgb(168, 115, 244)",
-    "rgb(13, 20, 142)",
     "rgb(170, 234, 29)",
     "rgb(224, 132, 0)",
     "rgb(157, 34, 105)",
@@ -98,12 +97,12 @@ const Reports = () => {
   };
 
   const buildChartLabel = () => {
-    const labels = [format(dateRange.from, "MM-yyyy")];
+    const labels = [format(dateRange.from, "dd-MM-yyyy")];
     const rangeDates = [dateRange.from];
     let lastDate = dateRange.from;
     while (compareAsc(lastDate, dateRange.to) <= 0) {
-      lastDate = add(lastDate, { months: 1 });
-      labels.push(format(lastDate, "MM-yyyy"));
+      lastDate = add(lastDate, { days: 1 });
+      labels.push(format(lastDate, "dd-MM-yyyy"));
       rangeDates.push(lastDate);
     }
     return [labels, rangeDates];
@@ -118,23 +117,23 @@ const Reports = () => {
     });
     return data;
   };
-
   const [labels, rangeDates] = buildChartLabel();
-
+  
   const data = {
     labels: labels,
     datasets:
-      report.length > 0 &&
-      report.map((reportEntry, idx) => {
-        return {
-          label: reportEntry[0].indicator.name,
-          data: buildChartData(rangeDates, reportEntry),
-          fill: false,
-          backgroundColor: colors[idx],
-          borderColor: colors[idx],
-          yAxisID: "y-axis-1",
-        };
-      }),
+    report.length > 0 &&
+    report.map((reportEntry, idx) => {
+      return {
+        label: reportEntry[0]?.indicator?.name,
+        data: buildChartData(rangeDates, reportEntry),
+        fill: false,
+        backgroundColor: colors[idx],
+        borderColor: colors[idx],
+        yAxisID: "y-axis-1",
+        spanGaps: true
+      };
+    }),
   };
 
   return (
