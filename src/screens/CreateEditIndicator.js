@@ -3,7 +3,6 @@ import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormL
 import {Add} from '@mui/icons-material';
 import { useHistory } from 'react-router-dom'
 
-import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
 
@@ -17,7 +16,7 @@ const CreateEditIndicator = ({ location }) => {
     const [hide, setHide] = useState('hidden')
     
     const {user} = useUserContext();
-    const [,, addIndicator,, editIndicator] = useIndicators(user?.token);
+    const [indicators,, addIndicator,, editIndicator] = useIndicators(user?.token);
     const [areas] = useAreas(user?.token);
     const history = useHistory()
 
@@ -25,9 +24,9 @@ const CreateEditIndicator = ({ location }) => {
         name: '',
         description: '',
         unidad: '',
-        indicadorValue1: '',
-        indicadorValue2: '',
-        constantValue2: '',
+        indicadorValue1: 0,
+        indicadorValue2: 0,
+        constantValue2: 0,
         operadorValue1: '',
         frecuencia: '',
         radioSelect: 'D',
@@ -65,7 +64,9 @@ const CreateEditIndicator = ({ location }) => {
                 frequency: datosForm.frecuencia,
                 areaId: datosForm.area,
                 description: datosForm.description,
-                // formula: datosForm.formula, // TODO: add formula
+                indicatorLeft: datosForm.indicadorValue1,
+                indicatorRight: datosForm.indicadorValue2 === 'value' ? datosForm.constantValue2 : datosForm.indicadorValue2,
+                operator: datosForm.operadorValue1
             })
         } else {
             await addIndicator({
@@ -75,7 +76,9 @@ const CreateEditIndicator = ({ location }) => {
                 frequency: datosForm.frecuencia,
                 areaId: datosForm.area,
                 description: datosForm.description,
-                // formula: datosForm.formula, // TODO: add formula
+                indicatorLeft: datosForm.indicadorValue1,
+                indicatorRight: datosForm.indicadorValue2 === 'value' ? datosForm.constantValue2 : datosForm.indicadorValue2,
+                operator: datosForm.operadorValue1
             })
         } 
         history.goBack()
@@ -165,7 +168,7 @@ const CreateEditIndicator = ({ location }) => {
                                         onChange={handleInputChange}
                                         required
                                     >
-                                        {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                        {indicators.map((indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem>)}
                                     </Select>
                                     <FormHelperText>Seleccione el primer indicador</FormHelperText>
                                 </FormControl>
@@ -180,7 +183,7 @@ const CreateEditIndicator = ({ location }) => {
                                         onChange={handleInputChange}
                                         required
                                     >
-                                        {listOperators.map( (operator) => <MenuItem value={operator.id}>{operator.name}</MenuItem> )}
+                                        {listOperators.map( (operator) => <MenuItem value={operator.name}>{operator.name}</MenuItem> )}
                                     </Select>
                                     <FormHelperText>Seleccione el operador</FormHelperText>
                                 </FormControl>
@@ -198,7 +201,7 @@ const CreateEditIndicator = ({ location }) => {
                                             required
                                         >
                                             <MenuItem value="value">Una constante</MenuItem>
-                                            {listIndicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
+                                            {indicators.map( (indicator) => <MenuItem value={indicator.id}>{indicator.name}</MenuItem> )}
                                         </Select> 
                                     <FormHelperText>Seleccione el segundo indicador</FormHelperText>
                                         { (datosForm.indicadorValue2 === 'value') && (
