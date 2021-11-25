@@ -34,7 +34,7 @@ const Samples = () => {
   const history = useHistory();
   
   useEffect(() => {
-    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name})))
+    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name, date: value?.date?.split('T')[0]})))
   }, [indicatorsValues])
 
   const onEdit = (item) => {
