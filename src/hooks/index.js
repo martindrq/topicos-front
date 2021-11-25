@@ -43,7 +43,7 @@ export const useIndicators = (token) => {
 
   const deleteIndicator = async (data) => {
     const response = await indicatorsService.deleteIndicator(data, token).catch(() => {
-      throw new Error("No se puede eliminar este indicador debido a que tiene valores asociados.") // FIXME: this could be not an error, just a 500 code
+      throw new Error("No se puede eliminar este indicador debido a que tiene valores asociados.")
     });
     return response
   }
