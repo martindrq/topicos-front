@@ -105,7 +105,7 @@ const CreateEditIndicator = ({ location }) => {
                         <Stack direction="row" alignItems="center" spacing={0}>
 
                             <FormControl sx={{ m: 1, minWidth: 4 }}>
-                                <InputLabel id="a">Area *</InputLabel>
+                                <InputLabel id="a">Área *</InputLabel>
                                 <Select labelId="a" 
                                     name='area'
                                     value={datosForm.area}
@@ -114,20 +114,16 @@ const CreateEditIndicator = ({ location }) => {
                                 >
                                     {areas.map( (area) => <MenuItem value={area.id}>{area.name}</MenuItem> )}
                                 </Select>
-                                <FormHelperText>Area perteneciente</FormHelperText>
+                                <FormHelperText>Área perteneciente</FormHelperText>
                             </FormControl>
 
-                            <FormControl sx={{ m: 1, minWidth: 2 }}>
-                                <InputLabel id="u">Unidad *</InputLabel>
-                                <Select labelId="u" 
+                            <FormControl>
+                                <TextField label="Unidad" variant="outlined" required autocomplete="none" 
                                     name='unidad'
                                     value={datosForm.unidad}
                                     onChange={handleInputChange}
-                                    required
-                                >
-                                    {listUnits.map( (unit) => <MenuItem key={unit.id} value={unit.name}>{unit.name}</MenuItem> )}
-                                </Select>
-                                <FormHelperText>Métrica de medida</FormHelperText>
+                                />
+                                <FormHelperText>Unidad de medida</FormHelperText>
                             </FormControl>
 
                             <FormControl sx={{ m: 1, minWidth: 2 }}>
