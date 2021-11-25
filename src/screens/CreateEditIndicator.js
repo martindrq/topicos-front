@@ -3,7 +3,6 @@ import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormL
 import {Add} from '@mui/icons-material';
 import { useHistory } from 'react-router-dom'
 
-import listUnits from '../mock-data/units'
 import listIndicators from '../mock-data/indicators'
 import listOperators from '../mock-data/operators'
 import listFrequency from '../mock-data/frequency'
