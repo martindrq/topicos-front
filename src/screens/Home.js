@@ -1,13 +1,30 @@
 import React from 'react';
 import {Grid, Typography} from '@mui/material';
   
-import { useUserContext } from '../hooks'
+import { useUserContext, useStats } from '../hooks'
 import { constants } from '../constants'
-// import DonutChart from '../components/DonutChart'
+
+const getStatText = (text, isDeres, companyName) => {
+  switch (text) {
+    case 'indicators':
+      return 'INDICADORES'
+    case 'areas': 
+      return 'AREAS'
+    case 'companies': 
+      return 'EMPRESAS'
+    case 'indicatorsValues':
+      return 'MUESTRAS'
+    case 'users':
+      return isDeres ? 'USUARIOS' : `USUARIOS ${companyName}`
+    default:
+      return ''
+  }
+}
 
 const Home = () => {
 
   const {user} = useUserContext()
+  const [stats] = useStats(user?.token)
 
   const isDeres = user?.company?.name === constants.deres
 
@@ -64,83 +81,29 @@ const Home = () => {
     return renderCompanyDescription()
   }
 
-  const renderDeresStats = () => (
-    <>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>
-          71
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          EMPRESAS
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>  
-          2.3k
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          USUARIOS
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>
-          222
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          INDICADORES
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>
-          56
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          AREAS
-        </Typography>
-      </Grid>
-    </>
-  )
-
-  const renderCompanyStats = () => (
-    <>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>
-          222
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          INDICADORES
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>  
-          2.3k
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          COMPAÑEROS
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>  
-          2.3k
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          MUESTRAS
-        </Typography>
-      </Grid>
-      <Grid xs={3}>
-        <Typography sx={statsStyle}>
-          56
-        </Typography>
-        <Typography sx={{fontWeight:'light', fontSize: 25, color: 'gray'}}>
-          AREAS
-        </Typography>
-      </Grid>
-    </>
-  )
-
-  const renderRoleStats = () => {
-    if (isDeres) return renderDeresStats()
-    return renderCompanyStats()
+  const renderStats = () => { 
+    return user && stats ? (
+      <>
+        {Object.entries(stats).filter(sta => {
+          if (!isDeres && sta[0] === 'companies') {
+            return false
+          } else if (isDeres && sta[0] === 'indicatorsValues') {
+            return false
+          } else {
+            return true
+          }
+        }).map(sta => (
+          <Grid xs={3}>
+            <Typography sx={statsStyle}>
+              {sta[1]}
+            </Typography>
+            <Typography sx={statsDescStyle}>
+              {getStatText(sta[0], isDeres, user?.company.name.toUpperCase())}
+            </Typography>
+          </Grid>
+        ))}
+      </>
+    ) : null
   }
 
   return (
@@ -150,18 +113,15 @@ const Home = () => {
           <Typography variant="h4">
             {user ? user.company.name : null}
           </Typography>
-          <Typography variant="h5" style={{fontWeight: 200}}>
+          <Typography variant="h5" style={{fontWeight: 200, color: 'gray'}}>
             {user ? user.mail : null}
           </Typography>
         </Grid>
       </Grid>
       <Grid container style={{marginTop: 50, marginBottom: 50}} xs={12}>
-        {user ? renderRoleStats() : null}
+        {renderStats()}
       </Grid>
-
-      <Grid xs={3}>
-        {/* <DonutChart/> */}
-      </Grid>
+      
       <Grid xs={12} >
 
         <Typography align="justify" variant="body1" style={textStyle}>
@@ -186,6 +146,13 @@ const textStyle = {
 const statsStyle = {
   color: '#ffa343',
   fontSize: 80,
+  fontFamily: 'Doppio One'
+}
+
+const statsDescStyle = {
+  fontWeight:'light', 
+  fontSize: 25, 
+  color: 'gray'
 }
 
 export default Home

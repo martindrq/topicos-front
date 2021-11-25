@@ -7,7 +7,9 @@ import { useUsers, useUserContext } from "../hooks";
 import Table from '../components/Table';
 
 const columns = [
-  { id: 'username', label: 'Nombre', minWidth: 170 },
+  { id: 'mail', label: 'Correo electrónico', minWidth: 170 },
+  { id: 'company', label: 'Empresa', minWidth: 170 },
+  { id: 'rut', label: 'RUT', minWidth: 170 }
 ];
 
 const Users = () => {
@@ -19,7 +21,8 @@ const Users = () => {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    setRows(users)
+    const renderedUsers = [...users].map(user => ({id: user.id, mail: user.mail, company: user.company.name, rut: user.company.rut}))
+    setRows(renderedUsers)
   }, [users])
 
   const onEdit = (itemId) => {

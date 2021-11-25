@@ -257,7 +257,10 @@ function PageLayout({children}) {
             </Badge>
           </IconButton>
           
-          <IconButton size="large" color="inherit" component={Link} to="/iniciar-sesion" onClick={() => setUser(null)}>
+          <IconButton size="large" color="inherit" component={Link} to="/iniciar-sesion" onClick={() => {
+            localStorage.removeItem(constants.localStorageUserKey)
+            setUser(null)
+          }}>
               <LoginOutlined fontSize="inherit"/>
           </IconButton>
 

@@ -12,7 +12,7 @@ const indicatorsService = {
     });
     return response;
   },
-  getIndicatorsValues: async (token, companyId=null, indicatorId=null, from=null, to=null) => {
+  getIndicatorsValues: async (token, companyId=undefined, indicatorId=undefined, from=undefined, to=undefined) => {
     const response = await axios.get(BACKEND_URL + "/indicator_value", {
       headers: {
         "Content-Type": "application/json",
