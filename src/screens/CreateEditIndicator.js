@@ -24,11 +24,6 @@ const CreateEditIndicator = ({ location }) => {
 
     const item = location?.state?.indicatorId
 
-    const getAreaId = (origin) => {
-        const element = areas.find(item => item.name === origin)
-        return element?.id
-    }
-
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
         description: item?.description || '',
@@ -38,7 +33,7 @@ const CreateEditIndicator = ({ location }) => {
         constantValue2: item?.constantValue2 || '',
         frecuencia: item?.frequency|| '',
         radioSelect: (item?.type === 'Directa' ? 'D' : (item?.type === 'Indirecta' ? 'I' : 'D')),
-        area: getAreaId(item?.area) || ''
+        area: item?.area || ''
     })
     
     
@@ -59,8 +54,14 @@ const CreateEditIndicator = ({ location }) => {
         if (state === 'I') {
             setHide('visible')
         }
+    console.log(datosForm)
     }
 
+    const getAreaId = (origin) => {
+        const element = areas.find(item => item.name === origin)
+        return element?.id
+    }
+    
     const enviarDatosForm = async (event) => {
         event.preventDefault()
 
@@ -71,17 +72,17 @@ const CreateEditIndicator = ({ location }) => {
                 unit: datosForm.unidad,
                 type: datosForm.radioSelect,
                 frequency: datosForm.frecuencia,
-                areaId: datosForm.area,
+                areaId: getAreaId(datosForm.area),
                 description: datosForm.description,
                 // formula: datosForm.formula, // TODO: add formula
-            })
+            }) 
         } else {
             await addIndicator({
                 name: datosForm.name,
                 unit: datosForm.unidad,
                 type: datosForm.radioSelect,
                 frequency: datosForm.frecuencia,
-                areaId: datosForm.area,
+                areaId: getAreaId(datosForm.area),
                 description: datosForm.description,
                 // formula: datosForm.formula, // TODO: add formula
             })
@@ -119,7 +120,7 @@ const CreateEditIndicator = ({ location }) => {
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    {areas.map( (area) => <MenuItem key={area.name} value={area.id}>{area.name}</MenuItem> )}
+                                    {areas.map( (area) => <MenuItem key={area.name} value={area.name}>{area.name}</MenuItem> )}
                                 </Select>
                                 <FormHelperText>Area perteneciente</FormHelperText>
                             </FormControl>
