@@ -50,14 +50,7 @@ const CreateEditIndicator = ({ location }) => {
         if (state === 'I') {
             setHide('visible')
         }
-        console.log(indicatorLocation)
     }
-
-    const getAreaId = (origin) => {
-        const element = areas.find(item => item.name === origin)
-        return element?.id
-    }
-
 
     const enviarDatosForm = async (event) => {
         event.preventDefault()
