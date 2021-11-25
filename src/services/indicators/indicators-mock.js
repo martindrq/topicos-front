@@ -30,9 +30,5 @@ const indicatorsService = {
   getNotifyIndicators: async () => {
     return {data: notifyMock};
   },
-
-  getAmountNotifyIndicators: async function (data) {
-    return {data: notifyMock.length};
-  },
 };
 export default indicatorsService;

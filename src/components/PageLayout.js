@@ -177,16 +177,15 @@ function PageLayout({children}) {
   const [open, setOpen] = useState(true);
   const [theme, setTheme] = useState('dark');
 
-  const [,amountNotifyIndicators] = useNotify();
+  const {user, setUser} = useUserContext();
+  const history = useHistory();
+  const [notification] = useNotify(user?.token);
 
   const [amountNotifications, setAmountNotifications] = useState(0)
 
   useEffect(() => {
-    setAmountNotifications(amountNotifyIndicators)
-  }, [amountNotifyIndicators])
-
-  const history = useHistory();
-  const {user, setUser} = useUserContext();
+    setAmountNotifications(notification.filter(noti => noti.alarm && noti.remainingDays <= 5).length)
+  }, [notification])
 
   const isDeres = user?.company?.name  === constants.deres
  

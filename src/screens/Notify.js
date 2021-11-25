@@ -2,33 +2,33 @@ import React, { useState, useEffect } from 'react';
 import {Grid, Avatar, Typography} from '@mui/material/';
 
 import {LooksOneOutlined, LooksTwoOutlined, Looks3Outlined, Looks4Outlined, Looks5Outlined, AllInclusive } from '@mui/icons-material';
-import {green, orange, red, grey} from '@mui/material/colors';
+import {green, orange, red} from '@mui/material/colors';
 
-import {useNotify} from "../hooks";
+import {useNotify, useUserContext} from "../hooks";
 
 import Table from '../components/Table';
 import Notification from '../components/Notification';
 
 const columns = [
-  { id: 'delay', label: 'Días restantes', minWidth: 0 },
-  { id: 'name', label: 'Nombre', minWidth: 170 },
+  { id: 'name', label: 'Indicador', minWidth: 170 },
   { id: 'frequency', label: 'Frecuencia (meses)', minWidth: 170 },
-  { id: 'date', label: 'Última medición', minWidth: 170 },
+  { id: 'remainingDays', label: 'Días restantes', minWidth: 170 },
+  { id: 'daysFromLast', label: 'Días desde la última medición', minWidth: 170 },
 ];
   
 const Notify = () => { 
   
-  const [ notifyIndicators,] = useNotify();    // TODO: use this instead of using indicatorsValues
+  const {user} = useUserContext();
+  const [notifyIndicators] = useNotify(user?.token);
   
   useEffect(() => {
-    setRows(notifyIndicators.map(value => ({...value, name: value?.indicator?.name, frequency: value?.indicator?.frequency,  delay: statusColor(value?.delay)}) ))
+    setRows(notifyIndicators.map(noti => ({...noti, name: noti?.indicator?.name, frequency: noti?.indicator?.frequency,  daysFromLast: noti?.daysFromLast, remainingDays: statusColor(noti?.remainingDays)}) ))
   }, [notifyIndicators])
 
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
 
   const statusColor = ( days ) => {
-
     switch(days) {
       case 1:   
         return (
@@ -66,12 +66,12 @@ const Notify = () => {
             </Avatar>
         </Grid> );
       default:
-        return (
+          return days < 0 ? <p style={{color: 'red'}}>{`Debió registrarse hace ${days * -1} días`}</p> : 
           <Grid>
-            <Avatar sx={{bgcolor: grey[600]}}>
-              <AllInclusive />
+            <Avatar sx={{bgcolor: green[600]}}>
+              {days}
             </Avatar>
-        </Grid> );
+          </Grid>
     }
   }
 

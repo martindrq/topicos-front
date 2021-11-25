@@ -4,6 +4,7 @@ import areasService from "../services/areas";
 import authService from "../services/auth";
 import companiesService from "../services/companies";
 import usersService from "../services/users";
+import notificationsService from "../services/notifications";
 import { UserContext } from '../App'
 
 export const useIndicators = (token) => {
@@ -166,11 +167,10 @@ export const useUsers = (token) => {
   return [users, addUser, deleteUser]
 }
 
-export const useReports = (token) => {
+export const useReports = (token, companyId) => {
 
   const [report, setReport] = useState([]);
   const [loadingReport, setLoadingReport] = useState([]);
-  const companyId = 1; // FIXME: use useContext
   
   const generateReport = async (indicatorsIds, from, to) => {
     setLoadingReport(true);
@@ -185,27 +185,19 @@ export const useUserContext = () => {
   return useContext(UserContext)
 }
 
-export const useNotify = () => {
+export const useNotify = (token) => {
 
   const [notifyIndicators, setNotifyIndicators] = useState([])
-  const [amountNotifyIndicators, setAmountNotifyIndicators] = useState([])
 
   const getNotifyIndicators = async () => {
-    const response = await indicatorsService.getNotifyIndicators();
+    const response = await notificationsService.getNotifyIndicators(token);
     setNotifyIndicators(response.data)    
   }
-
-  const getAmountNotifyIndicators = async () => {
-    const response = await indicatorsService.getAmountNotifyIndicators();
-    setAmountNotifyIndicators(response.data)    
-  }
-
   useEffect(() => {
-    // getNotifyIndicators()
-    // getAmountNotifyIndicators()
+    getNotifyIndicators()
   }, [])
 
-  return [notifyIndicators, amountNotifyIndicators]
+  return [notifyIndicators]
 }
 
 export const useStats = (token) => {
