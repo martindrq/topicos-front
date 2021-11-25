@@ -18,7 +18,7 @@ const Logs = () => {
   const [logs] = useLogs(user?.token);
   
   useEffect(() => {
-    setRows(logs)
+    setRows(logs.map(log => ({...log, date: log?.date?.split('T')[0]})))
   }, [logs])
 
   const [rows, setRows] = useState([]);
