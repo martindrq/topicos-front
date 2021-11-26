@@ -19,6 +19,11 @@ const columns = [
     minWidth: 170,
   },
   {
+    id: 'unit',
+    label: 'Unidad',
+    minWidth: 170,
+  },
+  {
     id: 'date',
     label: 'Fecha',
     minWidth: 170,
@@ -34,7 +39,7 @@ const Samples = () => {
   const history = useHistory();
   
   useEffect(() => {
-    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name, date: value?.date?.split('T')[0]})))
+    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
   }, [indicatorsValues])
 
   const onEdit = (item) => {
