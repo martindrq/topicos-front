@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab, Button} from '@mui/material/';
+import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab} from '@mui/material/';
 import {Add} from '@mui/icons-material';
 import { useHistory } from 'react-router-dom'
 
@@ -8,12 +8,12 @@ import listFrequency from '../mock-data/frequency'
 
 import { useIndicators, useUserContext, useAreas } from "../hooks";
 
-const CreateEditIndicator = ({ location }) => { 
+const CreateEditIndicator = () => { 
     
     const [hide, setHide] = useState('hidden')
     
     const {user} = useUserContext();
-    const [indicators,, addIndicator,, editIndicator] = useIndicators(user?.token);
+    const [indicators,, addIndicator] = useIndicators(user?.token);
     const [areas] = useAreas(user?.token);
     const history = useHistory()
 
@@ -72,7 +72,7 @@ const CreateEditIndicator = ({ location }) => {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h4">
-                    Crear indicador`
+                    Crear indicador
                 </Typography>
             </Grid>
             <Grid item xs={12}>
