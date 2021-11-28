@@ -143,6 +143,38 @@ const Reports = () => {
             Reportes
         </Typography>
       </Grid>
+      <Grid item xs={3} style={{marginRight: 50}}>
+        <FormControl variant="standard" fullWidth>
+          <DesktopDatePicker
+            label="Desde"
+            inputFormat="MM/dd/yyyy"
+            value={dateRange.from}
+            onChange={(date) => {
+              setDateRange({
+                ...dateRange,
+                from: date,
+              });
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={3}>
+        <FormControl variant="standard" fullWidth>
+          <DesktopDatePicker
+            label="Hasta"
+            inputFormat="MM/dd/yyyy"
+            value={dateRange.to}
+            onChange={(date) => {
+              setDateRange({
+                ...dateRange,
+                to: date,
+              });
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </FormControl>
+      </Grid>
       {indicators.map((indicator, idx) => {
         return (
           <Grid item xs={12} key={idx}>
@@ -178,39 +210,7 @@ const Reports = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={3}>
-                <FormControl variant="standard" fullWidth>
-                  <DesktopDatePicker
-                    label="Desde"
-                    inputFormat="MM/dd/yyyy"
-                    value={dateRange.from}
-                    onChange={(date) => {
-                      setDateRange({
-                        ...dateRange,
-                        from: date,
-                      });
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={3}>
-                <FormControl variant="standard" fullWidth>
-                  <DesktopDatePicker
-                    label="Hasta"
-                    inputFormat="MM/dd/yyyy"
-                    value={dateRange.to}
-                    onChange={(date) => {
-                      setDateRange({
-                        ...dateRange,
-                        to: date,
-                      });
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} style={{marginTop: 25}}>
                 {idx === 0 && (
                   <Button
                     fullWidth
