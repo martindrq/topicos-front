@@ -69,7 +69,7 @@ function App() {
           </PageLayout> : 
           <AuthLayout>
               <Route path="/iniciar-sesion" component={Login}/>
-              <Route path="/" render={() => <Redirect to="/iniciar-sesion"/>} />
+              <Route path="/" exact render={() => <Redirect to="/iniciar-sesion"/> } />
           </AuthLayout>
         }
         </UserContext.Provider>
