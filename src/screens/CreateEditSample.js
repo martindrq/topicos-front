@@ -93,7 +93,7 @@ function CreateEditSample ({ location }) {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                {indicators.map((indicator) => (
+                {indicators.filter(indicator => indicator.type === 'D').map((indicator) => (
                   <MenuItem value={indicator.id}>{indicator.name}</MenuItem>
                 ))}
               </Select>
