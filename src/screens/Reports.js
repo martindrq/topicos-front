@@ -125,7 +125,7 @@ const Reports = () => {
     report.length > 0 &&
     report.map((reportEntry, idx) => {
       return {
-        label: reportEntry[0]?.indicator?.name || "No hay datos",
+        label: reportEntry[0] ? `${reportEntry[0]?.indicator?.name} (${reportEntry[0]?.indicator?.unit})` : "No hay datos",
         data: buildChartData(rangeDates, reportEntry),
         fill: false,
         backgroundColor: colors[idx],
