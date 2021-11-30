@@ -1,5 +1,5 @@
-import React from 'react';
-import {Grid, Typography} from '@mui/material';
+import React, { useState } from 'react';
+import {Grid, Typography, CircularProgress} from '@mui/material';
   
 import { useUserContext, useStats } from '../hooks'
 import { constants } from '../constants'
@@ -23,8 +23,10 @@ const getStatText = (text, isDeres, companyName) => {
 
 const Home = () => {
 
+  const [loading, setLoading] = useState(false)
+
   const {user} = useUserContext()
-  const [stats] = useStats(user?.token)
+  const [stats] = useStats(user?.token, setLoading)
 
   const isDeres = user?.company?.name === constants.deres
 
@@ -106,6 +108,30 @@ const Home = () => {
     ) : null
   }
 
+  const renderLoadings = () => 
+  <>
+    <Grid xs={3}>
+      <Typography sx={statsStyle}>
+        <CircularProgress style={{color: "#ffa343"}}/>
+      </Typography>
+    </Grid>
+    <Grid xs={3}>
+      <Typography sx={statsStyle}>
+        <CircularProgress style={{color: "#ffa343"}}/>
+      </Typography>
+    </Grid>
+    <Grid xs={3}>
+      <Typography sx={statsStyle}>
+        <CircularProgress style={{color: "#ffa343"}}/>
+      </Typography>
+    </Grid>
+    <Grid xs={3}>
+      <Typography sx={statsStyle}>
+        <CircularProgress style={{color: "#ffa343"}}/>
+      </Typography>
+    </Grid>
+  </>
+
   return (
     <>
       <Grid container spacing={2}>
@@ -119,7 +145,7 @@ const Home = () => {
         </Grid>
       </Grid>
       <Grid container style={{marginTop: 50, marginBottom: 50}} xs={12}>
-        {renderStats()}
+        {loading ? renderLoadings() : renderStats()}
       </Grid>
       
       <Grid xs={12} >

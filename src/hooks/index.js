@@ -216,11 +216,13 @@ export const useNotify = (token) => {
   return [notifyIndicators]
 }
 
-export const useStats = (token) => {
+export const useStats = (token, setLoading=()=>{}) => {
   const [stats, setStats] = useState()
 
   const getStats = async () => {
+    setLoading(true)
     const response = await usersService.getStats(token);
+    setLoading(false)
     setStats(response.data)
   }
 
