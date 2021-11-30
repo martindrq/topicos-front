@@ -13,13 +13,14 @@ const columns = [
 
 const Companies = () => {
 
-  const {user} = useUserContext();
-  const [companies,,, deleteCompany] = useCompanies(user?.token);
-  const history = useHistory();
-
+  const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
 
+  const {user} = useUserContext();
+  const [companies,,, deleteCompany] = useCompanies(user?.token, setLoading);
+  const history = useHistory();
+  
   useEffect(() => {
     setRows(companies)
   }, [companies])
@@ -44,7 +45,7 @@ const Companies = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Empresas
         </Typography>
-        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} loadingData={loading} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  

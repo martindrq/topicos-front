@@ -20,7 +20,7 @@ import {
 
 import Alert from './Alert'
 
-export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true, canSelect=true}) {
+export default function StickyHeadTable({ columns, rows, loading = false, onEdit, onDelete, canEdit = true, canDelete = true, canSelect=true, loadingData=false}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [action, setAction] = useState('');
@@ -148,6 +148,14 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
               ))}
             </TableRow>
           </TableHead>
+          {loadingData ? 
+          (<TableBody> 
+            <TableRow>
+              <TableCell colSpan={7} align="center">
+                <CircularProgress size={30} sx={{ m: 10}}/>
+              </TableCell>
+            </TableRow>
+          </TableBody>) : 
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -184,7 +192,7 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
                   </TableRow>
                 );
               })}
-          </TableBody>
+          </TableBody>}
         </Table>
       </TableContainer>
       <TablePagination

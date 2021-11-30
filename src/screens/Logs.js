@@ -14,8 +14,10 @@ const columns = [
   
 const Logs = () => { 
   
+  const [loading, setLoading] = useState(false);
+
   const {user} = useUserContext();
-  const [logs] = useLogs(user?.token);
+  const [logs] = useLogs(user?.token, setLoading);
   
   useEffect(() => {
     setRows(logs.map(log => ({...log, date: log?.date?.split('T')[0]})))
@@ -31,7 +33,7 @@ const Logs = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Logs
         </Typography>
-        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} canSelect={false}/>
+        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} canSelect={false} loadingData={loading}/>
       </Grid>
     </Grid>
   );

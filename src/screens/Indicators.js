@@ -40,10 +40,11 @@ const Indicators = () => {
 
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const {user} = useUserContext();
 
-  const [indicators,,,,,, deleteIndicator] = useIndicators(user?.token);
+  const [indicators,,,,,, deleteIndicator] = useIndicators(user?.token, setLoading);
   
   useEffect(() => {
     setRows(indicators?.map(indicator => ({...indicator, area: indicator?.area?.name})))
@@ -64,7 +65,7 @@ const Indicators = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Indicadores
         </Typography>
-        <Table columns={columns} rows={rows} canEdit={false} onDelete={onDelete} />
+        <Table columns={columns} rows={rows} canEdit={false} onDelete={onDelete} loadingData={loading}/>
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  

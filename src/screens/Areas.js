@@ -18,13 +18,14 @@ const columns = [
 
 const Areas = () => {
 
-  const {user} = useUserContext();
-  const [areas,,, deleteArea] = useAreas(user?.token);
-  const history = useHistory();
-
   const [rows, setRows] = useState([]);
   const [errorText, setErrorText] = useState('');
+  const [loading, setLoading] = useState(false);
 
+  const {user} = useUserContext();
+  const [areas,,, deleteArea] = useAreas(user?.token, setLoading);
+  const history = useHistory();
+  
   useEffect(() => {
     setRows(areas)
   }, [areas])
@@ -49,7 +50,7 @@ const Areas = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Areas
         </Typography>
-        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} loadingData={loading} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
