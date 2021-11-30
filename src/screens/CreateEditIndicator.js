@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab, Button} from '@mui/material/';
+import {TextField, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Stack, InputLabel, MenuItem, FormHelperText, Select, Typography, Paper, Tooltip, Fab} from '@mui/material/';
 import {Add} from '@mui/icons-material';
 import { useHistory } from 'react-router-dom'
 
@@ -8,15 +8,12 @@ import listFrequency from '../mock-data/frequency'
 
 import { useIndicators, useUserContext, useAreas } from "../hooks";
 
-const CreateEditIndicator = ({ location }) => { 
+const CreateEditIndicator = () => { 
     
-    const isEdit = location?.state?.isEdit || false
-    const indicatorId = location?.state?.indicatorId
-
     const [hide, setHide] = useState('hidden')
     
     const {user} = useUserContext();
-    const [indicators,, addIndicator,, editIndicator] = useIndicators(user?.token);
+    const [indicators,, addIndicator] = useIndicators(user?.token);
     const [areas] = useAreas(user?.token);
     const history = useHistory()
 
@@ -27,10 +24,10 @@ const CreateEditIndicator = ({ location }) => {
         indicadorValue1: 0,
         indicadorValue2: 0,
         constantValue2: 0,
-        operadorValue1: '',
+        operadorValue1: "",
         frecuencia: '',
         radioSelect: 'D',
-        area: '',
+        area: ''
     })
     
     const handleInputChange = (event) => {
@@ -55,32 +52,19 @@ const CreateEditIndicator = ({ location }) => {
     const enviarDatosForm = async (event) => {
         event.preventDefault()
 
-        if (isEdit) {
-            await editIndicator({
-                id: indicatorId,
-                name: datosForm.name,
-                unit: datosForm.unidad,
-                type: datosForm.radioSelect,
-                frequency: datosForm.frecuencia,
-                areaId: datosForm.area,
-                description: datosForm.description,
-                indicatorLeft: datosForm.indicadorValue1,
-                indicatorRight: datosForm.indicadorValue2 === 'value' ? datosForm.constantValue2 : datosForm.indicadorValue2,
-                operator: datosForm.operadorValue1
-            })
-        } else {
-            await addIndicator({
-                name: datosForm.name,
-                unit: datosForm.unidad,
-                type: datosForm.radioSelect,
-                frequency: datosForm.frecuencia,
-                areaId: datosForm.area,
-                description: datosForm.description,
-                indicatorLeft: datosForm.indicadorValue1,
-                indicatorRight: datosForm.indicadorValue2 === 'value' ? datosForm.constantValue2 : datosForm.indicadorValue2,
-                operator: datosForm.operadorValue1
-            })
-        } 
+        await addIndicator({
+            name: datosForm.name,
+            unit: datosForm.unidad,
+            type: datosForm.radioSelect,
+            frequency: datosForm.frecuencia,
+            areaId: datosForm.area,
+            description: datosForm.description,
+            indicatorLeft: datosForm.indicadorValue1,
+            operator: datosForm.operadorValue1,
+            indicatorRight: datosForm.indicadorValue2 === 'value' ? undefined : datosForm.indicadorValue2,
+            constant : datosForm.indicadorValue2 === 'value' ? datosForm.constantValue2 : undefined
+        })
+        
         history.goBack()
     }
 
@@ -88,7 +72,7 @@ const CreateEditIndicator = ({ location }) => {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h4">
-                {`${isEdit ? 'Editar' : 'Crear'} indicador`}
+                    Crear indicador
                 </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -221,15 +205,6 @@ const CreateEditIndicator = ({ location }) => {
                             </Stack>  
                         }   
                     </Stack>
-                    {isEdit ? 
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Editar
-                        </Button>
-                        : 
                         <Stack direction="column" alignItems="center" spacing={2} >
                             <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
                                 <Tooltip title="Crear" placement="right">  
@@ -239,7 +214,6 @@ const CreateEditIndicator = ({ location }) => {
                                 </Tooltip>
                             </Paper>
                         </Stack>  
-                    }
                 </form>
             </Grid>
         </Grid>

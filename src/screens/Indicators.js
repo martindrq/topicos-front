@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography, Paper, Tooltip, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {useIndicators, useUserContext} from "../hooks";
 import Table from '../components/Table';
@@ -44,15 +44,10 @@ const Indicators = () => {
   const {user} = useUserContext();
 
   const [indicators,,,,,, deleteIndicator] = useIndicators(user?.token);
-  const history = useHistory();
-
+  
   useEffect(() => {
     setRows(indicators?.map(indicator => ({...indicator, area: indicator?.area?.name})))
   }, [indicators])
-
-  const onEdit = (item) => {
-    history.push('/indicadores/editar', { isEdit: true, indicatorId: item })
-  }
 
   const onDelete = async (item) => {
     try {
@@ -69,7 +64,7 @@ const Indicators = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Indicadores
         </Typography>
-        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} />
+        <Table columns={columns} rows={rows} canEdit={false} onDelete={onDelete} />
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  
