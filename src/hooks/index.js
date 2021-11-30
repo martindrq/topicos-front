@@ -200,12 +200,14 @@ export const useUserContext = () => {
   return useContext(UserContext)
 }
 
-export const useNotify = (token) => {
+export const useNotify = (token, setLoading=()=>{}) => {
 
   const [notifyIndicators, setNotifyIndicators] = useState([])
 
   const getNotifyIndicators = async () => {
+    setLoading(true)
     const response = await notificationsService.getNotifyIndicators(token);
+    setLoading(false)
     setNotifyIndicators(response.data)    
   }
   useEffect(() => {
