@@ -14,11 +14,12 @@ const columns = [
 
 const Users = () => {
 
-  const {user} = useUserContext();
-  const [users,, deleteUser] = useUsers(user?.token);
-  const history = useHistory();
-
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const {user} = useUserContext();
+  const [users,, deleteUser] = useUsers(user?.token, setLoading);
+  const history = useHistory();
 
   useEffect(() => {
     const renderedUsers = [...users].map(user => ({id: user.id, mail: user.mail, company: user.company.name, rut: user.company.rut}))
@@ -40,7 +41,7 @@ const Users = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Usuarios
         </Typography>
-        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} canEdit={false} />
+        <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} canEdit={false} loadingData={loading}/>
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
         <Tooltip title="Agregar" placement="right">  

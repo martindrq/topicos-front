@@ -8,17 +8,21 @@ import notificationsService from "../services/notifications";
 import logsService from "../services/adminLogs";
 import { UserContext } from '../App'
 
-export const useIndicators = (token) => {
+export const useIndicators = (token, setLoading=()=>{}) => {
   const [indicators, setIndicators] = useState([])
   const [indicatorsValues, setIndicatorsValues] = useState([])
 
   const getIndicators = async () => {
+    setLoading(true)
     const response = await indicatorsService.getIndicators(token);
+    setLoading(false)
     setIndicators(response.data)
   }
   
   const getIndicatorsValues = async () => {
+    setLoading(true)
     const response = await indicatorsService.getIndicatorsValues(token);
+    setLoading(false)
     setIndicatorsValues(response.data)
   }
 
@@ -62,12 +66,14 @@ export const useIndicators = (token) => {
   return [indicators, indicatorsValues, addIndicator, addIndicatorValue, editIndicator, editIndicatorValue, deleteIndicator, deleteIndicatorValue]
 }
 
-export const useAreas = (token) => {
+export const useAreas = (token, setLoading=()=>{}) => {
 
   const [areas, setAreas] = useState([])
 
   const getAreas = async () => {
+    setLoading(true)
     const response = await areasService.getAreas(token);
+    setLoading(false)
     setAreas(response.data)
   }
 
@@ -111,12 +117,14 @@ export const useAuth = () => {
   return [activate, login]
 }
 
-export const useCompanies = (token) => {
+export const useCompanies = (token, setLoading) => {
 
   const [companies, setCompanies] = useState([])
 
   const getCompanies = async () => {
+    setLoading(true)
     const response = await companiesService.getCompanies(token);
+    setLoading(false)
     setCompanies(response.data)
   }
 
@@ -145,12 +153,14 @@ export const useCompanies = (token) => {
   return [companies, addCompany, editCompany, deleteCompany]
 }
 
-export const useUsers = (token) => {
+export const useUsers = (token, setLoading=()=>{}) => {
 
   const [users, setUsers] = useState([])
 
   const getUsers = async () => {
+    setLoading(true)
     const response = await usersService.getUsers(token);
+    setLoading(false)
     setUsers(response.data)
   }
 
@@ -222,12 +232,14 @@ export const useStats = (token) => {
   return [stats]
 }
 
-export const useLogs = (token) => {
+export const useLogs = (token, setLoading=()=>{}) => {
 
   const [logs, setLogs] = useState([])
 
   const getLogs = async () => {
+    setLoading(true)
     const response = await logsService.getLogs(token);
+    setLoading(false)
     setLogs(response.data)    
   }
   useEffect(() => {
