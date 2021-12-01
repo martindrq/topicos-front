@@ -17,8 +17,10 @@ const columns = [
   
 const Notify = () => { 
   
+  const [loading, setLoading] = useState(false)
+
   const {user} = useUserContext();
-  const [notifyIndicators] = useNotify(user?.token);
+  const [notifyIndicators] = useNotify(user?.token, setLoading);
   
   useEffect(() => {
     setRows(notifyIndicators.map(noti => ({...noti, name: noti?.indicator?.name, frequency: noti?.indicator?.frequency,  daysFromLast: noti?.daysFromLast, remainingDays: noti?.remainingDays < 0 ? <strong style={{color: red[600]}}>{`Debió registrarse hace ${noti?.remainingDays * -1} días`}</strong> : <OutlinedNumber number={noti?.remainingDays}/>}) ))
@@ -34,7 +36,7 @@ const Notify = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Recordatorios
         </Typography>
-        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} canSelect={false}/>
+        <Table columns={columns} rows={rows} canEdit={false} canDelete={false} canSelect={false} loadingData={loading} />
       </Grid>
     </Grid>
   );
