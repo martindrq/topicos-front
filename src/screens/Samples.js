@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useIndicators, useUserContext } from "../hooks";
 import Table from '../components/Table';
+import SearchBar from '../components/SearchBar';
 
 const columns = [
   { 
@@ -34,9 +35,10 @@ const Samples = () => {
 
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [indicator, setIndicator] = useState();
 
   const {user} = useUserContext();
-  const [, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading);  
+  const [indicators, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading);  
   const history = useHistory();
   
   useEffect(() => {
@@ -57,6 +59,7 @@ const Samples = () => {
         <Typography variant="h4" style={{ marginBottom: 20 }}>
           Muestras
         </Typography>
+        <SearchBar options={indicators} value={indicator} setValue={setIndicator}/>
         <Table columns={columns} rows={rows} onEdit={onEdit} onDelete={onDelete} loadingData={loading}/>
       </Grid>
       <Paper sx={{ position: "fixed", bottom: 0, right: 0}} elevation={0} >
