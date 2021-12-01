@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useIndicators, useUserContext } from "../hooks";
 import Table from '../components/Table';
 import SearchBar from '../components/SearchBar';
+import indicatorsService from "../services/indicators";
 
 const columns = [
   { 
@@ -52,6 +53,16 @@ const Samples = () => {
   const onDelete = async (item) => {
     await deleteIndicatorValue({ id: item })
   }
+  
+  const onIndicatorChange = async () => {
+    const response = await Promise.resolve(indicatorsService.getIndicatorsValues(user?.token, null, indicator ? indicator : null, null, null))
+    setRows(response)
+  }
+
+  useEffect(() => {
+    onIndicatorChange()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [indicator])
 
   return (
     <Grid container spacing={2}>
