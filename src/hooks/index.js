@@ -117,7 +117,7 @@ export const useAuth = () => {
   return [activate, login]
 }
 
-export const useCompanies = (token, setLoading) => {
+export const useCompanies = (token, setLoading=()=>{}) => {
 
   const [companies, setCompanies] = useState([])
 
