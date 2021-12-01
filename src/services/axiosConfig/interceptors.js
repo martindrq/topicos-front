@@ -6,8 +6,11 @@ axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
     if(error.response?.status === 401){
-      localStorage.removeItem('userDeresPlatform')
-      window.location.href = "/iniciar-sesion";
+      const pathname = window.location.pathname;
+      if(!pathname.includes("/iniciar-sesion")){
+        localStorage.removeItem('userDeresPlatform')
+        window.location.href = "/iniciar-sesion";
+      }
     }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
