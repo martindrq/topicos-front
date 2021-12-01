@@ -27,7 +27,7 @@ const Reports = () => {
 
   const {user} = useUserContext();
   const [bseIndicatorsData] = useIndicators(user?.token);
-  const [report, loadingNewReport, generateReport] = useReports(user?.token, user?.company?.id);
+  const [report,, generateReport] = useReports(user?.token, user?.company?.id);
 
   const colors = [
     "rgb(168, 115, 244)",
