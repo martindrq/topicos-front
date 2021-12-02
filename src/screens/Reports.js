@@ -27,7 +27,7 @@ const Reports = () => {
 
   const {user} = useUserContext();
   const [bseIndicatorsData] = useIndicators(user?.token);
-  const [report, loadingNewReport, generateReport] = useReports(user?.token, user?.company?.id);
+  const [report,, generateReport] = useReports(user?.token, user?.company?.id);
 
   const colors = [
     "rgb(168, 115, 244)",
@@ -83,18 +83,6 @@ const Reports = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [indicators, dateRange]);
-
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          type: "linear",
-          display: true,
-          id: "y-axis-1"
-        }
-      ],
-    },
-  };
 
   const buildChartLabel = () => {
     const labels = [format(dateRange.from, "dd-MM-yyyy")];
@@ -247,9 +235,9 @@ const Reports = () => {
       })}
 
       <Grid item xs={12}>
-        {(report.length > 0 && !loadingNewReport) && (
+        {(report.length > 0) && (
           <Paper>
-            <Line data={data} options={options} />
+            <Line data={data} />
           </Paper>
         )}
       </Grid>
