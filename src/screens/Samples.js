@@ -56,7 +56,7 @@ const Samples = () => {
   
   const onIndicatorChange = async () => {
     const response = await Promise.resolve(indicatorsService.getIndicatorsValues(user?.token, null, indicator ? indicator : null, null, null))
-    setRows(response)
+    setRows(response.data.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
   }
 
   useEffect(() => {

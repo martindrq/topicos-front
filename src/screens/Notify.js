@@ -21,9 +21,17 @@ const Notify = () => {
 
   const {user} = useUserContext();
   const [notifyIndicators] = useNotify(user?.token, setLoading);
+
+  const getRemaining = (noti) => {
+    if (noti.remainingDays === null) {
+      return <strong style={{color: red[600]}}>No existe una frecuencia establecida para este indicador</strong>
+    } else {
+      return noti.remainingDays < 0 ? <strong style={{color: red[600]}}>{`Debió registrarse hace ${noti.remainingDays * -1} días`}</strong> : <OutlinedNumber number={noti.remainingDays}/>
+    }
+  }
   
   useEffect(() => {
-    setRows(notifyIndicators.map(noti => ({...noti, name: noti?.indicator?.name, frequency: noti?.indicator?.frequency,  daysFromLast: noti?.daysFromLast, remainingDays: noti?.remainingDays < 0 ? <strong style={{color: red[600]}}>{`Debió registrarse hace ${noti?.remainingDays * -1} días`}</strong> : <OutlinedNumber number={noti?.remainingDays}/>}) ))
+    setRows(notifyIndicators.map(noti => ({...noti, name: noti?.indicator?.name, frequency: noti?.indicator?.frequency, daysFromLast: noti?.daysFromLast, remainingDays: getRemaining(noti)})))
   }, [notifyIndicators])
 
   const [rows, setRows] = useState([]);

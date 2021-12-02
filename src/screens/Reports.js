@@ -135,7 +135,7 @@ const Reports = () => {
         <FormControl variant="standard" fullWidth>
           <DesktopDatePicker
             label="Desde"
-            inputFormat="MM/dd/yyyy"
+            inputFormat="dd/MM/yyyy"
             value={dateRange.from}
             onChange={(date) => {
               setDateRange({
@@ -151,7 +151,7 @@ const Reports = () => {
         <FormControl variant="standard" fullWidth>
           <DesktopDatePicker
             label="Hasta"
-            inputFormat="MM/dd/yyyy"
+            inputFormat="dd/MM/yyyy"
             value={dateRange.to}
             onChange={(date) => {
               setDateRange({

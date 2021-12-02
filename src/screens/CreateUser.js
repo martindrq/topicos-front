@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { TextField, Grid, Stack, Typography, Paper, Tooltip, Fab, MenuItem, FormControl, InputLabel, Select } from '@mui/material/';
 import { Add } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 
 import { useUsers, useCompanies, useUserContext } from "../hooks";
 
 const CreateEditArea = ({ location }) => { 
     const item = location?.state?.item
     
+    const history = useHistory();
     const {user} = useUserContext();
     const [, addUser] = useUsers(user?.token);
     const [companies] = useCompanies(user?.token);
@@ -25,6 +27,7 @@ const CreateEditArea = ({ location }) => {
     const enviarDatosForm = async (event) => {
         event.preventDefault()
         await addUser(datosForm)
+        history.goBack()
     }
 
     return(

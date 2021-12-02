@@ -56,6 +56,7 @@ const CreateEditCompany = ({ location }) => {
                             name='rut'
                             value={datosForm.rut}
                             onChange={handleInputChange} 
+                            type="number"
                         />
                         <TextField label="Razón social" variant="outlined" fullWidth required autocomplete="none" 
                             name='businessName'
