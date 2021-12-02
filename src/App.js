@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import {Grid, Box} from '@mui/material';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+import "./services/axiosConfig/interceptors";
 
 // screens
 import Home from './screens/Home';
