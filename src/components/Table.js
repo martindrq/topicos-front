@@ -158,7 +158,7 @@ export default function StickyHeadTable({ columns, rows, loading = false, onEdit
           </TableBody>) : 
           <TableBody>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 
                 const isItemSelected = isSelected(row.id);
