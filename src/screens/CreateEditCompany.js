@@ -15,6 +15,9 @@ const CreateEditCompany = ({ location }) => {
 
     const [datosForm, setDatosForm] = useState({
         name: item?.name || '',
+        rut: item?.rut || '',
+        businessName: item?.businessName || '',
+        businessArea: item?.businessArea || '',
     })
         
     const handleInputChange = (event) => {
