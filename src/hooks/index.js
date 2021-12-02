@@ -62,7 +62,6 @@ export const useIndicators = (token, setLoading=()=>{}) => {
 
   useEffect(() => {
     getIndicators()
-    getIndicatorsValues()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changes])
 
