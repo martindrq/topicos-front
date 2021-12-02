@@ -7,23 +7,26 @@ import { useIndicators, useUserContext } from "../hooks";
 
 function CreateEditSample ({ location }) {
   const isEdit = location?.state?.isEdit || false
-  const sampleId = location?.state?.sampleId
-  const indicatorId = location?.state?.indicatorId
+  const item = location?.state?.item
+  const indicatorId = location?.state?.item?.indicator?.id
 
   const {user} = useUserContext();
   const [indicators,,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
   const history = useHistory();
 
-  const [formState, setFormState] = useState({});
-  const [date, setDate] = useState(new Date().toISOString());
-  const [disabledValue, setDisabledValue] = useState(true);
+  const [formState, setFormState] = useState({
+    indicatorId: item?.indicator?.id || '',
+    value: item?.value || '',
+  });
+  const [date, setDate] = useState( item?.date ? item.date : new Date().toISOString());
+  const [disabledValue, setDisabledValue] = useState(item?.indicator?.type === "D" ? false : true);
   const [selectedIndicator, setSelectedIndicator] = useState(true);
 
   const handleSubmit = async () => {
     if (isEdit) {
       await editIndicatorValue({
           ...formState,
-          id: sampleId,
+          id: item.id,
           indicatorId,
           date,
       })
@@ -110,7 +113,7 @@ function CreateEditSample ({ location }) {
                 renderInput={(params) => <TextField {...params} required />}
                 value={date}
               />
-              <p style={{color: 'gray'}}>Deben existir muestras de los indicadores que lo componen para el mes seleccionado.</p>
+              {selectedIndicator?.type === 'I' || item?.type === 'I' ? <p style={{color: 'gray'}}>Deben existir muestras de los indicadores que lo componen para el mes seleccionado.</p> : null}
             </FormControl>
           </Grid>
 
@@ -127,7 +130,7 @@ function CreateEditSample ({ location }) {
                 autoComplete="off"
                 disabled={disabledValue}
               />
-              <p style={{color: 'gray'}}>Este campo se encuentra deshabilitado, ya que el valor es autocalculado.</p>
+              {selectedIndicator?.type === 'I' || item?.type === 'I' ? <p style={{color: 'gray'}}>Este campo se encuentra deshabilitado, ya que el valor es autocalculado.</p> : null}
             </FormControl>
           </Grid>
           <Button
