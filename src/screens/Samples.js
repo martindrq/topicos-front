@@ -46,10 +46,10 @@ const Samples = () => {
     setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
   }, [indicatorsValues])
 
-  const onEdit = (item) => {
-    history.push('/muestras/editar', { isEdit: true, sampleId: item, indicatorId: indicatorsValues.find(iv => iv.id === item)?.indicator?.id })
+  const onEdit = (itemId) => {
+    const item = indicatorsValues.find(item => item.id === itemId)
+    history.push('/muestras/editar', { isEdit: true, item, indicatorId: item?.id })
   }
-
   const onDelete = async (item) => {
     await deleteIndicatorValue({ id: item })
   }
