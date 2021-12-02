@@ -39,7 +39,7 @@ const Samples = () => {
   const [indicator, setIndicator] = useState();
 
   const {user} = useUserContext();
-  const [indicators, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading);  
+  const [indicators, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading, user?.company.id);  
   const history = useHistory();
   
   useEffect(() => {
@@ -55,7 +55,7 @@ const Samples = () => {
   }
   
   const onIndicatorChange = async () => {
-    const response = await Promise.resolve(indicatorsService.getIndicatorsValues(user?.token, null, indicator ? indicator : null, null, null))
+    const response = await Promise.resolve(indicatorsService.getIndicatorsValues(user?.token, user?.company.id, indicator ? indicator : null, null, null))
     setRows(response.data.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
   }
 
