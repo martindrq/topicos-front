@@ -4,39 +4,26 @@ import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { useHistory } from 'react-router-dom'
 
 import { useIndicators, useUserContext } from "../hooks";
-import Table from '../components/Table';
-
-const columns = [
-  { id: 'date', label: 'Fecha', minWidth: 170 },
-  {
-    id: 'value',
-    label: `Valor`, // TODO: add unit
-    minWidth: 170,
-    format: (value) => value.toFixed(2),
-  },
-];
 
 function CreateEditSample ({ location }) {
   const isEdit = location?.state?.isEdit || false
-  const item = location?.state?.item
-  const indicatorId = location?.state?.item?.indicator?.id
+  const sampleId = location?.state?.sampleId
+  const indicatorId = location?.state?.indicatorId
 
   const {user} = useUserContext();
-  const [indicators, indicatorsValues,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
+  const [indicators,,, addIndicatorValue,, editIndicatorValue] = useIndicators(user?.token);
   const history = useHistory();
 
-  const [formState, setFormState] = useState({
-    indicatorId: item?.indicator?.id || '',
-    value: item?.value || '',
-  });
-  const [rows, setRows] = useState([]);
-  const [date, setDate] = useState( item?.date ? item.date : new Date().toISOString());
+  const [formState, setFormState] = useState({});
+  const [date, setDate] = useState(new Date().toISOString());
+  const [disabledValue, setDisabledValue] = useState(true);
+  const [selectedIndicator, setSelectedIndicator] = useState(true);
 
   const handleSubmit = async () => {
     if (isEdit) {
       await editIndicatorValue({
           ...formState,
-          id: item.id,
+          id: sampleId,
           indicatorId,
           date,
       })
@@ -54,11 +41,23 @@ function CreateEditSample ({ location }) {
   };
 
   const handleChange = (event) => {
-    setFormState({
-      ...formState,
-      [event.target.name]: event.target.value,
-    });
-    setRows(indicatorsValues.filter(iv => iv.indicator_id === event.target.value))
+    if (event.target.name === "indicatorId") {
+      setSelectedIndicator(event.target.value)
+      if (event.target.value.type === 'I') {
+        setDisabledValue(true)
+      } else {
+        setDisabledValue(false)
+      }
+      setFormState({
+        ...formState,
+        [event.target.name]: event.target.value.id,
+      });
+    } else {
+      setFormState({
+        ...formState,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleDate = (date) => {
@@ -88,7 +87,7 @@ function CreateEditSample ({ location }) {
                 labelId="indicator"
                 id="indicator"
                 name="indicatorId"
-                value={formState.indicatorId || ""}
+                value={selectedIndicator}
                 fullWidth
                 onChange={handleChange}
                 label="Indicador"
@@ -96,8 +95,8 @@ function CreateEditSample ({ location }) {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                {indicators.filter(indicator => indicator.type === 'D').map((indicator) => (
-                  <MenuItem value={indicator.id}>{indicator.name}</MenuItem>
+                {indicators.map((indicator) => (
+                  <MenuItem value={indicator}>{indicator.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -111,6 +110,7 @@ function CreateEditSample ({ location }) {
                 renderInput={(params) => <TextField {...params} required />}
                 value={date}
               />
+              <p style={{color: 'gray'}}>Deben existir muestras de los indicadores que lo componen para el mes seleccionado.</p>
             </FormControl>
           </Grid>
 
@@ -125,7 +125,9 @@ function CreateEditSample ({ location }) {
                 name="value"
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={disabledValue}
               />
+              <p style={{color: 'gray'}}>Este campo se encuentra deshabilitado, ya que el valor es autocalculado.</p>
             </FormControl>
           </Grid>
           <Button
@@ -139,7 +141,6 @@ function CreateEditSample ({ location }) {
         </Grid>
       </Grid>
     </Grid>
-    {rows.length > 0 ? <Table columns={columns} rows={rows} /> : null}
     </>
   );
 }
