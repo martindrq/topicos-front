@@ -113,7 +113,7 @@ function CreateEditSample ({ location }) {
                 renderInput={(params) => <TextField {...params} required />}
                 value={date}
               />
-              <p style={{color: 'gray'}}>Deben existir muestras de los indicadores que lo componen para el mes seleccionado.</p>
+              {selectedIndicator?.type === 'I' || item?.type === 'I' ? <p style={{color: 'gray'}}>Deben existir muestras de los indicadores que lo componen para el mes seleccionado.</p> : null}
             </FormControl>
           </Grid>
 
@@ -130,7 +130,7 @@ function CreateEditSample ({ location }) {
                 autoComplete="off"
                 disabled={disabledValue}
               />
-              <p style={{color: 'gray'}}>Este campo se encuentra deshabilitado, ya que el valor es autocalculado.</p>
+              {selectedIndicator?.type === 'I' || item?.type === 'I' ? <p style={{color: 'gray'}}>Este campo se encuentra deshabilitado, ya que el valor es autocalculado.</p> : null}
             </FormControl>
           </Grid>
           <Button
