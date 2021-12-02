@@ -20,7 +20,7 @@ function CreateEditSample ({ location }) {
   });
   const [date, setDate] = useState( item?.date ? item.date : new Date().toISOString());
   const [disabledValue, setDisabledValue] = useState(item?.indicator?.type === "D" ? false : true);
-  const [selectedIndicator, setSelectedIndicator] = useState(true);
+  const [selectedIndicator, setSelectedIndicator] = useState();
 
   const handleSubmit = async () => {
     if (isEdit) {
