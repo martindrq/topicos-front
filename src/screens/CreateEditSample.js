@@ -124,7 +124,7 @@ function CreateEditSample ({ location }) {
                 fullWidth
                 value={formState.value || ""}
                 id="value"
-                label="Valor"
+                label={`Valor${selectedIndicator ? ` (${selectedIndicator.unit})` : ''}`}
                 name="value"
                 onChange={handleChange}
                 autoComplete="off"
