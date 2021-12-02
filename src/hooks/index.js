@@ -11,6 +11,7 @@ import { UserContext } from '../App'
 export const useIndicators = (token, setLoading=()=>{}) => {
   const [indicators, setIndicators] = useState([])
   const [indicatorsValues, setIndicatorsValues] = useState([])
+  const [changes, setChanges] = useState(0)
 
   const getIndicators = async () => {
     setLoading(true)
@@ -49,11 +50,13 @@ export const useIndicators = (token, setLoading=()=>{}) => {
     const response = await indicatorsService.deleteIndicator(data, token).catch(() => {
       throw new Error("No se puede eliminar este indicador debido a que tiene valores asociados.")
     });
+    setChanges(changes + 1);
     return response
   }
 
   const deleteIndicatorValue = async (data) => {
     const response = await indicatorsService.deleteIndicatorValue(data, token);
+    setChanges(changes + 1);
     return response
   }
 
@@ -61,7 +64,7 @@ export const useIndicators = (token, setLoading=()=>{}) => {
     getIndicators()
     getIndicatorsValues()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [changes])
 
   return [indicators, indicatorsValues, addIndicator, addIndicatorValue, editIndicator, editIndicatorValue, deleteIndicator, deleteIndicatorValue]
 }
@@ -69,6 +72,7 @@ export const useIndicators = (token, setLoading=()=>{}) => {
 export const useAreas = (token, setLoading=()=>{}) => {
 
   const [areas, setAreas] = useState([])
+  const [changes, setChanges] = useState(0)
 
   const getAreas = async () => {
     setLoading(true)
@@ -91,13 +95,14 @@ export const useAreas = (token, setLoading=()=>{}) => {
     const response = await areasService.deleteArea(data, token).catch(() => {
       throw new Error("No se puede eliminar esta area debido a que tiene indicadores asociados.") // FIXME: this could be not an error, just a 500 code
     });
+    setChanges(changes + 1);
     return response
   }
 
   useEffect(() => {
     getAreas()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [changes])
 
   return [areas, addArea, editArea, deleteArea]
 }
@@ -120,6 +125,7 @@ export const useAuth = () => {
 export const useCompanies = (token, setLoading=()=>{}) => {
 
   const [companies, setCompanies] = useState([])
+  const [changes, setChanges] = useState(0)
 
   const getCompanies = async () => {
     setLoading(true)
@@ -142,13 +148,14 @@ export const useCompanies = (token, setLoading=()=>{}) => {
     const response = await companiesService.deleteCompany(data, token).catch(() => {
       throw new Error("No se puede eliminar esta empresa debido a que tiene usuarios asociados.") // FIXME: this could be not an error, just a 500 code
     });
+    setChanges(changes + 1)
     return response
   }
 
   useEffect(() => {
     getCompanies()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [changes])
 
   return [companies, addCompany, editCompany, deleteCompany]
 }
@@ -156,6 +163,7 @@ export const useCompanies = (token, setLoading=()=>{}) => {
 export const useUsers = (token, setLoading=()=>{}) => {
 
   const [users, setUsers] = useState([])
+  const [changes, setChanges] = useState(0)
 
   const getUsers = async () => {
     setLoading(true)
@@ -171,13 +179,14 @@ export const useUsers = (token, setLoading=()=>{}) => {
 
   const deleteUser = async (data) => {
     const response = await usersService.deleteUser(data, token);
+    setChanges(changes + 1)
     return response
   }
 
   useEffect(() => {
     getUsers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [changes])
 
   return [users, addUser, deleteUser]
 }
