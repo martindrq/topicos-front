@@ -52,7 +52,9 @@ const Samples = () => {
   }
   
   const onIndicatorChange = async () => {
+    setLoading(true)
     const response = await Promise.resolve(indicatorsService.getIndicatorsValues(user?.token, user?.company.id, indicator ? indicator : null, null, null))
+    setLoading(false)
     setRows(response.data.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
   }
 

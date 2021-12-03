@@ -10,7 +10,7 @@ import { UserContext } from '../App'
 
 export const useIndicators = (token, setLoading=()=>{}) => {
   const [indicators, setIndicators] = useState([])
-  const [indicatorsValues, setIndicatorsValues] = useState([])
+  const [indicatorsValues] = useState([]) // TODO: to be removed
   const [changes, setChanges] = useState(0)
 
   const getIndicators = async () => {
@@ -18,13 +18,6 @@ export const useIndicators = (token, setLoading=()=>{}) => {
     const response = await indicatorsService.getIndicators(token);
     setLoading(false)
     setIndicators(response.data)
-  }
-  
-  const getIndicatorsValues = async () => {
-    setLoading(true)
-    const response = await indicatorsService.getIndicatorsValues(token);
-    setLoading(false)
-    setIndicatorsValues(response.data)
   }
 
   const addIndicator = async (data) => {
