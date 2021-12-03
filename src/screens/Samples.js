@@ -39,17 +39,14 @@ const Samples = () => {
   const [indicator, setIndicator] = useState();
 
   const {user} = useUserContext();
-  const [indicators, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading, user?.company.id);  
+  const [indicators, indicatorsValues,,,,,, deleteIndicatorValue] = useIndicators(user?.token, setLoading);  
   const history = useHistory();
-  
-  useEffect(() => {
-    setRows(indicatorsValues.map(value => ({...value, indicator: value?.indicator?.name, unit: value?.indicator?.unit, date: value?.date?.split('T')[0]})))
-  }, [indicatorsValues])
 
   const onEdit = (itemId) => {
     const item = indicatorsValues.find(item => item.id === itemId)
     history.push('/muestras/editar', { isEdit: true, item, indicatorId: item?.id })
   }
+
   const onDelete = async (item) => {
     await deleteIndicatorValue({ id: item })
   }
